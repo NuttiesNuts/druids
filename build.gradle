@@ -40,6 +40,11 @@ repositories {
 		maven { url "https://jitpack.io" }
 	}
 
+	maven {
+		url "https://cursemaven.com"
+		content { includeGroup "curse.maven" }
+	}
+
 }
 
 dependencies {
@@ -54,6 +59,7 @@ dependencies {
 	modImplementation libs.spell
 	modImplementation libs.spellpow
 	modImplementation libs.rpg
+	modImplementation libs.rune
 	modImplementation libs.cloth
 	modImplementation libs.playeranim
 	modImplementation libs.trink
@@ -80,7 +86,6 @@ processResources {
 		fl            : libs.versions.fl.get(),
 		fapi          : libs.versions.fapi.get(),
 		spell         : libs.versions.spell.get(),
-		spellpow      : libs.versions.spellpow.get(),
 		rpg           : libs.versions.rpg.get(),
 	]
 	inputs.properties meta
@@ -120,9 +125,8 @@ modrinth {
 	changelog = "$System.env.CHANGELOG"
 	syncBodyFrom = "<!--DO NOT EDIT MANUALLY: synced from gh readme-->\n" + rootProject.file("README.md").text
 	dependencies {
-		required.version libs.fapi.get().getName(), libs.versions.fapi.get()
-		required.version libs.spell.get().getName(), libs.versions.spell.get()
-		required.version libs.spellpow.get().getName(), libs.versions.spellpow.get()
-		required.version libs.rpg.get().getName(), libs.versions.rpg.get()
+		required.project 'fabric-api'
+		required.project 'spell-engine'
+		required.project 'more_rpg_classes'
 	}
 }

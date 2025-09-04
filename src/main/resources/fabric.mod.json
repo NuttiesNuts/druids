@@ -25,7 +25,6 @@
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
 		"spell_engine": ">=${spell}",
-		"spell_power": ">=${spellpow}",
 		"more_rpg_classes": ">=${rpg}"
 	},
 	"suggests": {

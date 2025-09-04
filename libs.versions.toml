@@ -10,6 +10,7 @@ fapi = "0.115.6+1.21.1"
 spell = "1.7.0+1.21.1"
 spellpow = "1.3.0+1.21.1"
 rpg = "2.3.1-1.21.1"
+rune = "1.1.3+1.21.1"
 cloth = "15.0.130"
 playeranim = "2.0.0-alpha1+1.21"
 trink = "3.10.0"
@@ -28,6 +29,7 @@ fapi = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "
 spell = { group = "maven.modrinth", name = "spell-engine", version.ref = "spell"}
 spellpow = { group = "maven.modrinth", name = "spell-power", version.ref = "spellpow"}
 rpg = { group = "maven.modrinth", name = "more-rpg-classes", version.ref = "rpg"}
+rune = { group = "maven.modrinth", name = "runes", version.ref = "rune"}
 cloth = {group = "me.shedaniel.cloth",name = "cloth-config-fabric", version.ref = "cloth" }
 playeranim = { group = "dev.kosmx.player-anim", name = "player-animation-lib-fabric", version.ref = "playeranim"}
 trink = { group = "dev.emi", name = "trinkets", version.ref = "trink"}

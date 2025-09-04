@@ -1,5 +1,6 @@
 package io.github.rulft44.druids;
 
+import io.github.rulft44.druids.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,8 @@ public class Druids implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		LOGGER.info("[Druids] pretty pink princess ponies prancing perpendicular");
+		LOGGER.info("[Druids] skibidi");
+
+		ModItems.initialize();
 	}
 }
