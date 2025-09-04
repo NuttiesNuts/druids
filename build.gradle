@@ -58,7 +58,6 @@ dependencies {
 
 	modImplementation libs.spell
 	modImplementation libs.spellpow
-	modImplementation libs.rpg
 	modImplementation libs.rune
 	modImplementation libs.cloth
 	modImplementation libs.playeranim
@@ -86,7 +85,6 @@ processResources {
 		fl            : libs.versions.fl.get(),
 		fapi          : libs.versions.fapi.get(),
 		spell         : libs.versions.spell.get(),
-		rpg           : libs.versions.rpg.get(),
 	]
 	inputs.properties meta
 	filesMatching("*.mod.json") { expand(meta) }
@@ -127,6 +125,5 @@ modrinth {
 	dependencies {
 		required.project 'fabric-api'
 		required.project 'spell-engine'
-		required.project 'more_rpg_classes'
 	}
 }

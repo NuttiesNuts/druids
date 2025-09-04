@@ -24,8 +24,7 @@
 		"minecraft": ">=${mc}",
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
-		"spell_engine": ">=${spell}",
-		"more_rpg_classes": ">=${rpg}"
+		"spell_engine": ">=${spell}"
 	},
 	"suggests": {
 		"better_combat": "*"
