@@ -11,7 +11,7 @@ public class Druids implements ModInitializer {
 	public static final String ID = "druids";
 	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
 
-	// Creates school with the id of `spell_power:nature`, default namespace: `spell_power`
+	// Creates school with the id of `spell_power:nature`
 	public static final SpellSchool NATURE = SpellSchools.createMagic("nature", 0x43bf4b);
 
 	@Override
