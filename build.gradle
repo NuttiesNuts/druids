@@ -85,6 +85,7 @@ processResources {
 		fl            : libs.versions.fl.get(),
 		fapi          : libs.versions.fapi.get(),
 		spell         : libs.versions.spell.get(),
+		rune		  : libs.versions.rune.get(),
 	]
 	inputs.properties meta
 	filesMatching("*.mod.json") { expand(meta) }
@@ -125,5 +126,15 @@ modrinth {
 	dependencies {
 		required.project 'fabric-api'
 		required.project 'spell-engine'
+		required.project 'spell-power'
+		required.project 'runes'
+
+	}
+}
+
+fabricApi {
+	configureDataGeneration() {
+		client = true
+		modId = project.modId
 	}
 }

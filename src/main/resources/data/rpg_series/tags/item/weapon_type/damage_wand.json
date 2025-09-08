@@ -1,0 +1,12 @@
+{
+	"values": [
+		{
+			"id": "druids:wand_nature",
+			"required": false
+		},
+		{
+			"id": "druids:wand_netherite_nature",
+			"required": false
+		}
+	]
+}

@@ -1,0 +1,23 @@
+{
+	"type": "minecraft:crafting_shaped",
+	"category": "equipment",
+	"pattern": [
+		" AP",
+		" CA",
+		"C  "
+	],
+	"key": {
+		"P": {
+			"item": "minecraft:vine"
+		},
+		"A": {
+			"item": "minecraft:emerald"
+		},
+		"C": {
+			"item": "minecraft:copper_ingot"
+		}
+	},
+	"result": {
+		"id": "druids:staff_nature"
+	}
+}

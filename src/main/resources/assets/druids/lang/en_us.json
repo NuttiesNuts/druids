@@ -1,3 +1,11 @@
 {
-	"item.druids.nature_stone": "Nature Rune"
+	"item.druids.nature_stone": "Nature Rune",
+	"item.druids.copper_nugget": "Copper Nugget",
+
+	"item.druids.wand_nature": "Nature Wand",
+	"item.druids.wand_netherite_nature": "Netherite Nature Wand",
+	"item.druids.staff_nature": "Nature Staff",
+	"item.druids.staff_netherite_nature": "Netherite Nature Staff",
+
+	"tag.item.c.nuggets.copper": "Copper Nuggets"
 }

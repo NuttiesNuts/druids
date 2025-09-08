@@ -1,0 +1,15 @@
+{
+	"type": "minecraft:smithing_transform",
+	"addition": {
+		"item": "minecraft:netherite_ingot"
+	},
+	"base": {
+		"item": "druids:staff_nature"
+	},
+	"result": {
+		"id": "druids:staff_netherite_nature"
+	},
+	"template": {
+		"item": "minecraft:netherite_upgrade_smithing_template"
+	}
+}

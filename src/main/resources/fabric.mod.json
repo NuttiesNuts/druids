@@ -24,7 +24,8 @@
 		"minecraft": ">=${mc}",
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
-		"spell_engine": ">=${spell}"
+		"spell_engine": ">=${spell}",
+		"runes": ">=${rune}"
 	},
 	"suggests": {
 		"better_combat": "*"
@@ -34,6 +35,9 @@
           "io.github.rulft44.druids.Druids"
 		],
 		"client": [
+		],
+		"fabric-datagen": [
+			"io.github.rulft44.druids.datagen.DruidsDataGenerator"
 		]
 	}
 }
