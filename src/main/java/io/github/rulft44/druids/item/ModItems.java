@@ -10,9 +10,6 @@ import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 
 public class ModItems {
-	// Rune
-	public static final Item NATURE_STONE = registerItem("nature_stone", new Item(new Item.Settings()));
-
 	// Misc
 	public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new Item.Settings()));
 
@@ -21,9 +18,6 @@ public class ModItems {
 	}
 
 	public static void register(){
-		ItemGroupEvents.modifyEntriesEvent(ItemGroups.COMBAT).register(entries -> {
-			entries.add(ModItems.NATURE_STONE);
-		});
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
 			entries.addAfter(Items.IRON_NUGGET, ModItems.COPPER_NUGGET);
 		});

@@ -18,6 +18,7 @@ public class LeafParticle extends AnimatedParticle {
 		this.velocityMultiplier = 0.8f;
 
 		this.maxAge = 20;
+		this.scale = 0.1F + this.random.nextFloat() * 0.1F;
 		this.setSpriteForAge(spriteProvider);
 	}
 

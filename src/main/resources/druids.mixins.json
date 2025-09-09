@@ -4,7 +4,6 @@
 	"package": "io.github.rulft44.druids.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"SpellSchoolsMixin"
 	],
 	"client": [
 	],

@@ -32,12 +32,15 @@
 
 ![skibidi](https://raw.githubusercontent.com/Rulft44/druids/refs/heads/fabric-1.21.1/src/main/resources/assets/druids/icon.png)
 
-Like nature magic with a splash of healing and poison? This is the class for you!
+Druids are experts in bending healing magic to their will and use it for crowd controlling enemies and buffing allies.
 
-Here's why:
+Pros:
 * Engulf foes in deadly vines
-* Heal yourself and allies with the power of nature
-* Debuff and poison your enemies
+* Buff yourself and allies
+
+Cons:
+* Little damage
+
 
 This mod is designed to be played with the other mods from the RPG Series, check them out!
 
