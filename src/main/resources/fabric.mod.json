@@ -35,6 +35,7 @@
           "io.github.rulft44.druids.Druids"
 		],
 		"client": [
+			"io.github.rulft44.druids.client.DruidsClient"
 		],
 		"fabric-datagen": [
 			"io.github.rulft44.druids.datagen.DruidsDataGenerator"
