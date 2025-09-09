@@ -8,10 +8,12 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 
 public class ModItems {
 	// Misc
 	public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new Item.Settings()));
+	public static final Item HEART_OF_THE_FOREST = registerItem("heart_of_the_forest", new Item(new Item.Settings().rarity(Rarity.UNCOMMON)));
 
 	private static Item registerItem(String name, Item item) {
 		return Registry.register(Registries.ITEM, Identifier.of(Druids.ID, name), item);
@@ -20,6 +22,7 @@ public class ModItems {
 	public static void register(){
 		ItemGroupEvents.modifyEntriesEvent(ItemGroups.INGREDIENTS).register(entries -> {
 			entries.addAfter(Items.IRON_NUGGET, ModItems.COPPER_NUGGET);
+			entries.addAfter(Items.HEART_OF_THE_SEA, ModItems.HEART_OF_THE_FOREST);
 		});
 	}
 }
