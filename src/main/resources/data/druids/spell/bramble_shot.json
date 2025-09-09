@@ -1,0 +1,95 @@
+{
+	"school": "NATURE",
+	"group": "primary",
+	"range": 28,
+	"tier": 0,
+	"learn": { },
+	"active": {
+		"scroll": { },
+		"cast": {
+			"duration": 1.2,
+			"animation": "spell_engine:one_handed_projectile_charge",
+			"sound": {
+				"id": "spell_engine:generic_healing_casting",
+				"randomness": 0
+			},
+			"particles": [
+				{
+					"particle_id": "druids:leaf",
+					"shape": "WIDE_PIPE",
+					"origin": "FEET",
+					"count": 2.0,
+					"min_speed": 0.05,
+					"max_speed": 0.1
+				}
+			]
+		}
+	},
+	"release": {
+		"animation": "spell_engine:one_handed_projectile_release"
+	},
+	"target": {
+		"type": "AIM",
+		"aim": { }
+	},
+	"deliver": {
+		"type": "PROJECTILE",
+		"projectile": {
+			"launch_properties": {
+				"velocity": 1.2,
+				"sound": { "id": "spell_engine:generic_healing_release" }
+			},
+			"projectile": {
+				"homing_angle": 0.5,
+				"client_data": {
+					"light_level": 6,
+					"particle_spawn_interval": 2.5,
+					"travel_particles": [
+						{
+							"particle_id": "spore_blossom_air",
+							"shape": "CONE",
+							"rotation": "LOOK",
+							"origin": "CENTER",
+							"count": 3.0,
+							"min_speed": 0.0,
+							"max_speed": 0.05
+						}
+					],
+					"model": {
+						"model_id": "druids:projectile/bramble_shot",
+						"scale": 0.7
+					}
+				}
+			}
+		}
+	},
+	"impacts": [
+		{
+			"action": {
+				"type": "DAMAGE",
+				"damage": {
+					"knockback": 0.8,
+					"spell_power_coefficient": 0.8
+				}
+			},
+			"particles": [
+				{
+					"particle_id": "spore_blossom_air",
+					"shape": "SPHERE",
+					"origin": "CENTER",
+					"count": 10.0,
+					"min_speed": 0.01,
+					"max_speed": 0.05
+				}
+			],
+			"sound": {
+				"id": "spell_engine:generic_poison_impact"
+			}
+		}
+	],
+	"cost": {
+		"item": {
+			"id": "druids:nature_stone"
+		}
+	}
+}

@@ -7,5 +7,8 @@
 	"item.druids.staff_nature": "Nature Staff",
 	"item.druids.staff_netherite_nature": "Netherite Nature Staff",
 
+	"spell.druids.bramble_shot.name": "Bramble Shot",
+	"spell.druids.bramble_shot.description": "Launches a wood projectile, causing up to {damage} nature spell damage.",
+
 	"tag.item.c.nuggets.copper": "Copper Nuggets"
 }

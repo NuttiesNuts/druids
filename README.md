@@ -41,7 +41,7 @@ Here's why:
 
 This mod is designed to be played with the other mods from the RPG Series, check them out!
 
-Config available at `config/druids.json5` or directly in Mod Menu.
+Config available at `config/druids`
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->

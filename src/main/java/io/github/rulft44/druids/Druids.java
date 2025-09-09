@@ -4,6 +4,7 @@ import io.github.rulft44.druids.config.Default;
 import io.github.rulft44.druids.config.TweaksConfig;
 import io.github.rulft44.druids.item.ModItems;
 import io.github.rulft44.druids.item.ModWeapons;
+import io.github.rulft44.druids.particle.ModParticles;
 import net.fabricmc.api.ModInitializer;
 import net.spell_engine.api.config.ConfigFile;
 import net.spell_power.api.SpellSchool;
@@ -42,6 +43,7 @@ public class Druids implements ModInitializer {
 
 		ModWeapons.register(equipmentConfig.value.weapons);
 		ModItems.register();
+		ModParticles.register();
 
 		equipmentConfig.save();
 	}
