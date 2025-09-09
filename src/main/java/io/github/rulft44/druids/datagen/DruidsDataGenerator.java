@@ -32,9 +32,9 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 
 		@Override
 		public void generate(RecipeExporter exporter) {
-			disassemble(exporter,
+			/*disassemble(exporter,
 				List.of(ModWeapons.natureWand.item()),
-				ModItems.COPPER_NUGGET);
+				Items.CHARCOAL);*/
 
 			disassemble(exporter,
 				List.of(ModWeapons.natureStaff.item()),

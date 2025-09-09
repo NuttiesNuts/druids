@@ -8,13 +8,13 @@
 	],
 	"key": {
 		"P": {
-			"item": "minecraft:vine"
+			"item": "druids:heart_of_the_forest"
 		},
 		"A": {
 			"item": "minecraft:emerald"
 		},
 		"C": {
-			"item": "minecraft:copper_ingot"
+			"tag": "c:rods/wooden"
 		}
 	},
 	"result": {

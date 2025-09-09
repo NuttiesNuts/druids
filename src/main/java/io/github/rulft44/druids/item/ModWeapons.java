@@ -56,7 +56,7 @@ public class ModWeapons {
 	}
 
 
-	public static final Weapon.Entry natureWand = wand("wand_nature",
+	/*public static final Weapon.Entry natureWand = wand("wand_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.COPPER_INGOT)))
 		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 4F))
 		.loot(Equipment.LootProperties.of(2));
@@ -64,7 +64,7 @@ public class ModWeapons {
 	public static final Weapon.Entry netheriteNatureWand = wand("wand_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
 		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 4.5F))
-		.loot(Equipment.LootProperties.of(3));
+		.loot(Equipment.LootProperties.of(3));*/
 
 
 	// MARK: Staves
@@ -77,14 +77,14 @@ public class ModWeapons {
 	}
 
 	public static final Weapon.Entry natureStaff = staff("staff_nature",
-		Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.COPPER_INGOT)))
+		Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.EMERALD)))
 		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 5))
 		.loot(Equipment.LootProperties.of(2));
 
-	public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
+	/*public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
 		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 6))
-		.loot(Equipment.LootProperties.of(3));
+		.loot(Equipment.LootProperties.of(3));*/
 
 	// MARK: Register
 
