@@ -81,10 +81,10 @@ public class ModWeapons {
 		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 5))
 		.loot(Equipment.LootProperties.of(2));
 
-	/*public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
+	public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
 		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 6))
-		.loot(Equipment.LootProperties.of(3));*/
+		.loot(Equipment.LootProperties.of(3));
 
 	// MARK: Register
 
