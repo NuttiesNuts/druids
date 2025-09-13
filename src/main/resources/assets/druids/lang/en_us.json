@@ -9,6 +9,10 @@
 
 	"spell.druids.bramble_shot.name": "Bramble Shot",
 	"spell.druids.bramble_shot.description": "Launches a wood projectile, causing up to {damage} nature spell damage.",
+	"spell.druids.barkskin.name": "Barkskin",
+	"spell.druids.barkskin.description": "Increases resistance and gives the caster thorns.",
 
-	"tag.item.c.nuggets.copper": "Copper Nuggets"
+	"tag.item.c.nuggets.copper": "Copper Nuggets",
+
+	"effect.druids.thorned": "Thorned"
 }

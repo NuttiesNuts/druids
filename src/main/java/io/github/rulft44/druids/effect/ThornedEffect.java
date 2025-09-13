@@ -2,7 +2,6 @@ package io.github.rulft44.druids.effect;
 
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.damage.DamageSources;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.player.PlayerEntity;
@@ -10,7 +9,7 @@ import net.minecraft.world.World;
 
 public class ThornedEffect extends StatusEffect {
 	protected ThornedEffect() {
-		super(StatusEffectCategory.NEUTRAL, 0x56211a);
+		super(StatusEffectCategory.BENEFICIAL, 0x56211a);
 	}
 
 	// Called every tick to check if the effect can be applied or not

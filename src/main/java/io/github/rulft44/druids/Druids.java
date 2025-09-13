@@ -46,9 +46,9 @@ public class Druids implements ModInitializer {
 	}
 }
 // TODO: Barkskin
-// - Fix Thorned Status Effect
-// - Cooldown: 20
 // - Spell Icon Art
+
+// TODO: Spell Book
 
 // TODO: Structures
 
