@@ -59,12 +59,12 @@
 					"travel_particles": [
 						{
 							"particle_id": "spore_blossom_air",
-							"shape": "CONE",
+							"shape": "LINE",
 							"rotation": "LOOK",
 							"origin": "CENTER",
-							"count": 3.0,
+							"count": 2.0,
 							"min_speed": 0.0,
-							"max_speed": 0.05
+							"max_speed": 0.1
 						}
 					],
 					"model": {
@@ -92,6 +92,14 @@
 					"count": 10.0,
 					"min_speed": 0.01,
 					"max_speed": 0.05
+				},
+				{
+					"particle_id": "spell_engine:magic_holy_burst",
+					"origin": "CENTER",
+					"shape": "SPHERE",
+					"count": 25.0,
+					"min_speed": 0.2,
+					"color_rgba": 4283786581
 				}
 			],
 			"sound": {
