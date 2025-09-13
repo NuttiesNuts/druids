@@ -2,6 +2,7 @@ package io.github.rulft44.druids;
 
 import io.github.rulft44.druids.config.Default;
 import io.github.rulft44.druids.config.TweaksConfig;
+import io.github.rulft44.druids.effect.ModEffects;
 import io.github.rulft44.druids.item.ModItems;
 import io.github.rulft44.druids.item.ModWeapons;
 import io.github.rulft44.druids.particle.ModParticles;
@@ -38,8 +39,17 @@ public class Druids implements ModInitializer {
 
 		ModWeapons.register(equipmentConfig.value.weapons);
 		ModItems.register();
+		ModEffects.register();
 		ModParticles.register();
 
 		equipmentConfig.save();
 	}
 }
+// TODO: Barkskin
+// - Fix Thorned Status Effect
+// - Cooldown: 20
+// - Spell Icon Art
+
+// TODO: Structures
+
+// TODO: Loot Injection
