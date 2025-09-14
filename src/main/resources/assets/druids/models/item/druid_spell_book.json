@@ -1,0 +1,6 @@
+{
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "druids:item/druid_spell_book"
+	}
+}

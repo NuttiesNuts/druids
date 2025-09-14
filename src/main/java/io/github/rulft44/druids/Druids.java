@@ -3,6 +3,7 @@ package io.github.rulft44.druids;
 import io.github.rulft44.druids.config.Default;
 import io.github.rulft44.druids.config.TweaksConfig;
 import io.github.rulft44.druids.effect.ModEffects;
+import io.github.rulft44.druids.item.ModBooks;
 import io.github.rulft44.druids.item.ModItems;
 import io.github.rulft44.druids.item.ModWeapons;
 import io.github.rulft44.druids.particle.ModParticles;
@@ -37,18 +38,17 @@ public class Druids implements ModInitializer {
 		equipmentConfig.refresh();
 		tweaksConfig.refresh();
 
+		ModBooks.register();
+
 		ModWeapons.register(equipmentConfig.value.weapons);
 		ModItems.register();
+
 		ModEffects.register();
 		ModParticles.register();
 
 		equipmentConfig.save();
 	}
 }
-// TODO: Barkskin
-// - Spell Icon Art
-
-// TODO: Spell Book
 
 // TODO: Structures
 
