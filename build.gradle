@@ -45,6 +45,15 @@ repositories {
 		content { includeGroup "curse.maven" }
 	}
 
+	maven {
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
+
 }
 
 dependencies {
@@ -65,8 +74,8 @@ dependencies {
 	modImplementation libs.trink
 	modImplementation libs.tiny
 
-	modImplementation "maven.modrinth:jei:9yyNIqwB"
-
+	modCompileOnlyApi libs.jeiapi
+	modRuntimeOnly libs.jei
 }
 
 processResources {
