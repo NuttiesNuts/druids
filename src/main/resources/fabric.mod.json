@@ -40,6 +40,9 @@
 		],
 		"fabric-datagen": [
 			"io.github.rulft44.druids.datagen.DruidsDataGenerator"
+		],
+		"jei_mod_plugin": [
+			"io.github.rulft44.druids.integration.jei.JEIPlugin"
 		]
 	}
 }
