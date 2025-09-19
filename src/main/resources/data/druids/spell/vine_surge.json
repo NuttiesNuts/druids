@@ -2,7 +2,9 @@
 	"school": "HEALING",
 	"range": 16.0,
 	"tier": 3,
+	"learn": {},
 	"active": {
+		"scroll": {},
 		"cast": {
 			"duration": 1.0,
 			"animation": "spell_engine:one_handed_healing_charge",

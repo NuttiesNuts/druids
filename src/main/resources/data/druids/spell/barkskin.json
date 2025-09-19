@@ -9,7 +9,8 @@
 			"duration": 0.75,
 			"animation": "spell_engine:one_handed_area_charge",
 			"sound": {
-				"id": "spell_engine:generic_healing_casting"
+				"id": "spell_engine:generic_healing_casting",
+				"randomness": 0
 			},
 			"particles": [
 				{
