@@ -25,7 +25,8 @@
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
 		"spell_engine": ">=${spell}",
-		"runes": ">=${rune}"
+		"runes": ">=${rune}",
+		"archers": ">=${archers}"
 	},
 	"suggests": {
 		"better_combat": "*"

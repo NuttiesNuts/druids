@@ -59,6 +59,7 @@ dependencies {
 	modImplementation libs.spell
 	modImplementation libs.spellpow
 	modImplementation libs.rune
+	modImplementation libs.archers
 	modImplementation libs.cloth
 	modImplementation libs.playeranim
 	modImplementation libs.trink
@@ -86,6 +87,7 @@ processResources {
 		fapi          : libs.versions.fapi.get(),
 		spell         : libs.versions.spell.get(),
 		rune		  : libs.versions.rune.get(),
+		archers		  : libs.versions.archers.get(),
 	]
 	inputs.properties meta
 	filesMatching("*.mod.json") { expand(meta) }
@@ -128,6 +130,7 @@ modrinth {
 		required.project 'spell-engine'
 		required.project 'spell-power'
 		required.project 'runes'
+		required.project 'archers'
 
 	}
 }
