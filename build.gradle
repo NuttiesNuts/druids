@@ -54,6 +54,11 @@ repositories {
 		url = "https://modmaven.dev"
 	}
 
+	maven {
+		name = "AzureDoom Mods"
+		url = "https://maven.azuredoom.com/mods"
+	}
+
 }
 
 dependencies {
@@ -67,6 +72,7 @@ dependencies {
 
 	modImplementation libs.spell
 	modImplementation libs.spellpow
+	modImplementation libs.azur
 	modImplementation libs.rune
 	modImplementation libs.archers
 	modImplementation libs.cloth

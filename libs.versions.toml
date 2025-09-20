@@ -9,6 +9,7 @@ fapi = "0.116.6+1.21.1"
 
 spell = "1.7.3+1.21.1"
 spellpow = "1.3.0+1.21.1"
+azur = "3.0.18"
 rune = "1.1.3+1.21.1"
 archers = "2.5.2+1.21.1"
 cloth = "15.0.140"
@@ -29,6 +30,7 @@ fapi = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "
 
 spell = { group = "maven.modrinth", name = "spell-engine", version.ref = "spell"}
 spellpow = { group = "maven.modrinth", name = "spell-power", version.ref = "spellpow"}
+azur = { group = "mod.azure.azurelibarmor", name = "azurelibarmor-fabric-1.21.1", version.ref = "azur"}
 rune = { group = "maven.modrinth", name = "runes", version.ref = "rune"}
 archers = { group = "maven.modrinth", name = "archers", version.ref = "archers"}
 cloth = {group = "me.shedaniel.cloth",name = "cloth-config-fabric", version.ref = "cloth" }
