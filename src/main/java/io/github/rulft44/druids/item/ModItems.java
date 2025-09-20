@@ -2,6 +2,7 @@ package io.github.rulft44.druids.item;
 
 import io.github.rulft44.druids.Druids;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
@@ -9,6 +10,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
+
+import java.util.HashMap;
 
 public class ModItems {
 	// Misc
@@ -24,5 +27,23 @@ public class ModItems {
 			entries.addAfter(Items.IRON_NUGGET, ModItems.COPPER_NUGGET);
 			entries.addAfter(Items.HEART_OF_THE_SEA, ModItems.HEART_OF_THE_FOREST);
 		});
+		ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(entries -> {
+			entries.addBefore(ModWeapons.natureStaff.item(), ModItems.HEART_OF_THE_FOREST);
+		});
+	}
+
+	public static final HashMap<String, Item> entries;
+	static {
+		entries = new HashMap<>();
+		for(var weaponEntry: ModWeapons.entries) {
+			entries.put(weaponEntry.id().toString(), weaponEntry.item());
+		}
+		for(var entry: ModArmors.entries) {
+			var set = entry.armorSet();
+			for (var piece: set.pieces()) {
+				var armorItem = (ArmorItem) piece;
+				entries.put(set.idOf(armorItem).toString(), armorItem);
+			}
+		}
 	}
 }

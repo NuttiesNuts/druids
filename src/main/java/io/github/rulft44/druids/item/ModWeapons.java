@@ -2,7 +2,6 @@ package io.github.rulft44.druids.item;
 
 import io.github.rulft44.druids.Druids;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroups;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
@@ -100,6 +99,6 @@ public class ModWeapons {
 				.loot(Equipment.LootProperties.of("aether"));
 		}*/
 
-		Weapon.register(configs, entries, ItemGroups.COMBAT);
+		Weapon.register(configs, entries, Group.KEY);
 	}
 }

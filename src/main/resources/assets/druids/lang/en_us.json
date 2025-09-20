@@ -1,8 +1,13 @@
 {
+	"itemGroup.druids.general": "Druids",
+
 	"item.druids.heart_of_the_forest": "Heart Of The Forest",
 	"item.druids.copper_nugget": "Copper Nugget",
 
 	"item.druids.druid_spell_book": "Druidic Grimoire",
+
+	"item.druids.druid_armor_head": "Druid Hood",
+	"item.druids.druid_armor_chest": "Druid Robe",
 
 	"item.druids.wand_nature": "Nature Wand",
 	"item.druids.wand_netherite_nature": "Netherite Nature Wand",
