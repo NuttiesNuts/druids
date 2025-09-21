@@ -15,8 +15,8 @@ import net.minecraft.util.Identifier;
 @JeiPlugin
 @MethodsReturnNonnullByDefault
 @SuppressWarnings("unused")
-public class JEIPlugin implements IModPlugin {
-	private static final Identifier ID = Identifier.of(Druids.ID, "jei_plugin");
+public class JEIPlugin /*implements IModPlugin*/ {
+	/*private static final Identifier ID = Identifier.of(Druids.ID, "jei_plugin");
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
@@ -26,5 +26,5 @@ public class JEIPlugin implements IModPlugin {
 	@Override
 	public Identifier getPluginUid() {
 		return ID;
-	}
+	}*/
 }
