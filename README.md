@@ -3,7 +3,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Rulft44/druids">
-    <img src="https://raw.githubusercontent.com/Rulft44/druids/refs/heads/fabric-1.21.1/src/main/resources/assets/druids/icon.png" alt="Icon" width="80" height="80">
+    <img src="https://raw.githubusercontent.com/Rulft44/druids/refs/heads/fabric-1.21.1/icon.png" alt="Icon" width="150" height="150">
   </a>
 
 <h3 align="center">Druids (RPG Series)</h3>
