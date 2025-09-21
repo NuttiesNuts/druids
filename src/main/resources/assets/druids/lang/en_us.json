@@ -8,6 +8,8 @@
 
 	"item.druids.druid_armor_head": "Druid Hood",
 	"item.druids.druid_armor_chest": "Druid Robe",
+	"item.druids.druid_armor_legs": "Druid Leggings",
+	"item.druids.druid_armor_feet": "Druid Boots",
 
 	"item.druids.wand_nature": "Nature Wand",
 	"item.druids.wand_netherite_nature": "Netherite Nature Wand",

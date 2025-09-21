@@ -60,7 +60,7 @@ public class ModArmors {
 	public static RegistryEntry<ArmorMaterial> material_t1 = material(
 		"druid_armor",
 		1, 3, 2, 1,
-		9,
+		10,
 		ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), WOOL_INGREDIENTS);
 
 	public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
