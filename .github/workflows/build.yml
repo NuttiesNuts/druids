@@ -72,3 +72,11 @@ jobs:
         run: |
           ./gradlew --no-configuration-cache modrinth
           ./gradlew --no-configuration-cache modrinthSyncBody
+
+      - name: Curseforge Publish
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CHANGELOG: ${{ github.event.release.body }}
+        if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.CURSEFORGE_TOKEN != '' }}
+        run: |
+          ./gradlew --no-configuration-cache publishCurseForge
