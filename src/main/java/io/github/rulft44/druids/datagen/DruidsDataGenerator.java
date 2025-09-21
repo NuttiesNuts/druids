@@ -1,5 +1,6 @@
 package io.github.rulft44.druids.datagen;
 
+import io.github.rulft44.druids.item.ModArmors;
 import io.github.rulft44.druids.item.ModItems;
 import io.github.rulft44.druids.item.ModWeapons;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -12,6 +13,9 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.spell_engine.api.item.armor.Armor;
+import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
+import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -21,6 +25,18 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(UnsmeltGenerator::new);
+		pack.addProvider(ItemTagGenerator::new);
+	}
+
+	public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
+		public ItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
+			super(output, registriesFuture);
+		}
+
+		@Override
+		protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+			generateArmorTags(ModArmors.entries, RPGSeriesItemTags.ArmorMetaType.MAGIC);
+		}
 	}
 	
 	public static class UnsmeltGenerator extends FabricRecipeProvider {
@@ -35,6 +51,8 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 			/*disassemble(exporter,
 				List.of(ModWeapons.natureWand.item()),
 				Items.CHARCOAL);*/
+
+			disassembleArmor(exporter, ModArmors.druidArmorSet_T1, Items.RABBIT_HIDE);
 
 			disassemble(exporter,
 				List.of(ModWeapons.natureStaff.item()),
@@ -58,6 +76,25 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 			);
 			FabricRecipeProvider.offerBlasting(exporter,
 				items,
+				RecipeCategory.MISC,
+				output,
+				0.1f,
+				UNSMELT_TIME / 2,
+				"disassemble"
+			);
+		}
+
+		private static void disassembleArmor(RecipeExporter exporter, Armor.Set armorSet, Item output) {
+			FabricRecipeProvider.offerSmelting(exporter,
+				armorSet.pieces(),
+				RecipeCategory.MISC,
+				output,
+				0.1f,
+				UNSMELT_TIME,
+				"disassemble"
+			);
+			FabricRecipeProvider.offerBlasting(exporter,
+				armorSet.pieces(),
 				RecipeCategory.MISC,
 				output,
 				0.1f,

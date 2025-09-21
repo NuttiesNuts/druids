@@ -1,0 +1,20 @@
+{
+  "values": [
+    {
+      "id": "druids:druid_armor_head",
+      "required": false
+    },
+    {
+      "id": "druids:druid_armor_chest",
+      "required": false
+    },
+    {
+      "id": "druids:druid_armor_legs",
+      "required": false
+    },
+    {
+      "id": "druids:druid_armor_feet",
+      "required": false
+    }
+  ]
+}
