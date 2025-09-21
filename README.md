@@ -45,8 +45,4 @@ This mod is designed to be played with the other mods from the RPG Series, check
 
 Config available at `config/druids`
 
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[issues-url]: https://github.com/Rulft44/druids/issues
-
 ---
