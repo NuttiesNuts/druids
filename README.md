@@ -30,9 +30,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![skibidi](https://raw.githubusercontent.com/Rulft44/druids/refs/heads/fabric-1.21.1/src/main/resources/assets/druids/icon.png)
 
-Druids are experts in bending healing magic to their will and use it for crowd controlling enemies and buffing allies.
+Druids are experts in bending Nature magic to their will and use it for crowd controlling enemies and buffing allies.
 
 Pros:
 * Engulf foes in deadly vines
