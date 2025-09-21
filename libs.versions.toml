@@ -7,15 +7,15 @@ fl = "0.17.2"
 yarn = "1.21.1+build.3"
 fapi = "0.116.6+1.21.1"
 
-spell = "1.7.3+1.21.1"
-spellpow = "1.3.0+1.21.1"
-azur = "3.0.18"
-rune = "1.1.3+1.21.1"
-archers = "2.5.2+1.21.1"
+spell = "1.8.0+1.21.1-fabric"
+spellpow = "1.4.0+1.21.1-fabric"
+azure = "3.0.18"
+rune = "1.2.0+1.21.1-fabric"
+archers = "2.6.0+1.21.1-fabric"
 cloth = "15.0.140"
-playeranim = "2.0.0-alpha1+1.21"
+playeranim = "2.0.1+1.21.1"
 trink = "3.10.0"
-tiny = "2.3.2"
+tiny = "3.0.0-fabric"
 jei = "19.22.1.316"
 
 [plugins]
@@ -30,12 +30,12 @@ fapi = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "
 
 spell = { group = "maven.modrinth", name = "spell-engine", version.ref = "spell"}
 spellpow = { group = "maven.modrinth", name = "spell-power", version.ref = "spellpow"}
-azur = { group = "mod.azure.azurelibarmor", name = "azurelibarmor-fabric-1.21.1", version.ref = "azur"}
+azure = { group = "mod.azure.azurelibarmor", name = "azurelibarmor-fabric-1.21.1", version.ref = "azure"}
 rune = { group = "maven.modrinth", name = "runes", version.ref = "rune"}
 archers = { group = "maven.modrinth", name = "archers", version.ref = "archers"}
 cloth = {group = "me.shedaniel.cloth",name = "cloth-config-fabric", version.ref = "cloth" }
 playeranim = { group = "dev.kosmx.player-anim", name = "player-animation-lib-fabric", version.ref = "playeranim"}
 trink = { group = "dev.emi", name = "trinkets", version.ref = "trink"}
-tiny = { group = "com.github.ZsoltMolnarrr", name = "TinyConfig", version.ref = "tiny"}
+tiny = { group = "maven.modrinth", name = "tiny-config", version.ref = "tiny"}
 jeiapi = { group = "mezz.jei", name = "jei-1.21.1-fabric-api", version.ref = "jei"}
 jei = { group = "mezz.jei", name = "jei-1.21.1-fabric", version.ref = "jei"}
