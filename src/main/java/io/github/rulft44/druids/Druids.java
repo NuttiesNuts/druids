@@ -71,7 +71,11 @@ public class Druids implements ModInitializer {
 	}
 }
 
-//TODO: Tags & recipes for armor
+// TODO: More RPG Library Dependency
+
+// TODO: Recipes for armor
+
+// TODO: Scrolls? fudging scrolls are not workinnng ah-
 
 // TODO: More Spells MOTO MOTO MOTO
 
