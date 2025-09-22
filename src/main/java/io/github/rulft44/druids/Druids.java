@@ -68,15 +68,3 @@ public class Druids implements ModInitializer {
 		equipmentConfig.save();
 	}
 }
-
-// TODO: Recipes for armor
-
-// TODO: Scrolls? fudging scrolls are not workinnng ah-
-
-// TODO: More Spells MOTO MOTO MOTO
-
-// TODO: Structures
-
-// TODO: Loot Injection
-
-// TODO: Proper RPG Series README layout
