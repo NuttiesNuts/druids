@@ -1,15 +1,19 @@
-- TODO: Armor model & texture
+# To-Do List
 
-- TODO: More Spells MOTO MOTO MOTO
+---
 
-- TODO: Balancing attributes
+- Armor model & texture
 
-- TODO: Recipes for armor
+- More Spells MOTO MOTO MOTO
 
-- TODO: Scrolls? fudging scrolls are not workinnng ah-
+- Balancing attributes
 
-- TODO: Structures
+- Recipes for armor
 
-- TODO: Loot Injection
+- Scrolls? fudging scrolls are not workinnng ah-
 
-- Proper RPG Series README layout
+- Structures
+
+- Loot Injection
+
+- RPG Series README layout
