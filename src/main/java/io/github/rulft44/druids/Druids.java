@@ -4,7 +4,6 @@ import io.github.rulft44.druids.config.Default;
 import io.github.rulft44.druids.config.TweaksConfig;
 import io.github.rulft44.druids.effect.ModEffects;
 import io.github.rulft44.druids.item.*;
-import io.github.rulft44.druids.particle.ModParticles;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -58,7 +57,6 @@ public class Druids implements ModInitializer {
 		ModItems.register();
 
 		ModEffects.register();
-		ModParticles.register();
 
 		FabricLoader.getInstance().getModContainer(ID).ifPresent(modContainer -> {
 				ResourceManagerHelper.registerBuiltinResourcePack(
@@ -71,8 +69,6 @@ public class Druids implements ModInitializer {
 	}
 }
 
-// TODO: More RPG Library Dependency
-
 // TODO: Recipes for armor
 
 // TODO: Scrolls? fudging scrolls are not workinnng ah-
@@ -82,3 +78,5 @@ public class Druids implements ModInitializer {
 // TODO: Structures
 
 // TODO: Loot Injection
+
+// TODO: Proper RPG Series README layout
