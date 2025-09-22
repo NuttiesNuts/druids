@@ -7,12 +7,12 @@ import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.weapon.StaffItem;
 import net.spell_engine.api.item.weapon.Weapon;
-import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -57,12 +57,12 @@ public class ModWeapons {
 
 	/*public static final Weapon.Entry natureWand = wand("wand_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.COPPER_INGOT)))
-		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 4F))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4F))
 		.loot(Equipment.LootProperties.of(2));
 
 	public static final Weapon.Entry netheriteNatureWand = wand("wand_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 4.5F))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4.5F))
 		.loot(Equipment.LootProperties.of(3));*/
 
 
@@ -77,12 +77,12 @@ public class ModWeapons {
 
 	public static final Weapon.Entry natureStaff = staff("staff_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.EMERALD)))
-		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 5))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 5))
 		.loot(Equipment.LootProperties.of(2));
 
 	public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 6))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 6))
 		.loot(Equipment.LootProperties.of(3));
 
 	// MARK: Register
