@@ -25,6 +25,7 @@
 		"fabricloader": ">=${fl}",
 		"fabric-api": ">=${fapi}",
 		"spell_engine": ">=${spell}",
+		"more_rpg_classes": ">=${rpg}",
 		"runes": ">=${rune}",
 		"archers": ">=${archers}"
 	},
