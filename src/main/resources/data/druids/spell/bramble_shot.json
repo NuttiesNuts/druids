@@ -1,5 +1,5 @@
 {
-	"school": "HEALING",
+	"school": "NATURE",
 	"group": "primary",
 	"range": 28,
 	"tier": 0,
@@ -7,15 +7,15 @@
 	"active": {
 		"scroll": { },
 		"cast": {
-			"duration": 1.2,
+			"duration": 1.5,
 			"animation": "spell_engine:one_handed_projectile_charge",
 			"sound": {
-				"id": "spell_engine:generic_healing_casting",
+				"id": "more_rpg_classes:nature_cast_1",
 				"randomness": 0
 			},
 			"particles": [
 				{
-					"particle_id": "druids:leaf",
+					"particle_id": "more_rpg_classes:leaf",
 					"shape": "PIPE",
 					"origin": "FEET",
 					"extent": 0.5,
@@ -48,11 +48,11 @@
 		"type": "PROJECTILE",
 		"projectile": {
 			"launch_properties": {
-				"velocity": 1.2,
-				"sound": { "id": "spell_engine:generic_healing_release" }
+				"velocity": 1,
+				"sound": { "id": "more_rpg_classes:nature_release_1" }
 			},
 			"projectile": {
-				"homing_angle": 0.5,
+				"homing_angle": 1.0,
 				"client_data": {
 					"light_level": 6,
 					"particle_spawn_interval": 2.5,
@@ -62,14 +62,14 @@
 							"shape": "LINE",
 							"rotation": "LOOK",
 							"origin": "CENTER",
-							"count": 2.0,
+							"count": 1.0,
 							"min_speed": 0.0,
 							"max_speed": 0.1
 						}
 					],
 					"model": {
 						"model_id": "druids:projectile/bramble_shot",
-						"scale": 0.7
+						"scale": 0.5
 					}
 				}
 			}
@@ -81,7 +81,7 @@
 				"type": "DAMAGE",
 				"damage": {
 					"knockback": 0.8,
-					"spell_power_coefficient": 0.5
+					"spell_power_coefficient": 0.25
 				}
 			},
 			"particles": [
@@ -103,13 +103,13 @@
 				}
 			],
 			"sound": {
-				"id": "spell_engine:generic_poison_impact"
+				"id": "more_rpg_classes:nature_impact_1"
 			}
 		}
 	],
 	"cost": {
 		"item": {
-			"id": "runes:healing_stone"
+			"id": "more_rpg_classes:nature_stone"
 		}
 	}
 }

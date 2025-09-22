@@ -2,8 +2,6 @@ package io.github.rulft44.druids.item;
 
 import io.github.rulft44.druids.Druids;
 import io.github.rulft44.druids.item.armor.DruidArmor;
-import net.archers.content.ArcherSounds;
-import net.minecraft.entity.attribute.EntityAttributeModifier;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
 import net.minecraft.item.Items;
@@ -12,6 +10,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
@@ -61,7 +60,7 @@ public class ModArmors {
 		"druid_armor",
 		1, 3, 2, 1,
 		10,
-		ArcherSounds.ARCHER_ARMOR_EQUIP.entry(), WOOL_INGREDIENTS);
+		SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, WOOL_INGREDIENTS);
 
 	public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
 	private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {

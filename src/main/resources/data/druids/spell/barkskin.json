@@ -1,5 +1,5 @@
 {
-	"school": "HEALING",
+	"school": "NATURE",
 	"range": 0,
 	"tier": 2,
 	"learn": {},
@@ -9,12 +9,12 @@
 			"duration": 0.75,
 			"animation": "spell_engine:one_handed_area_charge",
 			"sound": {
-				"id": "spell_engine:generic_healing_casting",
+				"id": "more_rpg_classes:nature_cast_1",
 				"randomness": 0
 			},
 			"particles": [
 				{
-					"particle_id": "druids:leaf",
+					"particle_id": "more_rpg_classes:leaf",
 					"shape": "PIPE",
 					"origin": "FEET",
 					"extent": 0.5,
@@ -47,9 +47,13 @@
 
 	"release": {
 		"animation": "spell_engine:dual_handed_ground_release",
+		"sound": {
+			"id": "more_rpg_classes:nature_release_1",
+			"volume": 0.5
+		},
 		"particles": [
 			{
-				"particle_id": "druids:leaf",
+				"particle_id": "more_rpg_classes:leaf",
 				"shape": "SPHERE",
 				"origin": "FEET",
 				"count": 3.0,
@@ -93,7 +97,7 @@
 			"duration": 20
 		},
 		"item": {
-			"id": "runes:healing_stone"
+			"id": "more_rpg_classes:nature_stone"
 		}
 	}
 }

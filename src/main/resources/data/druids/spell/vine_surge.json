@@ -1,5 +1,5 @@
 {
-	"school": "HEALING",
+	"school": "NATURE",
 	"range": 16.0,
 	"tier": 3,
 	"learn": {},
@@ -9,12 +9,12 @@
 			"duration": 1.0,
 			"animation": "spell_engine:one_handed_healing_charge",
 			"sound": {
-				"id": "spell_engine:generic_healing_casting",
+				"id": "more_rpg_classes:nature_cast_1",
 				"randomness": 0.0
 			},
 			"particles": [
 				{
-					"particle_id": "druids:leaf",
+					"particle_id": "more_rpg_classes:leaf",
 					"shape": "PIPE",
 					"origin": "FEET",
 					"extent": 0.5,
@@ -39,7 +39,7 @@
 	"release": {
 		"animation": "spell_engine:one_handed_healing_release",
 		"sound": {
-			"id": "spell_engine:generic_healing_release"
+			"id": "more_rpg_classes:nature_release_2"
 		}
 	},
 	"target": {
@@ -53,7 +53,7 @@
 		{
 			"action": {"type": "STATUS_EFFECT",
 				"status_effect": {
-					"effect_id": "archers:entangling_roots",
+					"effect_id": "more_rpg_classes:stagger",
 					"duration": 18.0,
 					"apply_limit": {
 						"health_base": 50.0,
@@ -72,7 +72,7 @@
 				}
 			],
 			"sound": {
-				"id": "archers:entangling_roots"
+				"id": "more_rpg_classes:nature_impact_1"
 			}
 		}
 	],
@@ -81,7 +81,7 @@
 			"duration": 4.0
 		},
 		"item": {
-			"id": "runes:healing_stone"
+			"id": "more_rpg_classes:nature_stone"
 		}
 	}
 }
