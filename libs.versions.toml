@@ -12,7 +12,6 @@ spellpow = "1.4.0+1.21.1-fabric"
 rpg = "2.4.1-1.21.1"
 azure = "3.0.18"
 rune = "1.2.0+1.21.1-fabric"
-archers = "2.6.1+1.21.1-fabric"
 cloth = "15.0.140"
 playeranim = "2.0.1+1.21.1"
 trink = "3.10.0"
@@ -34,7 +33,6 @@ spellpow = { group = "maven.modrinth", name = "spell-power", version.ref = "spel
 rpg = { group = "maven.modrinth", name = "more-rpg-library", version.ref = "rpg"}
 azure = { group = "mod.azure.azurelibarmor", name = "azurelibarmor-fabric-1.21.1", version.ref = "azure"}
 rune = { group = "maven.modrinth", name = "runes", version.ref = "rune"}
-archers = { group = "maven.modrinth", name = "archers", version.ref = "archers"}
 cloth = {group = "me.shedaniel.cloth",name = "cloth-config-fabric", version.ref = "cloth" }
 playeranim = { group = "dev.kosmx.player-anim", name = "player-animation-lib-fabric", version.ref = "playeranim"}
 trink = { group = "dev.emi", name = "trinkets", version.ref = "trink"}

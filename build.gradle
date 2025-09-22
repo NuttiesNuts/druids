@@ -77,7 +77,6 @@ dependencies {
 	modImplementation libs.rpg
 	modImplementation libs.azure
 	modImplementation libs.rune
-	modImplementation libs.archers
 	modImplementation libs.cloth
 	modImplementation libs.playeranim
 	modImplementation libs.trink
@@ -105,7 +104,6 @@ processResources {
 		fapi          : libs.versions.fapi.get(),
 		spell         : libs.versions.spell.get(),
 		rune		  : libs.versions.rune.get(),
-		archers		  : libs.versions.archers.get(),
 		rpg		  	  : libs.versions.rpg.get(),
 	]
 	inputs.properties meta
@@ -149,7 +147,6 @@ modrinth {
 		required.project 'spell-engine'
 		required.project 'more-rpg-library'
 		required.project 'runes'
-		required.project 'archers'
 
 	}
 }

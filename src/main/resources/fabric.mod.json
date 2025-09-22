@@ -26,8 +26,7 @@
 		"fabric-api": ">=${fapi}",
 		"spell_engine": ">=${spell}",
 		"more_rpg_classes": ">=${rpg}",
-		"runes": ">=${rune}",
-		"archers": ">=${archers}"
+		"runes": ">=${rune}"
 	},
 	"suggests": {
 		"better_combat": "*"
