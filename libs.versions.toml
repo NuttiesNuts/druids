@@ -7,7 +7,7 @@ fl = "0.17.2"
 yarn = "1.21.1+build.3"
 fapi = "0.116.6+1.21.1"
 
-spell = "1.8.0+1.21.1-fabric"
+spell = "1.8.2+1.21.1-fabric"
 spellpow = "1.4.0+1.21.1-fabric"
 rpg = "2.4.1-1.21.1"
 azure = "3.0.18"
