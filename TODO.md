@@ -2,8 +2,6 @@
 
 ---
 
-- Armor model & texture
-
 - More Spells MOTO MOTO MOTO
 
 - Balancing attributes
