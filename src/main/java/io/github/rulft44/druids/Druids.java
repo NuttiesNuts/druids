@@ -45,7 +45,7 @@ public class Druids implements ModInitializer {
 		tweaksConfig.refresh();
 
 		Group.DRUIDS = FabricItemGroup.builder()
-			.icon(() -> new ItemStack(ModArmors.druidArmorSet_T1.head))
+			.icon(() -> new ItemStack(ModArmors.druidArmorSet_T2.head))
 			.displayName(Text.translatable("itemGroup." + ID + ".general"))
 			.build();
 		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.DRUIDS);
