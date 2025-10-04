@@ -12,6 +12,11 @@
 	"item.druids.druid_armor_legs": "Druid Leggings",
 	"item.druids.druid_armor_feet": "Druid Boots",
 
+	"item.druids.netherite_druid_armor_head": "Netherite Druid Hood",
+	"item.druids.netherite_druid_armor_chest": "Netherite Druid Robe",
+	"item.druids.netherite_druid_armor_legs": "Netherite Druid Leggings",
+	"item.druids.netherite_druid_armor_feet": "Netherite Druid Boots",
+
 	"item.druids.wand_nature": "Nature Wand",
 	"item.druids.wand_netherite_nature": "Netherite Nature Wand",
 	"item.druids.staff_nature": "Nature Staff",

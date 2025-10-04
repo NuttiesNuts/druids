@@ -12,10 +12,12 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
+import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -56,11 +58,17 @@ public class ModArmors {
 		Items.BLACK_WOOL);
 	};
 
-	public static RegistryEntry<ArmorMaterial> material_t1 = material(
+	public static RegistryEntry<ArmorMaterial> material_t2 = material(
 		"druid_armor",
 		1, 3, 2, 1,
 		10,
 		SoundEvents.ITEM_ARMOR_EQUIP_LEATHER, WOOL_INGREDIENTS);
+
+	public static RegistryEntry<ArmorMaterial> material_t3 = material(
+		"netherite_druid_armor",
+		1, 3, 2, 1,
+		15,
+		SoundEvents.ITEM_ARMOR_EQUIP_NETHERITE, () -> { return Ingredient.ofItems(Items.NETHERITE_INGOT); });
 
 	public static final ArrayList<Armor.Entry> entries = new ArrayList<>();
 	private static Armor.Entry create(RegistryEntry<ArmorMaterial> material, Identifier id, int durability, Armor.Set.ItemFactory factory, ArmorSetConfig defaults, int tier) {
@@ -75,30 +83,57 @@ public class ModArmors {
 		entries.add(entry);
 		return entry;
 	}
-
-	private static AttributeModifier damageMultiplier(float value) {
-		return null; /*new AttributeModifier(
-			EntityAttributes_RangedWeapon.DAMAGE.id.toString(),
-			value,
-			EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE);*/
-	}
-
-	public static final float damage_T1 = 0.05F;
-
-	public static final Armor.Set druidArmorSet_T1 = create(
-		material_t1,
+	
+	private static final float spell_power_t2 = 0.25F;
+	private static final float spell_power_t3 = 0.3F;
+	
+	public static final Armor.Set druidArmorSet_T2 = create(
+		material_t2,
 		Identifier.of(Druids.ID, "druid_armor"),
-		15,
+		20,
 		DruidArmor::druid,
 		ArmorSetConfig.with(
 			new ArmorSetConfig.Piece(2)
-				.add(damageMultiplier(damage_T1)),
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t2)
+				)),
+			new ArmorSetConfig.Piece(4)
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t2)
+				)),
 			new ArmorSetConfig.Piece(3)
-				.add(damageMultiplier(damage_T1)),
-			new ArmorSetConfig.Piece(3)
-				.add(damageMultiplier(damage_T1)),
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t2)
+				)),
 			new ArmorSetConfig.Piece(2)
-				.add(damageMultiplier(damage_T1))
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t2)
+				))
+		),
+		1)
+		.armorSet();
+	public static final Armor.Set druidArmorSet_T3 = create(
+		material_t3,
+		Identifier.of(Druids.ID, "netherite_druid_armor"),
+		30,
+		DruidArmor::druid,
+		ArmorSetConfig.with(
+			new ArmorSetConfig.Piece(2)
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t3)
+				)),
+			new ArmorSetConfig.Piece(4)
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t3)
+				)),
+			new ArmorSetConfig.Piece(3)
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t3)
+				)),
+			new ArmorSetConfig.Piece(2)
+				.addAll(List.of(
+					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t3)
+				))
 		),
 		1)
 		.armorSet();

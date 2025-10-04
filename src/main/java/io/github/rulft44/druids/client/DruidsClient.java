@@ -20,7 +20,8 @@ public class DruidsClient implements ClientModInitializer {
 			Identifier.of(Druids.ID, "projectile/bramble_shot")
 		));
 
-		registerArmorRenderer(ModArmors.druidArmorSet_T1, DruidArmorRenderer::druid);
+		registerArmorRenderer(ModArmors.druidArmorSet_T2, DruidArmorRenderer::druid);
+		registerArmorRenderer(ModArmors.druidArmorSet_T3, DruidArmorRenderer::netherite_druid);
 	}
 
 	private static void registerArmorRenderer(Armor.Set set, Supplier<AzArmorRenderer> armorRendererSupplier) {

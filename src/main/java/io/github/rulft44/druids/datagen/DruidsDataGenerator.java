@@ -52,7 +52,8 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 				List.of(ModWeapons.natureWand.item()),
 				Items.CHARCOAL);*/
 
-			disassembleArmor(exporter, ModArmors.druidArmorSet_T1, Items.RABBIT_HIDE);
+			disassembleArmor(exporter, ModArmors.druidArmorSet_T2, Items.RABBIT_HIDE);
+			disassembleArmor(exporter, ModArmors.druidArmorSet_T3, Items.NETHERITE_SCRAP);
 
 			disassemble(exporter,
 				List.of(ModWeapons.natureStaff.item()),

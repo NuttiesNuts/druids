@@ -1,7 +1,7 @@
-// 1.21.1	2025-09-21T20:33:13.2234017	Druids (RPG Series)/Tags for minecraft:item
-563679f6e10c614f4842386a2e39db09f2c9fc7c data\minecraft\tags\item\foot_armor.json
-06109f2f906653a3e54c11cc36558c54bb47dc21 data\rpg_series\tags\item\loot_tier\tier_1_armors.json
-188aea2cd7ad0b1ae44a09008d708e888668878f data\minecraft\tags\item\head_armor.json
-06109f2f906653a3e54c11cc36558c54bb47dc21 data\rpg_series\tags\item\armor_type\magic.json
-97377c78c523f785534e6e97b39e1ee76043e242 data\minecraft\tags\item\leg_armor.json
-56364f9ada8f9d49c96f60a483d23d85b366ebe7 data\minecraft\tags\item\chest_armor.json
+// 1.21.1	2025-10-04T23:24:55.0903084	Druids (RPG Series)/Tags for minecraft:item
+dc300cb4b18c3ce1c7187cdbd5f46b0ac65eeeb7 data\minecraft\tags\item\foot_armor.json
+454449e3eacf37e7cf9fcadaa68d59f75a8d1da9 data\rpg_series\tags\item\loot_tier\tier_1_armors.json
+19bfe5583c2e3c3ac1f283e94eec8a1974fac088 data\minecraft\tags\item\head_armor.json
+454449e3eacf37e7cf9fcadaa68d59f75a8d1da9 data\rpg_series\tags\item\armor_type\magic.json
+78d6effa17cc53e5ac668ce9f2c33b25df32b1f7 data\minecraft\tags\item\leg_armor.json
+f401f536267b337fadd0632b188573f3826fa314 data\minecraft\tags\item\chest_armor.json
