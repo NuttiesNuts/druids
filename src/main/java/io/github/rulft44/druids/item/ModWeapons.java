@@ -77,12 +77,12 @@ public class ModWeapons {
 
 	public static final Weapon.Entry natureStaff = staff("staff_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.EMERALD)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 5))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 3.5f))
 		.loot(Equipment.LootProperties.of(2));
 
 	public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 6))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4))
 		.loot(Equipment.LootProperties.of(3));
 
 	// MARK: Register
