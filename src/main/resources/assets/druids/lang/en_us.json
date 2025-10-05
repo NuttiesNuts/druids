@@ -24,6 +24,8 @@
 
 	"spell.druids.bramble_shot.name": "Bramble Shot",
 	"spell.druids.bramble_shot.description": "Launches a wood projectile, causing up to {damage} nature spell damage.",
+	"spell.druids.maul.name": "Maul",
+	"spell.druids.maul.description": "Mauls the target, causing up to {damage} nature spell damage and applying Grievous Wounds.",
 	"spell.druids.barkskin.name": "Barkskin",
 	"spell.druids.barkskin.description": "Increases resistance and gives the caster thorns.",
 	"spell.druids.vine_surge.name": "Vine Surge",

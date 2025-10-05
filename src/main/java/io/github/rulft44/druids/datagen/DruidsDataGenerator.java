@@ -3,6 +3,7 @@ package io.github.rulft44.druids.datagen;
 import io.github.rulft44.druids.item.ModArmors;
 import io.github.rulft44.druids.item.ModItems;
 import io.github.rulft44.druids.item.ModWeapons;
+import io.github.rulft44.druids.spell.DruidSpells;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -13,6 +14,7 @@ import net.minecraft.item.ItemConvertible;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.item.armor.Armor;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
@@ -25,8 +27,22 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 	public void onInitializeDataGenerator(FabricDataGenerator fabricDataGenerator) {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(UnsmeltGenerator::new);
+		pack.addProvider(SpellGen::new);
 		pack.addProvider(ItemTagGenerator::new);
 	}
+	public static class SpellGen extends SpellGenerator {
+		public SpellGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
+			super(dataOutput, registryLookup);
+		}
+
+		@Override
+		public void generateSpells(Builder builder) {
+			for (var entry: DruidSpells.entries) {
+				builder.add(entry.id(), entry.spell());
+			}
+		}
+	}
+
 
 	public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
 		public ItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
