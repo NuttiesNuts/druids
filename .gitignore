@@ -25,4 +25,3 @@ bin/
 
 # fabric
 run/
-/src/main/generated/.cache/
