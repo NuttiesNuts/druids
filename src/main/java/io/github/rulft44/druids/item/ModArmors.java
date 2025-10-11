@@ -110,7 +110,7 @@ public class ModArmors {
 					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t2)
 				))
 		),
-		1)
+		2)
 		.armorSet();
 	public static final Armor.Set druidArmorSet_T3 = create(
 		material_t3,
@@ -135,7 +135,7 @@ public class ModArmors {
 					AttributeModifier.multiply(MoreSpellSchools.NATURE.id, spell_power_t3)
 				))
 		),
-		1)
+		3)
 		.armorSet();
 
 	public static void register(Map<String, ArmorSetConfig> configs) {
