@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "L": {
+      "item": "minecraft:wheat_seeds"
+    },
+    "W": {
+      "tag": "minecraft:wool"
+    }
+  },
+  "pattern": [
+    "  W",
+    " W ",
+    "WLW"
+  ],
+  "result": {
+    "count": 1,
+    "id": "druids:druid_armor_head"
+  }
+}

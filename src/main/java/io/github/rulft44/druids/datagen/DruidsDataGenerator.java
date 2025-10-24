@@ -29,6 +29,7 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(UnsmeltGenerator::new);
 		pack.addProvider(SpellGen::new);
 		pack.addProvider(ItemTagGenerator::new);
+		pack.addProvider(DruidRecipes::new);
 	}
 	public static class SpellGen extends SpellGenerator {
 		public SpellGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
@@ -64,12 +65,12 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 
 		@Override
 		public void generate(RecipeExporter exporter) {
-			/*disassemble(exporter,
-				List.of(ModWeapons.natureWand.item()),
-				Items.CHARCOAL);*/
-
-			disassembleArmor(exporter, ModArmors.druidArmorSet_T2, Items.RABBIT_HIDE);
+			disassembleArmor(exporter, ModArmors.druidArmorSet_T2, Items.WHEAT_SEEDS);
 			disassembleArmor(exporter, ModArmors.druidArmorSet_T3, Items.NETHERITE_SCRAP);
+
+			disassemble(exporter,
+				List.of(ModWeapons.natureWand.item()),
+				Items.CHARCOAL);
 
 			disassemble(exporter,
 				List.of(ModWeapons.natureStaff.item()),

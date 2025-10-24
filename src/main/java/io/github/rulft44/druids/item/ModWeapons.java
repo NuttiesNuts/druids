@@ -54,16 +54,15 @@ public class ModWeapons {
 		return entry(name, material, StaffItem::new, new WeaponConfig(wandAttackDamage, wandAttackSpeed), Equipment.WeaponType.DAMAGE_WAND);
 	}
 
-
-	/*public static final Weapon.Entry natureWand = wand("wand_nature",
-		Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.COPPER_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4F))
+	public static final Weapon.Entry natureWand = wand("wand_nature",
+		Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.STICK)))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 3F))
 		.loot(Equipment.LootProperties.of(2));
 
 	public static final Weapon.Entry netheriteNatureWand = wand("wand_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4.5F))
-		.loot(Equipment.LootProperties.of(3));*/
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 3.5F))
+		.loot(Equipment.LootProperties.of(3));
 
 
 	// MARK: Staves
@@ -82,7 +81,7 @@ public class ModWeapons {
 
 	public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4.5F))
 		.loot(Equipment.LootProperties.of(3));
 
 	// MARK: Register

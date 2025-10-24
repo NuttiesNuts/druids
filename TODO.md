@@ -2,16 +2,18 @@
 
 ---
 
-- Mass Entanglement
+High Priority:
+-
+- Loot Injection
 
+Low Priority:
+-
 - Balancing attributes
 
-- Recipes for armor
+- More Weapons & Artifacts
 
 - Scrolls? fudging scrolls are not workinnng ah-
 
 - Structures
-
-- Loot Injection
 
 - RPG Series README layout
