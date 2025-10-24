@@ -30,6 +30,8 @@
 	"spell.druids.barkskin.description": "Increases resistance and gives the caster thorns.",
 	"spell.druids.vine_surge.name": "Vine Surge",
 	"spell.druids.vine_surge.description": "Send forth vines that immobilize an enemy.",
+	"spell.druids.mass_entanglement.name": "Mass Entanglement",
+	"spell.druids.mass_entanglement.description": "Roots and damages all enemies in range for {effect_duration} sec.",
 
 	"tag.item.c.nuggets.copper": "Copper Nuggets",
 

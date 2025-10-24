@@ -2,8 +2,10 @@ package io.github.rulft44.druids.spell;
 
 import io.github.rulft44.druids.Druids;
 import net.minecraft.util.Identifier;
+import net.more_rpg_classes.client.particle.MoreParticles;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.effect.MRPGCEffects;
+import net.more_rpg_classes.item.MRPGCItems;
 import net.more_rpg_classes.sounds.ModSounds;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.spell.Spell;
@@ -57,6 +59,27 @@ public class DruidSpells {
 		return buff;
 	}
 
+	private static void configureNatureRuneCost(Spell spell) {
+		if (spell.cost == null) {
+			spell.cost = new Spell.Cost();
+		}
+		spell.cost.item = new Spell.Cost.Item();
+		spell.cost.item.id = "more_rpg_classes:nature_stone";
+	}
+
+	private static ParticleBatch[] natureCastingParticles() {
+		return new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.MagicParticles.get(
+				SpellEngineParticles.MagicParticles.Shape.SPARK,
+				SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
+				ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
+				1.5F, 0.05F, 0.2F).color(4294954239L),
+			new ParticleBatch("more_rpg_classes:leaf",
+				ParticleBatch.Shape.PIPE, ParticleBatch.Origin.FEET,
+				0.5F, 0.05F, 0.1F).scale(0.5F).maxAge(0.25F)
+		};
+	}
+
 	public static final Entry maul = add(maul());
 	private static Entry maul() {
 		var id = Identifier.of(Druids.ID, "maul");
@@ -99,6 +122,63 @@ public class DruidSpells {
 
 		configureCooldown(spell, 15);
 		spell.cost.exhaust = 0.3F;
+		return new Entry(id, spell, title, description, null);
+	}
+
+	public static final Entry mass_entanglement = add(mass_entanglement());
+	private static Entry mass_entanglement() {
+		var id = Identifier.of(Druids.ID, "mass_entanglement");
+		var title = "";
+		var description = "";
+		var debuffEffect = MRPGCEffects.STAGGER;
+		var spell = SpellBuilder.createSpellActive();
+		spell.range = 10F;
+		spell.tier = 4;
+		spell.school = MoreSpellSchools.NATURE;
+
+		spell.active.cast.animation = "spell_engine:one_handed_area_charge";
+		spell.active.cast.particles = natureCastingParticles();
+		spell.active.cast.duration = 15;
+		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
+
+		spell.release.animation = "spell_engine:one_handed_area_release";
+
+		var debuff = createEffectImpact(debuffEffect.id, 15);
+		debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		debuff.action.status_effect.show_particles = false;
+		debuff.action.status_effect.amplifier = 1;
+		debuff.action.status_effect.amplifier_cap = 5;
+		debuff.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+		debuff.particles = new ParticleBatch[]{
+			new ParticleBatch("falling_spore_blossom",
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+				2, 0.1F, 0.2F)
+		};
+
+		spell.target.type = Spell.Target.Type.AREA;
+		spell.target.area = new Spell.Target.Area();
+		spell.target.area.vertical_range_multiplier = 1F;
+		spell.target.area.angle_degrees = 360;
+
+		spell.release.sound = new Sound(ModSounds.NATURE_IMPACT_1_ID);
+		spell.release.particles = new ParticleBatch[]{
+			new ParticleBatch(
+				SpellEngineParticles.roots.id().toString(),
+				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.GROUND,
+				3F, 0, 0)
+		};
+		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+				1, 0, 0).color(4283786581L)//.scale(0.8F)
+		};
+
+		var damage = damageImpact(0.65F, 0);
+
+		spell.impacts = List.of(debuff, damage);
+
+		configureCooldown(spell, 25);
+		configureNatureRuneCost(spell);
 		return new Entry(id, spell, title, description, null);
 	}
 
