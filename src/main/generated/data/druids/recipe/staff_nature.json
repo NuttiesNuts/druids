@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "A": {
+      "item": "minecraft:emerald"
+    },
+    "G": {
+      "tag": "c:seeds"
+    },
+    "P": {
+      "tag": "minecraft:saplings"
+    },
+    "S": {
+      "tag": "c:rods/wooden"
+    }
+  },
+  "pattern": [
+    " AP",
+    " GA",
+    "S  "
+  ],
+  "result": {
+    "count": 1,
+    "id": "druids:staff_nature"
+  }
+}
