@@ -1,7 +1,6 @@
 package io.github.rulft44.druids.datagen;
 
 import io.github.rulft44.druids.item.ModArmors;
-import io.github.rulft44.druids.item.ModItems;
 import io.github.rulft44.druids.item.ModWeapons;
 import io.github.rulft44.druids.spell.DruidSpells;
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
@@ -31,6 +30,7 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 		pack.addProvider(ItemTagGenerator::new);
 		pack.addProvider(DruidRecipes::new);
 	}
+
 	public static class SpellGen extends SpellGenerator {
 		public SpellGen(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
 			super(dataOutput, registryLookup);
@@ -43,7 +43,6 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 			}
 		}
 	}
-
 
 	public static class ItemTagGenerator extends RPGSeriesDataGen.ItemTagGenerator {
 		public ItemTagGenerator(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
@@ -65,8 +64,8 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 
 		@Override
 		public void generate(RecipeExporter exporter) {
-			disassembleArmor(exporter, ModArmors.druidArmorSet_T2, Items.WHEAT_SEEDS);
-			disassembleArmor(exporter, ModArmors.druidArmorSet_T3, Items.NETHERITE_SCRAP);
+			disassembleArmor(exporter, ModArmors.druidArmorSet, Items.WHEAT_SEEDS);
+			disassembleArmor(exporter, ModArmors.netheriteDruidArmorSet, Items.NETHERITE_SCRAP);
 
 			disassemble(exporter,
 				List.of(ModWeapons.natureWand.item()),

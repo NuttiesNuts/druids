@@ -17,7 +17,6 @@ import net.spell_engine.api.config.ArmorSetConfig;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.armor.Armor;
-import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,7 +86,7 @@ public class ModArmors {
 	private static final float spell_power_t2 = 0.25F;
 	private static final float spell_power_t3 = 0.3F;
 	
-	public static final Armor.Set druidArmorSet_T2 = create(
+	public static final Armor.Set druidArmorSet = create(
 		material_t2,
 		Identifier.of(Druids.ID, "druid_armor"),
 		20,
@@ -112,7 +111,7 @@ public class ModArmors {
 		),
 		2)
 		.armorSet();
-	public static final Armor.Set druidArmorSet_T3 = create(
+	public static final Armor.Set netheriteDruidArmorSet = create(
 		material_t3,
 		Identifier.of(Druids.ID, "netherite_druid_armor"),
 		30,

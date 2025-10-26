@@ -7,6 +7,14 @@
     "item": "druids:druid_armor_head"
   },
   "result": {
+    "components": {
+      "azurelibarmor:az_id": [
+        -1897040696,
+        366952962,
+        -1985782227,
+        -30315059
+      ]
+    },
     "count": 1,
     "id": "druids:netherite_druid_armor_head"
   },

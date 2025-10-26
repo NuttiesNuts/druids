@@ -68,7 +68,7 @@ public class DruidRecipes extends FabricRecipeProvider {
 
 	private void generateArmorRecipes(RecipeExporter exporter) {
 		// Nature Robes - wool + vines
-		generateArmorSet(exporter, ModArmors.druidArmorSet_T2, Items.WHEAT_SEEDS);
+		generateArmorSet(exporter, ModArmors.druidArmorSet, Items.WHEAT_SEEDS);
 	}
 
 	/**
@@ -127,10 +127,10 @@ public class DruidRecipes extends FabricRecipeProvider {
 		offerNetheriteUpgradeRecipe(exporter, ModWeapons.natureStaff.item(), RecipeCategory.COMBAT, ModWeapons.netheriteNatureStaff.item());
 
 		// Armor upgrades - Nature set
-		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet_T2.head, RecipeCategory.COMBAT, ModArmors.druidArmorSet_T3.head);
-		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet_T2.chest, RecipeCategory.COMBAT, ModArmors.druidArmorSet_T3.chest);
-		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet_T2.legs, RecipeCategory.COMBAT, ModArmors.druidArmorSet_T3.legs);
-		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet_T2.feet, RecipeCategory.COMBAT, ModArmors.druidArmorSet_T3.feet);
+		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet.head, RecipeCategory.COMBAT, ModArmors.netheriteDruidArmorSet.head);
+		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet.chest, RecipeCategory.COMBAT, ModArmors.netheriteDruidArmorSet.chest);
+		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet.legs, RecipeCategory.COMBAT, ModArmors.netheriteDruidArmorSet.legs);
+		offerNetheriteUpgradeRecipe(exporter, ModArmors.druidArmorSet.feet, RecipeCategory.COMBAT, ModArmors.netheriteDruidArmorSet.feet);
 	}
 
 	// ========================================

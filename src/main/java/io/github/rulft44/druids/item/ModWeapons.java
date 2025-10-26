@@ -44,8 +44,6 @@ public class ModWeapons {
 		}
 	}
 
-	// private static final String AETHER = "aether";
-
 	// MARK: Wands
 
 	private static final float wandAttackDamage = 2;
@@ -63,7 +61,6 @@ public class ModWeapons {
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
 		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 3.5F))
 		.loot(Equipment.LootProperties.of(3));
-
 
 	// MARK: Staves
 
@@ -87,17 +84,6 @@ public class ModWeapons {
 	// MARK: Register
 
 	public static void register(Map<String, WeaponConfig> configs) {
-		/* Example mod compatability
-		if (Druids.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(AETHER)) {
-			var repair = ingredient("aether:ambrosium_shard", FabricLoader.getInstance().isModLoaded(AETHER), Items.NETHERITE_INGOT);
-			staff("aether_wizard_staff",
-				Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair))
-				.attribute(AttributeModifier.bonus(SpellSchools.ARCANE.id, 7))
-				.attribute(AttributeModifier.bonus(SpellSchools.FIRE.id, 7))
-				.attribute(AttributeModifier.bonus(SpellSchools.FROST.id, 7))
-				.loot(Equipment.LootProperties.of("aether"));
-		}*/
-
 		Weapon.register(configs, entries, Group.KEY);
 	}
 }

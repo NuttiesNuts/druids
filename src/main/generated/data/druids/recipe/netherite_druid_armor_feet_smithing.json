@@ -7,6 +7,14 @@
     "item": "druids:druid_armor_feet"
   },
   "result": {
+    "components": {
+      "azurelibarmor:az_id": [
+        9373434,
+        -1342813019,
+        -1961212099,
+        295770128
+      ]
+    },
     "count": 1,
     "id": "druids:netherite_druid_armor_feet"
   },
