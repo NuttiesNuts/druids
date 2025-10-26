@@ -28,7 +28,7 @@ public class ModItems {
 			entries.addAfter(Items.HEART_OF_THE_SEA, ModItems.HEART_OF_THE_FOREST);
 		});
 		ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(entries -> {
-			entries.addBefore(ModWeapons.natureStaff.item(), ModItems.HEART_OF_THE_FOREST);
+			entries.addBefore(ModWeapons.natureWand.item(), ModItems.HEART_OF_THE_FOREST);
 		});
 	}
 

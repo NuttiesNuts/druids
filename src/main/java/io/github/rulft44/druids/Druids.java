@@ -6,10 +6,15 @@ import io.github.rulft44.druids.effect.ModEffects;
 import io.github.rulft44.druids.item.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
 import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.block.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.loot.LootPool;
+import net.minecraft.loot.LootTables;
+import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
@@ -45,13 +50,11 @@ public class Druids implements ModInitializer {
 		tweaksConfig.refresh();
 
 		Group.DRUIDS = FabricItemGroup.builder()
-			.icon(() -> new ItemStack(ModArmors.druidArmorSet_T2.head))
+			.icon(() -> new ItemStack(ModArmors.druidArmorSet.head))
 			.displayName(Text.translatable("itemGroup." + ID + ".general"))
 			.build();
 		Registry.register(Registries.ITEM_GROUP, Group.KEY, Group.DRUIDS);
-
 		ModBooks.register();
-
 		ModWeapons.register(equipmentConfig.value.weapons);
 		ModArmors.register(equipmentConfig.value.armor_sets);
 		ModItems.register();
@@ -66,5 +69,31 @@ public class Druids implements ModInitializer {
 			});
 
 		equipmentConfig.save();
+
+		// Modify some loot tables to give a Heart Of The Forest
+		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+			if (LootTables.JUNGLE_TEMPLE_CHEST == key && source.isBuiltin()) {
+				LootPool.Builder pool = LootPool.builder()
+					.with(ItemEntry.builder(ModItems.HEART_OF_THE_FOREST));
+
+				tableBuilder.pool(pool);
+			}
+		});
+		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+			if (LootTables.SNIFFER_DIGGING_GAMEPLAY == key && source.isBuiltin()) {
+				LootPool.Builder pool = LootPool.builder()
+					.with(ItemEntry.builder(ModItems.HEART_OF_THE_FOREST));
+
+				tableBuilder.pool(pool);
+			}
+		});
+		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
+			if (LootTables.WOODLAND_MANSION_CHEST == key && source.isBuiltin()) {
+				LootPool.Builder pool = LootPool.builder()
+					.with(ItemEntry.builder(ModItems.HEART_OF_THE_FOREST));
+
+				tableBuilder.pool(pool);
+			}
+		});
 	}
 }
