@@ -82,8 +82,7 @@ dependencies {
 	modImplementation libs.trink
 	modImplementation libs.tiny
 
-	modCompileOnlyApi libs.jeiapi
-	modRuntimeOnly libs.jei
+	modImplementation libs.jei
 }
 
 processResources {
