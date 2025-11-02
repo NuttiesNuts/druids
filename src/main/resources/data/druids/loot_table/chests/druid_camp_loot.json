@@ -1,0 +1,107 @@
+{
+	"type": "minecraft:chest",
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:loot_table",
+					"value": "elemental_wizards_rpg:spell_scrolls/beginner_nature"
+				}
+			]
+		},
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "druids:wand_nature",
+					"weight": 2
+				},
+				{
+					"type": "minecraft:item",
+					"name": "druids:staff_nature",
+					"weight": 1
+				}
+			]
+		},
+		{
+			"rolls": {
+				"type": "minecraft:uniform",
+				"min": 2,
+				"max": 5
+			},
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"weight": 2,
+					"name": "more_rpg_classes:nature_stone",
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"type": "minecraft:uniform",
+								"min": 5,
+								"max": 20
+							},
+							"add": false
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"weight": 3,
+					"name": "minecraft:copper_ingot",
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"type": "minecraft:uniform",
+								"min": 1,
+								"max": 8
+							},
+							"add": false
+						}
+					]
+				},
+				{
+					"type": "minecraft:tag",
+					"expand": true,
+					"weight": 3,
+					"name": "minecraft:leaves",
+					"functions": [
+						{
+							"function": "minecraft:set_count",
+							"count": {
+								"type": "minecraft:uniform",
+								"min": 1,
+								"max": 8
+							},
+							"add": false
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "druids:druid_armor_head",
+					"weight": 1
+				},
+				{
+					"type": "minecraft:item",
+					"name": "druids:druid_armor_chest",
+					"weight": 1
+				},
+				{
+					"type": "minecraft:item",
+					"name": "druids:druid_armor_legs",
+					"weight": 1
+				},
+				{
+					"type": "minecraft:item",
+					"name": "druids:druid_armor_feet",
+					"weight": 1
+				}
+			]
+		}
+	]
+}

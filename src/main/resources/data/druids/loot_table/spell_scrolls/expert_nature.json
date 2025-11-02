@@ -1,0 +1,55 @@
+{
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "minecraft:item",
+					"name": "spell_engine:scroll",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "minecraft:set_components",
+							"components": {
+								"spell_engine:spell_container": {
+									"spell_ids": ["druids:vine_surge"],
+									"max_spell_count": 1
+								},
+								"minecraft:custom_model_data": 200,
+								"minecraft:item_name": "{translate:item.druids.druid.spell_scroll}",
+								"minecraft:rarity": "rare"
+							}
+						},
+						{
+							"function": "minecraft:set_count",
+							"count": 1
+						}
+					]
+				},
+				{
+					"type": "minecraft:item",
+					"name": "spell_engine:scroll",
+					"weight": 1,
+					"functions": [
+						{
+							"function": "minecraft:set_components",
+							"components": {
+								"spell_engine:spell_container": {
+									"spell_ids": ["druids:mass_entanglement"],
+									"max_spell_count": 1
+								},
+								"minecraft:custom_model_data": 200,
+								"minecraft:item_name": "{translate:item.druids.druid.spell_scroll}",
+								"minecraft:rarity": "epic"
+							}
+						},
+						{
+							"function": "minecraft:set_count",
+							"count": 1
+						}
+					]
+				}
+			]
+		}
+	]
+}
