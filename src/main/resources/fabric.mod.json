@@ -29,6 +29,7 @@
 		"runes": ">=${rune}"
 	},
 	"suggests": {
+		"archers": "*",
 		"better_combat": "*"
 	},
 	"entrypoints": {
