@@ -31,17 +31,23 @@
 ## About The Project
 
 
-Druids are experts in bending Nature magic to their will and use it for crowd controlling enemies and buffing allies.
+Druids are experts in bending Nature magic to their will and use it for crowd controlling enemies.
 
-Pros:
+#### Pros:
 * Engulf foes in deadly vines
-* Buff yourself and allies
 
-Cons:
+#### Cons:
 * Little damage
 
+### Features:
+You can find a Druid Camp in forests with interesting loot.
 
-This mod is designed to be played with the other mods from the RPG Series, check them out!
+Using the power of Nature you can cast spells of different power levels.
+
+---
+
+
+This mod is designed to be played with the other mods from the RPG Series & More RPG Series, [check them out](https://modrinth.com/collection/wMVRF7To)!
 
 Config available at `config/druids`
 
