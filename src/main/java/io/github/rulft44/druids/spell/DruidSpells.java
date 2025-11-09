@@ -1,6 +1,9 @@
 package io.github.rulft44.druids.spell;
 
 import io.github.rulft44.druids.Druids;
+import net.minecraft.entity.effect.StatusEffects;
+import net.minecraft.particle.ParticleTypes;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.client.particle.MoreParticles;
 import net.more_rpg_classes.custom.MoreSpellSchools;
@@ -80,48 +83,81 @@ public class DruidSpells {
 		};
 	}
 
-	public static final Entry maul = add(maul());
-	private static Entry maul() {
-		var id = Identifier.of(Druids.ID, "maul");
+	public static final Entry bramble_volley = add(bramble_volley());
+	private static Entry bramble_volley() {
+		var id = Identifier.of(Druids.ID, "bramble_volley");
 		var title = "";
 		var description = "";
-		var debuffEffect = MRPGCEffects.GRIEVOUS_WOUNDS;
 		var spell = SpellBuilder.createSpellActive();
 		spell.group = "primary";
-		spell.range = 0.5F;
-		spell.range_mechanic = Spell.RangeMechanic.MELEE;
+		spell.range = 64F;
 		spell.tier = 1;
 		spell.school = MoreSpellSchools.NATURE;
 
-		spell.release.animation = "spell_engine:one_handed_throw_release";
+		spell.active.cast.duration = 0.25F;
+		spell.active.cast.channel_ticks = 2;
 
-		var debuff = createEffectImpact(debuffEffect.id, 5);
-		debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-		debuff.action.status_effect.show_particles = false;
-		debuff.action.status_effect.amplifier = 1;
-		debuff.action.status_effect.amplifier_cap = 5;
-		debuff.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
-		debuff.particles = new ParticleBatch[]{
+		spell.active.cast.animation = "spell_engine:one_handed_projectile_charge";
+		spell.release.animation = "spell_engine:one_handed_projectile_release";
+
+		var debuff1 = createEffectImpact(MRPGCEffects.GRIEVOUS_WOUNDS.id, 5);
+		debuff1.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		debuff1.action.status_effect.show_particles = false;
+		debuff1.action.status_effect.amplifier = 1;
+		debuff1.action.status_effect.amplifier_cap = 5;
+		debuff1.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+		debuff1.particles = new ParticleBatch[]{
 			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
 				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
 				10, 0.05F, 0.3F),
-			/*new ParticleBatch("more_rpg_classes:blood_drop",
-				ParticleBatch.Shape.PIPE, ParticleBatch.Origin.FEET,
-				10, 0.2F, 0.4F),*/
+		};
+		var debuff2 = createEffectImpact(Registries.STATUS_EFFECT.getId(StatusEffects.POISON.value()), 5);
+		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		debuff2.action.status_effect.show_particles = false;
+		debuff2.action.status_effect.amplifier = 1;
+		debuff2.action.status_effect.amplifier_cap = 5;
+		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+		debuff2.particles = new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+				10, 0.05F, 0.3F),
 		};
 
-		spell.target.type = Spell.Target.Type.AREA;
-		spell.target.area = new Spell.Target.Area();
-		spell.target.area.vertical_range_multiplier = 0.5F;
-		spell.target.area.angle_degrees = 45;
+		spell.target.type = Spell.Target.Type.AIM;
+		spell.target.aim = new Spell.Target.Aim();
 
-		var damage = damageImpact(0.65F, 1.0F);
+		spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
+		spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
+		spell.deliver.projectile.launch_properties.velocity = 1F;
+		spell.deliver.projectile.direction_offsets = new Spell.Delivery.ShootProjectile.DirectionOffset[] {
+			new Spell.Delivery.ShootProjectile.DirectionOffset(-10.0F, 0.0F), // left
+			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, 0.0F),   // center
+			new Spell.Delivery.ShootProjectile.DirectionOffset(10.0F, 0.0F)   // right
+		};
+		spell.deliver.projectile.launch_properties.sound = new Sound(ModSounds.NATURE_RELEASE_1_ID);
+
+			var projectile = new Spell.ProjectileData();
+			projectile.homing_angle = 1;
+			projectile.client_data = new Spell.ProjectileData.Client();
+			projectile.client_data.light_level = 6;
+			projectile.client_data.travel_particles = new ParticleBatch[]{
+				new ParticleBatch(
+					Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR).toString(),
+					ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
+					ParticleBatch.Rotation.LOOK, 1, 0, 0.1F, 0),
+			};
+			projectile.client_data.model = new Spell.ProjectileModel();
+			projectile.client_data.model.model_id = "druids:projectile/bramble_shot";
+			projectile.client_data.model.scale = 0.5F;
+			spell.deliver.projectile.projectile = projectile;
+
+		var damage = damageImpact(0.25F, 0.8F);
 		damage.sound = new Sound(ModSounds.CRIPPLING_STRIKE_ID);
 
-		spell.impacts = List.of(debuff, damage);
+		spell.impacts = List.of(debuff1, debuff2, damage);
 
-		configureCooldown(spell, 15);
-		spell.cost.exhaust = 0.3F;
+		configureCooldown(spell, 6);
+		configureNatureRuneCost(spell);
 		return new Entry(id, spell, title, description, null);
 	}
 
@@ -138,7 +174,7 @@ public class DruidSpells {
 
 		spell.active.cast.animation = "spell_engine:one_handed_area_charge";
 		spell.active.cast.particles = natureCastingParticles();
-		spell.active.cast.duration = 15;
+		spell.active.cast.duration = 8;
 		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
 
 		spell.release.animation = "spell_engine:one_handed_area_release";
@@ -153,6 +189,17 @@ public class DruidSpells {
 			new ParticleBatch("falling_spore_blossom",
 				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
 				2, 0.1F, 0.2F)
+		};
+
+		var debuff2 = createEffectImpact(Registries.STATUS_EFFECT.getId(StatusEffects.POISON.value()), 5);
+		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		debuff2.action.status_effect.show_particles = false;
+		debuff2.action.status_effect.amplifier = 2;
+		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.5F;
+		debuff2.particles = new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+				10, 0.05F, 0.3F),
 		};
 
 		spell.target.type = Spell.Target.Type.AREA;
@@ -175,7 +222,7 @@ public class DruidSpells {
 
 		var damage = damageImpact(0.65F, 0);
 
-		spell.impacts = List.of(debuff, damage);
+		spell.impacts = List.of(debuff, debuff2, damage);
 
 		configureCooldown(spell, 25);
 		configureNatureRuneCost(spell);

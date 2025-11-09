@@ -12,7 +12,7 @@
 							"function": "minecraft:set_components",
 							"components": {
 								"spell_engine:spell_container": {
-									"spell_ids": ["druids:maul"],
+									"spell_ids": ["druids:bramble_volley"],
 									"max_spell_count": 1
 								},
 								"minecraft:custom_model_data": 200,

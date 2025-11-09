@@ -1,0 +1,127 @@
+{
+  "school": "spell_power:nature",
+  "range": 64.0,
+  "group": "primary",
+  "tier": 1,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 0.25,
+      "channel_ticks": 2,
+      "animation": "spell_engine:one_handed_projectile_charge"
+    }
+  },
+  "release": {
+    "animation": "spell_engine:one_handed_projectile_release"
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {}
+  },
+  "deliver": {
+    "type": "PROJECTILE",
+    "projectile": {
+      "direction_offsets": [
+        {
+          "yaw": -10.0
+        },
+        {},
+        {
+          "yaw": 10.0
+        }
+      ],
+      "launch_properties": {
+        "sound": {
+          "id": "more_rpg_classes:nature_release_1"
+        }
+      },
+      "projectile": {
+        "client_data": {
+          "light_level": 6,
+          "travel_particles": [
+            {
+              "particle_id": "minecraft:spore_blossom_air",
+              "origin": "CENTER",
+              "shape": "LINE",
+              "rotation": "LOOK",
+              "count": 1.0,
+              "max_speed": 0.1
+            }
+          ],
+          "model": {
+            "model_id": "druids:projectile/bramble_shot",
+            "scale": 0.5
+          }
+        }
+      }
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "more_rpg_classes:grievous_wounds",
+          "duration": 5.0,
+          "amplifier": 1,
+          "amplifier_cap": 5,
+          "amplifier_cap_power_multiplier": 0.2,
+          "apply_mode": "ADD"
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:dripping_blood",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 10.0,
+          "min_speed": 0.05,
+          "max_speed": 0.3
+        }
+      ]
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "minecraft:poison",
+          "duration": 5.0,
+          "amplifier": 1,
+          "amplifier_cap": 5,
+          "amplifier_cap_power_multiplier": 0.2,
+          "apply_mode": "ADD"
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:dripping_blood",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 10.0,
+          "min_speed": 0.05,
+          "max_speed": 0.3
+        }
+      ]
+    },
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.25,
+          "knockback": 0.8
+        }
+      },
+      "sound": {
+        "id": "more_rpg_classes:crippling_strike"
+      }
+    }
+  ],
+  "cost": {
+    "cooldown": {
+      "duration": 6.0
+    },
+    "item": {
+      "id": "more_rpg_classes:nature_stone"
+    }
+  }
+}

@@ -15,14 +15,6 @@
     "WLW"
   ],
   "result": {
-    "components": {
-      "azurelibarmor:az_id": [
-        1364914612,
-        -2012131380,
-        -1880029577,
-        1090921791
-      ]
-    },
     "count": 1,
     "id": "druids:druid_armor_head"
   }

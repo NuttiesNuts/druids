@@ -15,14 +15,6 @@
     "WWW"
   ],
   "result": {
-    "components": {
-      "azurelibarmor:az_id": [
-        -254955309,
-        -1307685314,
-        -2038006823,
-        135329266
-      ]
-    },
     "count": 1,
     "id": "druids:druid_armor_chest"
   }

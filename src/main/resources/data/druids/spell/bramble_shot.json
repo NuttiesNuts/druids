@@ -105,6 +105,19 @@
 			"sound": {
 				"id": "more_rpg_classes:nature_impact_1"
 			}
+		},
+		{
+			"action": {
+				"type": "STATUS_EFFECT",
+				"status_effect": {
+					"effect_id": "minecraft:poison",
+					"duration": 5.0,
+					"amplifier": 1,
+					"amplifier_cap": 5,
+					"amplifier_cap_power_multiplier": 0.2,
+					"apply_mode": "ADD"
+				}
+			}
 		}
 	],
 	"cost": {

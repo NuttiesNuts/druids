@@ -15,14 +15,6 @@
     "W W"
   ],
   "result": {
-    "components": {
-      "azurelibarmor:az_id": [
-        -1919155313,
-        1227442884,
-        -1761545756,
-        1380584524
-      ]
-    },
     "count": 1,
     "id": "druids:druid_armor_legs"
   }

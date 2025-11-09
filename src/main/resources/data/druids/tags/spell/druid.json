@@ -1,9 +1,8 @@
 {
 	"values": [
-		"druids:maul",
+		"druids:bramble_volley",
 		"druids:barkskin",
 		"druids:vine_surge",
-		"archers:entangling_roots",
 		"druids:mass_entanglement"
 	]
 }
