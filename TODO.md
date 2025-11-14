@@ -11,5 +11,4 @@ Low Priority:
 - Barkskin on allies
 - Re-texture & Re-model Druid Armor
 - Balancing attributes
-- More Weapons & Artifacts
 - RPG Series README layout
