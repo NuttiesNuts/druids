@@ -28,7 +28,7 @@
 	"spell.druids.bramble_volley.name": "Bramble Volley",
 	"spell.druids.bramble_volley.description": "Launches 3 woods projectiles, dealing up to {damage} nature spell damage and applying Grievous Wounds + Poison.",
 	"spell.druids.barkskin.name": "Barkskin",
-	"spell.druids.barkskin.description": "Gives the caster thorns.",
+	"spell.druids.barkskin.description": "Gives the caster some defense and thorns.",
 	"spell.druids.vine_surge.name": "Vine Surge",
 	"spell.druids.vine_surge.description": "Send forth vines that immobilize and poison an enemy.",
 	"spell.druids.mass_entanglement.name": "Mass Entanglement",

@@ -29,7 +29,7 @@ public class ThornedEffect extends StatusEffect {
 				World world = player.getWorld();
 
 				DamageSource thorns = world.getDamageSources().thorns(player);
-				float damage = (float) (1 + world.random.nextInt(3) + amplifier); // 1–3 + amp
+				float damage = (float) (1 + world.random.nextInt(amplifier + 2) + amplifier);
 				attacker.damage(thorns, damage);
 			}
 		}

@@ -134,7 +134,7 @@ public class DruidSpells {
 			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, 0.0F),   // center
 			new Spell.Delivery.ShootProjectile.DirectionOffset(10.0F, 0.0F)   // right
 		};
-		spell.deliver.projectile.launch_properties.sound = new Sound(ModSounds.NATURE_RELEASE_1_ID);
+		spell.deliver.projectile.launch_properties.sound = new Sound(ModSounds.NATURE_RELEASE_1_ID.toString(), 0.75F, 1F, 0.1F);
 
 			var projectile = new Spell.ProjectileData();
 			projectile.homing_angle = 1;
@@ -151,12 +151,12 @@ public class DruidSpells {
 			projectile.client_data.model.scale = 0.5F;
 			spell.deliver.projectile.projectile = projectile;
 
-		var damage = damageImpact(0.25F, 0.8F);
-		damage.sound = new Sound(ModSounds.CRIPPLING_STRIKE_ID);
+		var damage = damageImpact(0.50F, 0.8F);
+		damage.sound = new Sound(ModSounds.CRIPPLING_STRIKE_ID.toString(), 0.5F, 1F, 0.1F);
 
 		spell.impacts = List.of(debuff1, debuff2, damage);
 
-		configureCooldown(spell, 6);
+		configureCooldown(spell, 3);
 		configureNatureRuneCost(spell);
 		return new Entry(id, spell, title, description, null);
 	}

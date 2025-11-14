@@ -70,8 +70,8 @@
 				"type": "STATUS_EFFECT",
 				"status_effect": {
 					"effect_id": "druids:thorned",
-					"duration": 15.0,
-					"amplifier": 0,
+					"duration": 17.0,
+					"amplifier": 1,
 					"amplifier_power_multiplier": 0.25
 				}
 			}

@@ -32,7 +32,8 @@
       ],
       "launch_properties": {
         "sound": {
-          "id": "more_rpg_classes:nature_release_1"
+          "id": "more_rpg_classes:nature_release_1",
+          "volume": 0.75
         }
       },
       "projectile": {
@@ -107,18 +108,19 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.25,
+          "spell_power_coefficient": 0.5,
           "knockback": 0.8
         }
       },
       "sound": {
-        "id": "more_rpg_classes:crippling_strike"
+        "id": "more_rpg_classes:crippling_strike",
+        "volume": 0.5
       }
     }
   ],
   "cost": {
     "cooldown": {
-      "duration": 6.0
+      "duration": 3.0
     },
     "item": {
       "id": "more_rpg_classes:nature_stone"
