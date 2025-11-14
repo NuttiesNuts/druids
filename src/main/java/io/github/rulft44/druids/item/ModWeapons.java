@@ -1,18 +1,21 @@
 package io.github.rulft44.druids.item;
 
 import io.github.rulft44.druids.Druids;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.item.ToolMaterials;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
 import net.spell_engine.api.item.Equipment;
 import net.spell_engine.api.item.weapon.StaffItem;
 import net.spell_engine.api.item.weapon.Weapon;
+import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -43,6 +46,8 @@ public class ModWeapons {
 			};
 		}
 	}
+
+	private static final String ARSENAL = "arsenal";
 
 	// MARK: Wands
 
@@ -81,9 +86,21 @@ public class ModWeapons {
 		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4.5F))
 		.loot(Equipment.LootProperties.of(3));
 
+
+
 	// MARK: Register
 
 	public static void register(Map<String, WeaponConfig> configs) {
+		if (Druids.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(ARSENAL)) {
+			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), FabricLoader.getInstance().isModLoaded(ARSENAL), Items.NETHERITE_INGOT);
+			staff("staff_moon",
+				Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair))
+				.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 5))
+				.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 7))
+				.loot(Equipment.LootProperties.of(4))
+				.rarity = Rarity.EPIC;
+		}
+
 		Weapon.register(configs, entries, Group.KEY);
 	}
 }

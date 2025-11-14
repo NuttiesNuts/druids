@@ -21,6 +21,7 @@
 	"item.druids.wand_netherite_nature": "Netherite Nature Wand",
 	"item.druids.staff_nature": "Nature Staff",
 	"item.druids.staff_netherite_nature": "Netherite Nature Staff",
+	"item.druids.staff_moon": "Crescent Staff Of The Forest",
 
 	"spell.druids.bramble_shot.name": "Bramble Shot",
 	"spell.druids.bramble_shot.description": "Launches a wood projectile, causing up to {damage} nature spell damage and poisoning on hit.",
