@@ -53,18 +53,29 @@ public class ModWeapons {
 
 	private static final float wandAttackDamage = 2;
 	private static final float wandAttackSpeed = -2.4F;
+
+	// Wand spell power bonuses
+	private static final float T0_WAND_POWER = 3F;
+	private static final float T1_WAND_POWER = 4F;
+	private static final float T2_WAND_POWER = 5F;
+	private static final float T3_WAND_POWER = 5.5F;
+	private static final float T1_STAFF_POWER = 5F;
+	private static final float T2_STAFF_POWER = 6F;
+	private static final float T3_STAFF_POWER = 7F;
+	private static final float T4_STAFF_POWER = 8F;
+
 	private static Weapon.Entry wand(String name, Weapon.CustomMaterial material) {
 		return entry(name, material, StaffItem::new, new WeaponConfig(wandAttackDamage, wandAttackSpeed), Equipment.WeaponType.DAMAGE_WAND);
 	}
 
 	public static final Weapon.Entry natureWand = wand("wand_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.STICK)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 3F))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T2_WAND_POWER))
 		.loot(Equipment.LootProperties.of(2));
 
 	public static final Weapon.Entry netheriteNatureWand = wand("wand_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 3.5F))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T3_WAND_POWER))
 		.loot(Equipment.LootProperties.of(3));
 
 	// MARK: Staves
@@ -78,12 +89,12 @@ public class ModWeapons {
 
 	public static final Weapon.Entry natureStaff = staff("staff_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.EMERALD)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 3.5f))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T2_STAFF_POWER))
 		.loot(Equipment.LootProperties.of(2));
 
 	public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
 		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 4.5F))
+		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T3_STAFF_POWER))
 		.loot(Equipment.LootProperties.of(3));
 
 
@@ -95,8 +106,8 @@ public class ModWeapons {
 			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), FabricLoader.getInstance().isModLoaded(ARSENAL), Items.NETHERITE_INGOT);
 			staff("staff_moon",
 				Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair))
-				.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, 5))
-				.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, 7))
+				.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, T1_STAFF_POWER))
+				.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T4_STAFF_POWER))
 				.loot(Equipment.LootProperties.of(4))
 				.rarity = Rarity.EPIC;
 		}
