@@ -67,7 +67,7 @@ public class DruidSpells {
 			spell.cost = new Spell.Cost();
 		}
 		spell.cost.item = new Spell.Cost.Item();
-		spell.cost.item.id = "more_rpg_classes:nature_stone";
+		spell.cost.item.id = Registries.ITEM.getId(MRPGCItems.NATURE_STONE).toString();
 	}
 
 	private static ParticleBatch[] natureCastingParticles() {
@@ -174,7 +174,8 @@ public class DruidSpells {
 
 		spell.active.cast.animation = "spell_engine:one_handed_area_charge";
 		spell.active.cast.particles = natureCastingParticles();
-		spell.active.cast.duration = 8;
+		spell.active.cast.duration = 6;
+		spell.active.cast.channel_ticks = 14;
 		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
 
 		spell.release.animation = "spell_engine:one_handed_area_release";
@@ -212,15 +213,20 @@ public class DruidSpells {
 			new ParticleBatch(
 				SpellEngineParticles.roots.id().toString(),
 				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.GROUND,
-				3F, 0, 0)
+				3F, 0, 0.5F)
 		};
 		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
 			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
 				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
 				1, 0, 0).color(4283786581L)//.scale(0.8F)
 		};
+		spell.release.particles = new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.area_swirl.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+				1, 0.5F, 0.5F).color(961665948L).scale(0.8F)
+		};
 
-		var damage = damageImpact(0.65F, 0);
+		var damage = damageImpact(0.25F, 0.5F);
 
 		spell.impacts = List.of(debuff, debuff2, damage);
 

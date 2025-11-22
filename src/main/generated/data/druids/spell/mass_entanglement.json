@@ -5,7 +5,8 @@
   "learn": {},
   "active": {
     "cast": {
-      "duration": 8.0,
+      "duration": 6.0,
+      "channel_ticks": 14,
       "animation": "spell_engine:one_handed_area_charge",
       "sound": {
         "id": "more_rpg_classes:nature_cast_1"
@@ -37,11 +38,14 @@
     "animation": "spell_engine:one_handed_area_release",
     "particles": [
       {
-        "particle_id": "spell_engine:roots",
-        "origin": "GROUND",
-        "shape": "PILLAR",
-        "count": 3.0,
-        "max_speed": 0.0
+        "particle_id": "spell_engine:area_swirl",
+        "origin": "FEET",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "min_speed": 0.5,
+        "max_speed": 0.5,
+        "color_rgba": 961665948,
+        "scale": 0.8
       }
     ],
     "particles_scaled_with_ranged": [
@@ -114,8 +118,8 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.65,
-          "knockback": 0.0
+          "spell_power_coefficient": 0.25,
+          "knockback": 0.5
         }
       }
     }
