@@ -10,7 +10,7 @@ public class DruidArmorRenderer extends AzArmorRenderer {
 		return new DruidArmorRenderer("druid_armor", "druid_armor");
 	}
 	public static DruidArmorRenderer netherite_druid() {
-		return new DruidArmorRenderer("netherite_druid_armor", "netherite_druid_armor");
+		return new DruidArmorRenderer("druid_armor", "netherite_druid_armor");
 	}
 
 	public DruidArmorRenderer(String modelName, String textureName) {
