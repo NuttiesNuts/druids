@@ -44,8 +44,8 @@
         "count": 1.0,
         "min_speed": 0.5,
         "max_speed": 0.5,
-        "color_rgba": 961665948,
-        "scale": 0.8
+        "color_rgba": 10279747,
+        "scale": 5.0
       }
     ],
     "particles_scaled_with_ranged": [
