@@ -67,50 +67,53 @@ public class DruidRecipes extends FabricRecipeProvider {
 	// ========================================
 
 	private void generateArmorRecipes(RecipeExporter exporter) {
-		// Nature Robes - wool + vines
+		// Nature Robes
 		generateArmorSet(exporter, ModArmors.druidArmorSet, Items.WHEAT_SEEDS);
 	}
 
 	/**
-	 * Generate all 4 armor pieces for a set using the standard (wizard) robe patterns
+	 * Generate all 4 druid armor pieces
 	 */
 	private void generateArmorSet(RecipeExporter exporter, Armor.Set set, Item specialIngredient) {
-		// Helmet/Head - pattern: "  W" / " W " / "WLW"
+		// Helmet/Head
 		ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, set.head)
 			.pattern("  W")
-			.pattern(" W ")
-			.pattern("WLW")
+			.pattern(" WW")
+			.pattern("GLG")
 			.input('L', specialIngredient)
+			.input('G', Items.GOLD_INGOT)
 			.input('W', ItemTags.WOOL)
 			.criterion(hasItem(specialIngredient), conditionsFromItem(specialIngredient))
 			.offerTo(exporter);
 
-		// Chestplate - pattern: "L L" / "WLW" / "WWW"
+		// Chestplate
 		ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, set.chest)
 			.pattern("L L")
-			.pattern("WLW")
+			.pattern("GFG")
 			.pattern("WWW")
 			.input('L', specialIngredient)
+			.input('G', Items.GOLD_INGOT)
 			.input('W', ItemTags.WOOL)
+			.input('F', ItemTags.SMALL_FLOWERS)
 			.criterion(hasItem(specialIngredient), conditionsFromItem(specialIngredient))
 			.offerTo(exporter);
 
-		// Leggings - pattern: "LLL" / "W W" / "W W"
+		// Leggings
 		ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, set.legs)
-			.pattern("LLL")
+			.pattern("GGG")
 			.pattern("W W")
 			.pattern("W W")
-			.input('L', specialIngredient)
-			.input('W', ItemTags.WOOL)
+			.input('G', Items.GOLD_INGOT)
+			.input('W', ConventionalItemTags.LEATHERS)
 			.criterion(hasItem(specialIngredient), conditionsFromItem(specialIngredient))
 			.offerTo(exporter);
 
-		// Boots - pattern: "L L" / "W W"
+		// Boots
 		ShapedRecipeJsonBuilder.create(RecipeCategory.COMBAT, set.feet)
-			.pattern("L L")
 			.pattern("W W")
-			.input('L', specialIngredient)
-			.input('W', ItemTags.WOOL)
+			.pattern("G G")
+			.input('G', Items.GOLD_INGOT)
+			.input('W', ConventionalItemTags.LEATHERS)
 			.criterion(hasItem(specialIngredient), conditionsFromItem(specialIngredient))
 			.offerTo(exporter);
 	}

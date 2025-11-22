@@ -2,16 +2,16 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
-    "L": {
-      "item": "minecraft:wheat_seeds"
+    "G": {
+      "item": "minecraft:gold_ingot"
     },
     "W": {
-      "tag": "minecraft:wool"
+      "tag": "c:leathers"
     }
   },
   "pattern": [
-    "L L",
-    "W W"
+    "W W",
+    "G G"
   ],
   "result": {
     "count": 1,

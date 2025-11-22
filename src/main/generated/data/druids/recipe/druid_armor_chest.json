@@ -2,6 +2,12 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "F": {
+      "tag": "minecraft:small_flowers"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
     "L": {
       "item": "minecraft:wheat_seeds"
     },
@@ -11,7 +17,7 @@
   },
   "pattern": [
     "L L",
-    "WLW",
+    "GFG",
     "WWW"
   ],
   "result": {

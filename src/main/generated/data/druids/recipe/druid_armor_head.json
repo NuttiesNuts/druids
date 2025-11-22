@@ -2,6 +2,9 @@
   "type": "minecraft:crafting_shaped",
   "category": "equipment",
   "key": {
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
     "L": {
       "item": "minecraft:wheat_seeds"
     },
@@ -11,8 +14,8 @@
   },
   "pattern": [
     "  W",
-    " W ",
-    "WLW"
+    " WW",
+    "GLG"
   ],
   "result": {
     "count": 1,

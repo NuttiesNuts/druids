@@ -223,7 +223,7 @@ public class DruidSpells {
 		spell.release.particles = new ParticleBatch[]{
 			new ParticleBatch(SpellEngineParticles.area_swirl.id().toString(),
 				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-				1, 0.5F, 0.5F).color(961665948L).scale(0.8F)
+				1, 0.5F, 0.5F).color(10279747L).scale(5F)
 		};
 
 		var damage = damageImpact(0.25F, 0.5F);
