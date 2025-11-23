@@ -3,8 +3,7 @@
 plugins {
 	id "maven-publish"
 	alias libs.plugins.loom
-	alias libs.plugins.minotaur
-	id("net.darkhax.curseforgegradle") version "1.1.26"
+	id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
 }
 
 version = "$modVersion+$branchName"
@@ -121,7 +120,6 @@ java {
 	targetCompatibility = JavaVersion.VERSION_21
 }
 
-
 publishing {
 	repositories {
 	}
@@ -132,36 +130,53 @@ publishing {
 	}
 }
 
-modrinth {
-	token = "$System.env.MODRINTH_TOKEN"
-	projectId = slug
-	versionNumber = project.version
-	versionType = release_type
-	uploadFile = remapJar
-	gameVersions = compatibleVersions.split(", ").toList()
-	loaders = compatibleLoaders.split(", ").toList()
-	changelog = "$System.env.CHANGELOG"
-	syncBodyFrom = "<!--DO NOT EDIT MANUALLY: synced from gh readme-->\n" + rootProject.file("README.md").text
-	dependencies {
-		required.project 'fabric-api'
-		required.project 'spell-engine'
-		required.project 'more-rpg-library'
-		required.project 'runes'
-
+publisher {
+	// Setup the required API keys.
+	apiKeys {
+		// Modrinth Token
+		modrinth System.getenv("MODRINTH_TOKEN")
+		// Curseforge Token
+		curseforge System.getenv("CURSEFORGE_TOKEN")
 	}
-}
 
-task publishCurseForge(type: net.darkhax.curseforgegradle.TaskPublishCurseForge) {
+	setDebug(true)
 
-	apiToken = "$System.env.CURSEFORGE_API_KEY"
+	setCurseID("1351037")
+	setModrinthID("druids")
 
-	// The main file to upload
-	def mainFile = upload(1351037, remapJar)
-	mainFile.releaseType = release_type
-	mainFile.changelog = "$System.env.CHANGELOG"
-	mainFile.changelogType = 'markdown'
-	mainFile.gameVersions = compatibleVersions.split(", ").toList()
-	mainFile.addModLoader(compatibleLoaders.capitalize())
+	setVersionType(release_type)
+
+	setChangelog(System.getenv("CHANGELOG"))
+
+	// Required for Modrinth/GitHub
+	setVersion("${modVersion}+${compatibleLoaders}-${compatibleVersions}")
+
+	setDisplayName("Druids v${modVersion} ${compatibleLoaders}")
+
+	setGameVersions(compatibleVersions.split(", "))
+
+	setLoaders(compatibleLoaders.split(", "))
+
+	setArtifact(remapJar)
+
+	// Disable the built in Fractureizer scanner
+	setDisableMalwareScanner(true)
+
+	// Safety check to check if the artifact contains a valid mod metadata entry,
+	// which could possibly mean that the jar is empty
+	setDisableEmptyJarCheck(true)
+
+	// Modrinth Dependencies
+	modrinthDepends {
+		// Multiple required dependencies
+		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'runes'
+	}
+
+	// Curse Dependencies
+	curseDepends {
+		// Multiple required dependencies
+		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'rune-crafting'
+	}
 }
 
 fabricApi {

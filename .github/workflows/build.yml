@@ -64,11 +64,18 @@ jobs:
           files: 'build/libs/*.jar;!build/libs/*-sources.jar'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Curseforge Publish
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          CHANGELOG: ${{ github.event.release.body }}
+        if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.CURSEFORGE_TOKEN != '' }}
+        run: |
+          ./gradlew --no-configuration-cache publishCurseforge
+
       - name: Modrinth Publish
         env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
           CHANGELOG: ${{ github.event.release.body }}
         if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.MODRINTH_TOKEN != '' }}
         run: |
-          ./gradlew --no-configuration-cache modrinth
-          ./gradlew --no-configuration-cache modrinthSyncBody
+          ./gradlew --no-configuration-cache publishModrinth
