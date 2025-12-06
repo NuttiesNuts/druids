@@ -30,12 +30,10 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-
 Druids are experts in bending Nature magic to their will and use it for crowd controlling enemies.
 
 #### Pros:
 * Engulf foes in deadly vines
-
 #### Cons:
 * Little damage
 

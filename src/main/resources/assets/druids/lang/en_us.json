@@ -6,6 +6,7 @@
 
 	"item.druids.druid_spell_book": "Druidic Grimoire",
 	"item.druids.druid.spell_scroll": "Druidic Scroll",
+	"item.druids.druid_spell_book.spell_binding.description": "Spell Book of Druids, bending nature magic to lock down and damage targets over time\n- Strengths: Magical damage over time and rooting\n- Weaknesses: Mediocre damage\n- Equipment: Lightly armored",
 
 	"item.druids.druid_armor_head": "Druid Hood",
 	"item.druids.druid_armor_chest": "Druid Robe",
@@ -32,12 +33,33 @@
 	"spell.druids.vine_surge.name": "Vine Surge",
 	"spell.druids.vine_surge.description": "Send forth vines that immobilize and poison an enemy.",
 	"spell.druids.mass_entanglement.name": "Mass Entanglement",
-	"spell.druids.mass_entanglement.description": "Roots, damages and poisons all enemies in range for {effect_duration} sec.",
+	"spell.druids.mass_entanglement.description": "Roots, damages and poisons all enemies in range.",
 
 	"tag.item.c.nuggets.copper": "Copper Nuggets",
 
 	"effect.druids.thorned": "Thorned",
 
 	"druids.jei.info.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
-	"lore.druids.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find."
+	"lore.druids.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
+
+	"advancements.rpg_series.path_choose_druid.title": "Path of Nature",
+	"advancements.rpg_series.path_choose_druid.description": "Create a Druidic Grimoire",
+
+	"advancements.rpg_series.spell_novice_druid.title": "100% Natural",
+	"advancements.rpg_series.spell_novice_druid.description": "Obtain your first Druid Spell",
+
+	"advancements.rpg_series.spell_master_druid.title": "Vegan",
+	"advancements.rpg_series.spell_master_druid.description": "Obtain all Druid Spells",
+
+	"advancements.rpg_series.obtain_druid_robes.title": "A Druid Is Always Late",
+	"advancements.rpg_series.obtain_druid_robes.description": "Acquire a full set of Druid Armor",
+
+	"advancements.rpg_series.obtain_druid_rune.title": "Path of Nature",
+	"advancements.rpg_series.obtain_druid_rune.description": "Obtain an druid Rune",
+
+	"advancements.rpg_series.spell_cast_druid_wand.title": "Druidic Practice",
+	"advancements.rpg_series.spell_cast_druid_wand.description": "Cast a spell with a Nature Wand",
+
+	"advancements.rpg_series.spell_cast_druid_book.title": "Nature Empowerment",
+	"advancements.rpg_series.spell_cast_druid_book.description": "Cast a spell from the Druidic Grimoire"
 }

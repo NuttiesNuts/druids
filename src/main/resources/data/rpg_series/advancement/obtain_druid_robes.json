@@ -1,0 +1,52 @@
+{
+	"display": {
+		"icon": {
+			"id": "druids:druid_armor_chest"
+		},
+		"title": {
+			"translate": "advancements.rpg_series.obtain_druid_robes.title"
+		},
+		"description": {
+			"translate": "advancements.rpg_series.obtain_druid_robes.description"
+		},
+		"frame": "task",
+		"show_toast": true,
+		"announce_to_chat": true,
+		"hidden": false
+	},
+	"parent": "rpg_series:misc_items",
+	"criteria": {
+		"druid_robes": {
+			"trigger": "minecraft:inventory_changed",
+			"conditions": {
+				"items": [
+					{
+						"items": [
+							"druids:druid_armor_head"
+						]
+					},
+					{
+						"items": [
+							"druids:druid_armor_chest"
+						]
+					},
+					{
+						"items": [
+							"druids:druid_armor_legs"
+						]
+					},
+					{
+						"items": [
+							"druids:druid_armor_feet"
+						]
+					}
+				]
+			}
+		}
+	},
+	"requirements": [
+		[
+			"druid_robes"
+		]
+	]
+}

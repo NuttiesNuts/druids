@@ -1,6 +1,9 @@
 # BETA 0.4
 
-- 
+- Increased Druid Camp rarity
+- Add Advancements
+- Add pt_br translations
+- Fix Mass Entanglement spell tooltip
 
 # BETA 0.3
 
