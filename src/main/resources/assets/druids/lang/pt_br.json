@@ -1,0 +1,65 @@
+{
+	"itemGroup.druids.general": "Druidas",
+
+	"item.druids.heart_of_the_forest": "Coração da Floresta",
+	"item.druids.copper_nugget": "Pepita de Cobre",
+
+	"item.druids.druid_spell_book": "Grimório Druidico",
+	"item.druids.druid.spell_scroll": "Pergaminho Druidico",
+	"item.druids.druid_spell_book.spell_binding.description": "Spell Book of Druids, bending nature magic to lock down and damage targets over time\n- Strengths: Magical damage over time and rooting\n- Weaknesses: Mediocre damage\n- Equipment: Lightly armored",
+
+	"item.druids.druid_armor_head": "Chapéu de druida",
+	"item.druids.druid_armor_chest": "Manto de druida",
+	"item.druids.druid_armor_legs": "Calças de druida",
+	"item.druids.druid_armor_feet": "Botas de druida",
+
+	"item.druids.netherite_druid_armor_head": "Chapéu de druida de netherita",
+	"item.druids.netherite_druid_armor_chest": "Manto de druida de netherita",
+	"item.druids.netherite_druid_armor_legs": "Calças de druida de netherita",
+	"item.druids.netherite_druid_armor_feet": "Botas de druida de netherita",
+
+	"item.druids.wand_nature": "Varinha de natureza",
+	"item.druids.wand_netherite_nature": "Varinha de natureza de netherita",
+	"item.druids.staff_nature": "Cajado de natureza",
+	"item.druids.staff_netherite_nature": "Cajado de natureza de netherita",
+	"item.druids.staff_moon": "Cajado Crescente da Floresta",
+
+	"spell.druids.bramble_shot.name": "Tiro de Espinhos",
+	"spell.druids.bramble_shot.description": "Dispara um projétil de espinhos, causando até {damage} dano de feitiço de natureza e envenenando.",
+	"spell.druids.bramble_volley.name": "Torrente de Espinhos",
+	"spell.druids.bramble_volley.description": "Dispara 3 projéteis de espinhos, causando até {damage} dano de feitiço de natureza, reduzindo cura e envenenando.",
+	"spell.druids.barkskin.name": "Pele de Casca de Árvore",
+	"spell.druids.barkskin.description": "Protege voçê e dá-lhe espinhos",
+	"spell.druids.vine_surge.name": "Onda de Trepadeiras",
+	"spell.druids.vine_surge.description": "Envia vinhas que imobilizam e envenenam o inimigo.",
+	"spell.druids.mass_entanglement.name": "Emaranhamento em Massa",
+	"spell.druids.mass_entanglement.description": "Enraíza, causa dano e envenena todos os inimigos no alcance.",
+
+	"tag.item.c.nuggets.copper": "Pepitas de Cobre",
+
+	"effect.druids.thorned": "Espinhoso",
+
+	"druids.jei.info.heart_of_the_forest": "Um tesouro que pode ser usado para construir artefactos e armas druidicas poderosas. É uma descoberta incomum.",
+	"lore.druids.heart_of_the_forest": "Um tesouro que pode ser usado para construir artefactos e armas druidicas poderosas. É uma descoberta incomum.",
+
+	"advancements.rpg_series.path_choose_druid.title": "Caminho da Natureza",
+	"advancements.rpg_series.path_choose_druid.description": "Crie um Grimório Druidico",
+
+	"advancements.rpg_series.spell_novice_druid.title": "100% Natural",
+	"advancements.rpg_series.spell_novice_druid.description": "Obtenha seu primeiro feitiço de druida",
+
+	"advancements.rpg_series.spell_master_druid.title": "Vegan",
+	"advancements.rpg_series.spell_master_druid.description": "Obtenha todos os feitiços de druida",
+
+	"advancements.rpg_series.obtain_druid_robes.title": "A Druid Is Always Late",
+	"advancements.rpg_series.obtain_druid_robes.description": "Adquira um conjunto completo de armadura de druida",
+
+	"advancements.rpg_series.obtain_druid_rune.title": "Caminho da Natureza",
+	"advancements.rpg_series.obtain_druid_rune.description": "Obtenha uma Runa de Natureza",
+
+	"advancements.rpg_series.spell_cast_druid_wand.title": "Prática Druidica",
+	"advancements.rpg_series.spell_cast_druid_wand.description": "Lance um feitiço com uma Varinha de Natureza",
+
+	"advancements.rpg_series.spell_cast_druid_book.title": "Empoderamento da Natureza",
+	"advancements.rpg_series.spell_cast_druid_book.description": "Lance um feitiço do Grimório Druidico."
+}
