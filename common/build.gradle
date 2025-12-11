@@ -1,0 +1,74 @@
+architectury {
+    common rootProject.enabled_platforms.split(',')
+}
+
+repositories {
+	maven {
+		name = 'Modrinth'
+		url = 'https://api.modrinth.com/maven'
+		content {
+			includeGroup 'maven.modrinth'
+		}
+	}
+
+	maven {
+		name "KosmX's maven"
+		url 'https://maven.kosmx.dev/'
+	}
+
+	maven {
+		url = 'https://maven.shedaniel.me/'
+	}
+
+	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://maven.ladysnake.org/releases'
+	}
+
+	repositories {
+		maven { url "https://jitpack.io" }
+	}
+
+	maven {
+		url "https://cursemaven.com"
+		content { includeGroup "curse.maven" }
+	}
+
+	maven {
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
+
+	maven {
+		name = "AzureDoom Mods"
+		url = "https://maven.azuredoom.com/mods"
+	}
+}
+
+dependencies {
+    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
+    // which get remapped to the correct annotations on each platform.
+    // Do NOT use other classes from Fabric Loader.
+	modImplementation libs.fl
+	modImplementation libs.fapi
+
+	modImplementation libs.spell
+	modImplementation libs.spellpow
+	modImplementation libs.rpg
+	modImplementation libs.azure
+	modImplementation libs.rune
+	modImplementation libs.cloth
+	modImplementation libs.playeranim
+	modImplementation libs.trink
+	modImplementation libs.tiny
+
+	modImplementation libs.jei
+}

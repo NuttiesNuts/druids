@@ -1,0 +1,171 @@
+import com.hypherionmc.modpublisher.properties.ModLoader
+
+plugins {
+    id 'com.gradleup.shadow'
+	id "com.hypherionmc.modutils.modpublisher" version "2.1.8"
+}
+
+def platform = project.name;
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+fabricApi {
+	configureDataGeneration() {
+		client = true
+		modId = "druids"
+		outputDirectory = project(':common').file('src/main/generated')
+	}
+}
+
+configurations {
+    common {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+    developmentFabric.extendsFrom common
+
+    // Files in this configuration will be bundled into your mod using the Shadow plugin.
+    // Don't use the `shadow` configuration from the plugin itself as it's meant for excluding files.
+    shadowBundle {
+        canBeResolved = true
+        canBeConsumed = false
+    }
+}
+
+repositories {
+	maven {
+		name = 'Modrinth'
+		url = 'https://api.modrinth.com/maven'
+		content {
+			includeGroup 'maven.modrinth'
+		}
+	}
+
+	maven {
+		name "KosmX's maven"
+		url 'https://maven.kosmx.dev/'
+	}
+
+	maven {
+		url = 'https://maven.shedaniel.me/'
+	}
+
+	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://maven.ladysnake.org/releases'
+	}
+
+	repositories {
+		maven { url "https://jitpack.io" }
+	}
+
+	maven {
+		url "https://cursemaven.com"
+		content { includeGroup "curse.maven" }
+	}
+
+	maven {
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
+
+	maven {
+		name = "AzureDoom Mods"
+		url = "https://maven.azuredoom.com/mods"
+	}
+
+}
+
+
+dependencies {
+	modImplementation libs.fl
+	modImplementation libs.fapi
+
+    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+    shadowBundle project(path: ':common', configuration: 'transformProductionFabric')
+
+	modImplementation libs.spell
+	modImplementation libs.spellpow
+	modImplementation libs.rpg
+	modImplementation libs.azure
+	modImplementation libs.rune
+	modImplementation libs.cloth
+	modImplementation libs.playeranim
+	modImplementation libs.trink
+	modImplementation libs.tiny
+
+	modImplementation libs.jei
+}
+
+processResources {
+    inputs.property 'version', project.version
+
+    filesMatching('fabric.mod.json') {
+        expand version: inputs.properties.version
+    }
+}
+
+shadowJar {
+    configurations = [project.configurations.shadowBundle]
+    archiveClassifier = 'dev-shadow'
+}
+
+remapJar {
+    inputFile.set shadowJar.archiveFile
+}
+
+publisher {
+	// Setup the required API keys.
+	apiKeys {
+		// Modrinth Token
+		modrinth System.getenv("MODRINTH_TOKEN")
+		// Curseforge Token
+		curseforge System.getenv("CURSEFORGE_TOKEN")
+	}
+
+	setDebug(false)
+
+	setCurseID("1351037")
+	setModrinthID("druids")
+
+	setVersionType(release_type)
+
+	setChangelog(project.changelog_last_section)
+
+	// Required for Modrinth/GitHub
+	setVersion("${mod_version}+${platform}-${minecraft_version}")
+
+	setDisplayName("Druids v${mod_version} ${platform}")
+
+	setGameVersions(minecraft_version)
+
+	setLoaders(ModLoader.FABRIC)
+
+	setArtifact(remapJar)
+
+	// Modrinth Dependencies
+	modrinthDepends {
+		// Multiple required dependencies
+		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'runes'
+	}
+
+	// Curse Dependencies
+	curseDepends {
+		// Multiple required dependencies
+		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'rune-crafting'
+	}
+}
+

@@ -1,0 +1,8 @@
+// 1.21.1	2025-11-22T21:53:21.9809569	Druids (RPG Series)/Tags for minecraft:item
+78d6effa17cc53e5ac668ce9f2c33b25df32b1f7 data\minecraft\tags\item\leg_armor.json
+2f94265eeb08cd27d3735f232dfe7049fb2d8e0a data\rpg_series\tags\item\loot_tier\tier_3_armors.json
+19bfe5583c2e3c3ac1f283e94eec8a1974fac088 data\minecraft\tags\item\head_armor.json
+f401f536267b337fadd0632b188573f3826fa314 data\minecraft\tags\item\chest_armor.json
+dc300cb4b18c3ce1c7187cdbd5f46b0ac65eeeb7 data\minecraft\tags\item\foot_armor.json
+06109f2f906653a3e54c11cc36558c54bb47dc21 data\rpg_series\tags\item\loot_tier\tier_2_armors.json
+454449e3eacf37e7cf9fcadaa68d59f75a8d1da9 data\rpg_series\tags\item\armor_type\magic.json

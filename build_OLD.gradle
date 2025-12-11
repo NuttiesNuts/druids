@@ -1,0 +1,188 @@
+import com.hypherionmc.modpublisher.properties.ModLoader
+
+//file:noinspection GroovyAssignabilityCheck
+//file:noinspection GroovyAccessibility
+plugins {
+	id "maven-publish"
+	alias libs.plugins.loom
+	id "com.hypherionmc.modutils.modpublisher" version "2.1.8+snapshot.2"
+}
+
+version = "$modVersion+$branchName"
+archivesBaseName = project.slug
+
+repositories {
+	maven {
+		name = 'Modrinth'
+		url = 'https://api.modrinth.com/maven'
+		content {
+			includeGroup 'maven.modrinth'
+		}
+	}
+
+	maven {
+		name "KosmX's maven"
+		url 'https://maven.kosmx.dev/'
+	}
+
+	maven {
+		url = 'https://maven.shedaniel.me/'
+	}
+
+	maven {
+		name = "TerraformersMC"
+		url = "https://maven.terraformersmc.com/"
+	}
+	maven {
+		name = "Ladysnake Libs"
+		url = 'https://maven.ladysnake.org/releases'
+	}
+
+	repositories {
+		maven { url "https://jitpack.io" }
+	}
+
+	maven {
+		url "https://cursemaven.com"
+		content { includeGroup "curse.maven" }
+	}
+
+	maven {
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
+
+	maven {
+		name = "AzureDoom Mods"
+		url = "https://maven.azuredoom.com/mods"
+	}
+
+}
+
+dependencies {
+	minecraft libs.mc
+	mappings variantOf(libs.yarn) { classifier "v2" }
+
+	modImplementation libs.fl
+	modImplementation libs.fapi
+
+	include(implementation("com.github.LlamaLad7:MixinExtras:0.1.1"))
+	annotationProcessor("com.github.LlamaLad7:MixinExtras:0.1.1")
+
+	modImplementation libs.spell
+	modImplementation libs.spellpow
+	modImplementation libs.rpg
+	modImplementation libs.azure
+	modImplementation libs.rune
+	modImplementation libs.cloth
+	modImplementation libs.playeranim
+	modImplementation libs.trink
+	modImplementation libs.tiny
+
+	modImplementation libs.jei
+}
+
+processResources {
+	final Map<String, String> meta = [
+		version       : version,
+		modId         : modId,
+		modName       : modName,
+		modDescription: modDescription,
+		homepage      : "https://modrinth.com/mod/${slug}",
+		issues        : "https://github.com/${user}/${slug}/issues",
+		sources       : "https://github.com/${user}/${slug}",
+		license       : license,
+		authors       : authors.split(", ").join("\",\n    \""),
+		contributors  : contributors.split(", ").join("\",\n    \""),
+		members       : "${authors}${contributors ? ". Contributions by ${contributors}." : ""}",
+		mc            : compatibleVersions.split(", ")[0],
+		fl            : libs.versions.fl.get(),
+		fapi          : libs.versions.fapi.get(),
+		spell         : libs.versions.spell.get(),
+		rune		  : libs.versions.rune.get(),
+		rpg		  	  : libs.versions.rpg.get(),
+	]
+	inputs.properties meta
+	filesMatching("*.mod.json") { expand(meta) }
+	filesMatching("META-INF/*mods.toml") { expand(meta) }
+}
+
+tasks.withType(JavaCompile).configureEach {
+	it.options.encoding = "UTF-8"
+	it.options.release = 21
+}
+
+java {
+	withSourcesJar()
+	sourceCompatibility = JavaVersion.VERSION_21
+	targetCompatibility = JavaVersion.VERSION_21
+}
+
+publishing {
+	repositories {
+	}
+	publications {
+		mavenJava(MavenPublication) {
+			from components.java
+		}
+	}
+}
+
+// Split changelog section to latest for mod publishing
+ext.changelog_last_section = { ->
+	return new File("CHANGELOG.md").text.split('\n# ')[0]
+}
+
+
+publisher {
+	// Setup the required API keys.
+	apiKeys {
+		// Modrinth Token
+		modrinth System.getenv("MODRINTH_TOKEN")
+		// Curseforge Token
+		curseforge System.getenv("CURSEFORGE_TOKEN")
+	}
+
+	setDebug(false)
+
+	setCurseID("1351037")
+	setModrinthID("druids")
+
+	setVersionType(release_type)
+
+	setChangelog(project.changelog_last_section)
+
+	// Required for Modrinth/GitHub
+	setVersion("${modVersion}+${compatibleLoaders}-${compatibleVersions}")
+
+	setDisplayName("Druids v${modVersion} ${compatibleLoaders}")
+
+	setGameVersions(compatibleVersions)
+
+	setLoaders(ModLoader.FABRIC)
+
+	setArtifact(remapJar)
+
+	// Modrinth Dependencies
+	modrinthDepends {
+		// Multiple required dependencies
+		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'runes'
+	}
+
+	// Curse Dependencies
+	curseDepends {
+		// Multiple required dependencies
+		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'rune-crafting'
+	}
+}
+
+fabricApi {
+	configureDataGeneration() {
+		client = true
+		modId = project.modId
+	}
+}

@@ -1,3 +1,8 @@
+# BETA 0.5
+
+- NeoForge release
+- Added Effects config
+
 # BETA 0.4
 
 - Increased Druid Camp rarity

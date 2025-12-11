@@ -64,18 +64,20 @@ jobs:
           files: 'build/libs/*.jar;!build/libs/*-sources.jar'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Curseforge Publish
+      - name: Fabric Mod Publish
         env:
           CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
-          CHANGELOG: ${{ github.event.release.body }}
-        if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.CURSEFORGE_TOKEN != '' }}
-        run: |
-          ./gradlew --no-configuration-cache publishCurseforge
-
-      - name: Modrinth Publish
-        env:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
-          CHANGELOG: ${{ github.event.release.body }}
-        if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.MODRINTH_TOKEN != '' }}
-        run: |
-          ./gradlew --no-configuration-cache publishModrinth
+        if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.CURSEFORGE_TOKEN != '' && env.MODRINTH_TOKEN != ''}}
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: :fabric:publishMod
+
+      - name: NeoForge Mod Publish
+        env:
+          CURSEFORGE_TOKEN: ${{ secrets.CURSEFORGE_TOKEN }}
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+        if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.CURSEFORGE_TOKEN != '' && env.MODRINTH_TOKEN != ''}}
+        uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+        with:
+          arguments: :neoforge:publishMod

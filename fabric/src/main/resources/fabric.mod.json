@@ -1,0 +1,49 @@
+{
+	"schemaVersion": 1,
+	"id": "druids",
+	"version": "${version}",
+	"name": "Druids (RPG Class)",
+	"description": "Engulf foes in deadly vines and poison targets.",
+	"authors": [
+		"Rulft"
+	],
+	"contributors": [
+		""
+	],
+	"contact": {
+		"homepage": "",
+		"issues": "https://github.com/Rulft44/druids/issues",
+		"sources": "https://github.com/Rulft44/druids"
+	},
+	"license": "MIT",
+	"icon": "icon.png",
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": "~1.21.1",
+		"java": ">=21",
+		"fabric-api": "*",
+		"azurelibarmor": "*",
+		"spell_engine": ">=1.5.0",
+		"spell_power": ">=1.2.0",
+		"more_rpg_classes": ">=2.2.0-1.21.1",
+		"runes": ">=1.2.0"
+	},
+	"suggests": {
+		"archers": "*",
+		"better_combat": "*"
+	},
+	"entrypoints": {
+		"main": [
+          "io.github.rulft44.fabric.FabricMod"
+		],
+		"client": [
+			"io.github.rulft44.fabric.client.FabricClient"
+		],
+		"fabric-datagen": [
+			"io.github.rulft44.druids.datagen.DruidsDataGenerator"
+		],
+		"jei_mod_plugin": [
+			"io.github.rulft44.druids.integration.jei.JEIPlugin"
+		]
+	}
+}

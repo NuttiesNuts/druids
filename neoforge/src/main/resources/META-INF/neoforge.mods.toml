@@ -1,0 +1,35 @@
+modLoader = "javafml"
+loaderVersion = "[4,)"
+#issueTrackerURL = ""
+license = "MIT"
+
+[[mods]]
+modId = "druids"
+version = "${version}"
+displayName = "Druids (RPG Class)"
+authors = "Rulft"
+description = '''
+Engulf foes in deadly vines and poison targets.
+'''
+logoFile = "icon.png"
+
+[[dependencies.druids]]
+modId = "neoforge"
+type = "required"
+versionRange = "[21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.druids]]
+modId = "minecraft"
+type = "required"
+versionRange = "[1.21.1,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.druids]]
+modId = "more_rpg_classes"
+type = "required"
+versionRange = "[2.2.0-1.21.1,)"
+ordering = "NONE"
+side = "BOTH"

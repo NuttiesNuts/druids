@@ -1,15 +1,13 @@
 [versions]
 loom = "1.10.+"
-minotaur = "2.+"
 
-mc = "1.21.1"
-fl = "0.18.1"
-yarn = "1.21.1+build.3"
+fl = "0.18.2"
 fapi = "0.116.7+1.21.1"
+neo = "21.1.215"
 
 spell = "1.8.16+1.21.1-fabric"
 spellpow = "1.4.5+1.21.1-fabric"
-rpg = "2.5.7+1.21.1-fabric"
+rpg = "2.5.10+1.21.1-fabric"
 azure = "3.1.2"
 rune = "1.2.1+1.21.1-fabric"
 cloth = "15.0.140"
@@ -18,15 +16,23 @@ trink = "3.10.0"
 tiny = "3.1.0-fabric"
 jei = "19.25.0.323"
 
+# neoforge only
+tinyneo = "3.1.0-neoforge"
+runeneo = "1.2.1+1.21.1-neoforge"
+spellneo = "1.8.16+1.21.1-neoforge"
+spellpowneo = "1.4.5+1.21.1-neoforge"
+rpgneo = "2.5.10+1.21.1-neoforge"
+owoneo = "0.12.15.5-beta.1+1.21"
+accessories = "1.1.0-beta.48+1.21.1"
+fofapi = "0.115.6+2.1.4+1.21.1"
+
 [plugins]
 loom = { id = "fabric-loom", version.ref = "loom" }
-minotaur = { id = "com.modrinth.minotaur", version.ref = "minotaur" }
 
 [libraries]
-mc = { group = "mojang", name = "minecraft", version.ref = "mc" }
 fl = { group = "net.fabricmc", name = "fabric-loader", version.ref = "fl" }
-yarn = { group = "net.fabricmc", name = "yarn", version.ref = "yarn" }
 fapi = { group = "net.fabricmc.fabric-api", name = "fabric-api", version.ref = "fapi" }
+neo = { group = "net.neoforged", name = "neoforge", version.ref = "neo" }
 
 spell = { group = "maven.modrinth", name = "spell-engine", version.ref = "spell"}
 spellpow = { group = "maven.modrinth", name = "spell-power", version.ref = "spellpow"}

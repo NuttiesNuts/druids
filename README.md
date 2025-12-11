@@ -9,7 +9,7 @@
 <h3 align="center">Druids (RPG Series)</h3>
 
   <p align="center">
-    A mod that adds Druid related magic to minecraft!
+    A mod that adds Druid related magic to minecraft using Spell Engine!
     <br />
     <a href="https://github.com/Rulft44/druids/issues/new?labels=bug&template=bug-report---.md">Report Bug</a>
     &middot;
@@ -30,12 +30,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-Druids are experts in bending Nature magic to their will and use it for crowd controlling enemies.
-
-#### Pros:
-* Engulf foes in deadly vines
-#### Cons:
-* Little damage
+Druids are experts in bending Nature magic to their will and use it to slowly poison and root their targets.
 
 ### Features:
 You can find a Druid Camp in forests with interesting loot.
