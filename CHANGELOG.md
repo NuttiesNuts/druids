@@ -1,3 +1,7 @@
+# BETA 0.6
+
+- Fix Crescent Staff recipe not loading
+
 # BETA 0.5
 
 - Added Effects config
