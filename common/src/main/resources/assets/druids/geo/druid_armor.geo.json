@@ -18,10 +18,7 @@
 				{
 					"name": "armorHead",
 					"parent": "bipedHead",
-					"pivot": [0, 24, 0],
-					"cubes": [
-						{"origin": [-5.5, 23, -4], "size": [11, 3, 8], "uv": [0, 20]}
-					]
+					"pivot": [0, 24, 0]
 				},
 				{
 					"name": "hat",

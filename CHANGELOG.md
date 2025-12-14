@@ -1,7 +1,9 @@
 # BETA 0.5
 
-- NeoForge release
 - Added Effects config
+- Changed Crescent Staff recipe
+- Changed spells to apply FatalPoison instead of regular Poison
+- Fix staff models missing when Wizards isn't installed
 
 # BETA 0.4
 

@@ -2,20 +2,26 @@
 	"type": "minecraft:crafting_shaped",
 	"category": "equipment",
 	"key": {
-		"P": {
+		"H": {
 			"item": "druids:heart_of_the_forest"
 		},
-		"C": {
+		"V": {
 			"item": "minecraft:vine"
 		},
 		"M": {
 			"tag": "c:rods/wooden"
+		},
+		"E": {
+			"item": "minecraft:emerald"
+		},
+		"S": {
+			"item": "druids:staff_nature"
 		}
 	},
 	"pattern": [
-		" CP",
-		" MC",
-		"M  "
+		" EH",
+		" VE",
+		"S  "
 	],
 	"result": {
 		"id": "druids:staff_moon"
