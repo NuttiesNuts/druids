@@ -7,6 +7,22 @@ plugins {
 
 def platform = project.name;
 
+// Function to read the last section from CHANGELOG.md
+def changelog_last_section() {
+	def changelogFile = rootProject.file('CHANGELOG.md')
+	if (!changelogFile.exists()) {
+		return "No changelog available"
+	}
+
+	def content = changelogFile.text
+	def sections = content.split(/(?m)(?=^# )/)
+
+	// Return the first section (most recent) after the split
+	// Remove the first empty element if it exists
+	def recentSection = sections.find { it.trim().startsWith('#') }
+	return recentSection ?: "No changelog available"
+}
+
 architectury {
     platformSetupLoomIde()
     neoForge()
@@ -154,7 +170,7 @@ publisher {
 
 	setVersionType(release_type)
 
-	setChangelog(project.changelog_last_section)
+	setChangelog(changelog_last_section())
 
 	// Required for Modrinth/GitHub
 	setVersion("${mod_version}+${platform}-${minecraft_version}")
