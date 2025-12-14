@@ -35,7 +35,6 @@ public class DruidSpells {
 		return entry;
 	}
 
-
 	private static Spell.Impact damageImpact(float coefficient, float knockback) {
 		var damage = new Spell.Impact();
 		damage.action = new Spell.Impact.Action();
@@ -61,7 +60,6 @@ public class DruidSpells {
 		buff.action.status_effect.duration = duration;
 		return buff;
 	}
-
 	private static void configureNatureRuneCost(Spell spell) {
 		if (spell.cost == null) {
 			spell.cost = new Spell.Cost();
@@ -69,7 +67,6 @@ public class DruidSpells {
 		spell.cost.item = new Spell.Cost.Item();
 		spell.cost.item.id = Registries.ITEM.getId(MRPGCItems.NATURE_STONE).toString();
 	}
-
 	private static ParticleBatch[] natureCastingParticles() {
 		return new ParticleBatch[]{
 			new ParticleBatch(SpellEngineParticles.MagicParticles.get(
@@ -111,17 +108,12 @@ public class DruidSpells {
 				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
 				10, 0.05F, 0.3F),
 		};
-		var debuff2 = createEffectImpact(Registries.STATUS_EFFECT.getId(StatusEffects.POISON.value()), 5);
+		var debuff2 = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
 		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
 		debuff2.action.status_effect.show_particles = false;
 		debuff2.action.status_effect.amplifier = 1;
 		debuff2.action.status_effect.amplifier_cap = 5;
 		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
-		debuff2.particles = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				10, 0.05F, 0.3F),
-		};
 
 		spell.target.type = Spell.Target.Type.AIM;
 		spell.target.aim = new Spell.Target.Aim();
@@ -192,16 +184,12 @@ public class DruidSpells {
 				2, 0.1F, 0.2F)
 		};
 
-		var debuff2 = createEffectImpact(Registries.STATUS_EFFECT.getId(StatusEffects.POISON.value()), 5);
+		var debuff2 = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
 		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
 		debuff2.action.status_effect.show_particles = false;
 		debuff2.action.status_effect.amplifier = 2;
 		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.5F;
-		debuff2.particles = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				10, 0.05F, 0.3F),
-		};
+
 
 		spell.target.type = Spell.Target.Type.AREA;
 		spell.target.area = new Spell.Target.Area();

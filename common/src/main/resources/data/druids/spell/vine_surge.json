@@ -79,7 +79,7 @@
 			"action": {
 				"type": "STATUS_EFFECT",
 				"status_effect": {
-					"effect_id": "minecraft:poison",
+					"effect_id": "more_rpg_classes:fatal_poison",
 					"duration": 5.0,
 					"amplifier": 2,
 					"amplifier_cap_power_multiplier": 0.5,
