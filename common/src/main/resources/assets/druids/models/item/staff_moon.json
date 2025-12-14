@@ -1,5 +1,5 @@
 {
-	"parent": "wizards:item/medium_staff",
+	"parent": "druids:item/medium_staff",
 	"textures": {
 		"layer0": "druids:item/staff_moon"
 	}
