@@ -23,8 +23,9 @@ bin/
 # macos
 *.DS_Store
 
-# fabric
-run/
-
 # datagen cache
-/src/main/generated/.cache/
+common/src/main/generated/.cache/
+
+# run
+fabric/run
+neoforge/run
