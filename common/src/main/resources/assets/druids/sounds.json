@@ -1,0 +1,14 @@
+{
+	"dart_impact": {
+		"subtitle": "sound.druids.dart_impact",
+		"sounds": [
+			"druids:dart_impact"
+		]
+	},
+	"dart_release": {
+		"subtitle": "sound.druids.dart_release",
+		"sounds": [
+			"druids:dart_release"
+		]
+	}
+}

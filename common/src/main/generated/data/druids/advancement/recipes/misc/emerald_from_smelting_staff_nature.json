@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "druids:emerald_from_smelting_staff_nature"
+        "recipe": "minecraft:emerald_from_smelting_staff_nature"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "druids:emerald_from_smelting_staff_nature"
+      "minecraft:emerald_from_smelting_staff_nature"
     ]
   }
 }

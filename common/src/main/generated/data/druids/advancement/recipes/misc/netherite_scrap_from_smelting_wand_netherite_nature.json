@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "druids:netherite_scrap_from_smelting_wand_netherite_nature"
+        "recipe": "minecraft:netherite_scrap_from_smelting_wand_netherite_nature"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "druids:netherite_scrap_from_smelting_wand_netherite_nature"
+      "minecraft:netherite_scrap_from_smelting_wand_netherite_nature"
     ]
   }
 }

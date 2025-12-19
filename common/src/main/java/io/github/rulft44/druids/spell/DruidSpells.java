@@ -223,4 +223,47 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description, null);
 	}
 
+	public static Entry dart_shot = add(dart_shot());
+	private static Entry dart_shot() {
+		var id = Identifier.of(Druids.ID, "dart_shot");
+		var spell = SpellBuilder.createSpellActive();
+		var title = "";
+		var description = "";
+		spell.school = MoreSpellSchools.NATURE;
+		spell.group = "primary";
+		spell.tier = 0;
+		spell.range = 64;
+		spell.active.cast.duration = 0;
+		//spell.active.cast.animation = "spell_engine:one_handed_projectile_charge";
+
+		spell.release = new Spell.Release();
+		//spell.release.animation = "spell_engine:one_handed_projectile_release";
+		spell.release.sound = new Sound(io.github.rulft44.druids.sounds.ModSounds.DART_RELEASE_ID);
+
+		spell.target.type = Spell.Target.Type.AIM;
+		spell.target.aim = new Spell.Target.Aim();
+
+		var debuff2 = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
+		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		debuff2.action.status_effect.show_particles = false;
+		debuff2.action.status_effect.amplifier = 1;
+		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+
+		var damage = SpellBuilder.Impacts.damage(0.7F, 0F);
+		damage.particles = new ParticleBatch[] {
+			new ParticleBatch(
+				SpellEngineParticles.MagicParticles.get(
+					SpellEngineParticles.MagicParticles.Shape.ARCANE,
+					SpellEngineParticles.MagicParticles.Motion.BURST
+				).id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+				null, 20, 0.2F, 0.7F, 0.0F, 0F)
+		};
+		damage.sound = new Sound(io.github.rulft44.druids.sounds.ModSounds.DART_IMPACT_ID.toString(), 1.5F, 1F, 0.1F);
+		spell.impacts = List.of(damage, debuff2);
+
+		configureCooldown(spell, 0.5F);
+		return new Entry(id, spell, title, description, null);
+	}
+
 }

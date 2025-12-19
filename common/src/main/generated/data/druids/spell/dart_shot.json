@@ -1,0 +1,59 @@
+{
+  "school": "spell_power:nature",
+  "range": 64.0,
+  "group": "primary",
+  "tier": 0,
+  "learn": {},
+  "active": {},
+  "release": {
+    "sound": {
+      "id": "druids:dart_release"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {}
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "DAMAGE",
+        "damage": {
+          "spell_power_coefficient": 0.7,
+          "knockback": 0.0
+        }
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:magic_arcane_burst",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 20.0,
+          "min_speed": 0.2,
+          "max_speed": 0.7
+        }
+      ],
+      "sound": {
+        "id": "druids:dart_impact",
+        "volume": 1.5
+      }
+    },
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "more_rpg_classes:fatal_poison",
+          "duration": 5.0,
+          "amplifier": 1,
+          "amplifier_cap_power_multiplier": 0.2,
+          "apply_mode": "ADD"
+        }
+      }
+    }
+  ],
+  "cost": {
+    "cooldown": {
+      "duration": 0.5
+    }
+  }
+}

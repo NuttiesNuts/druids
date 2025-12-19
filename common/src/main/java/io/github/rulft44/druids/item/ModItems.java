@@ -17,6 +17,7 @@ public class ModItems {
 	// Misc
 	public static final Item COPPER_NUGGET = registerItem("copper_nugget", new Item(new Item.Settings()));
 	public static final Item HEART_OF_THE_FOREST = registerItem("heart_of_the_forest", new Item(new Item.Settings().rarity(Rarity.UNCOMMON)));
+	//public static final Item BLOWGUN = registerItem("blowgun", new Item(new Item.Settings()));
 
 	private static Item registerItem(String name, Item item) {
 		return Registry.register(Registries.ITEM, Identifier.of(Druids.ID, name), item);
@@ -29,6 +30,7 @@ public class ModItems {
 		});
 		ItemGroupEvents.modifyEntriesEvent(Group.KEY).register(entries -> {
 			entries.addBefore(ModWeapons.natureWand.item(), ModItems.HEART_OF_THE_FOREST);
+			//entries.addAfter(ModItems.HEART_OF_THE_FOREST, ModItems.BLOWGUN);
 		});
 	}
 

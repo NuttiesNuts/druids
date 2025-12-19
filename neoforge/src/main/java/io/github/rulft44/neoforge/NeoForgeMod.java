@@ -18,6 +18,9 @@ public final class NeoForgeMod {
 		event.register(RegistryKeys.ITEM, reg -> {
 			Druids.registerItems();
 		});
+		event.register(RegistryKeys.SOUND_EVENT, reg -> {
+			Druids.registerSounds();
+		});
 		event.register(RegistryKeys.STATUS_EFFECT, reg -> {
 			Druids.registerEffects();
 		});

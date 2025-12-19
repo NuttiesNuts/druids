@@ -3,6 +3,7 @@
 
 	"item.druids.heart_of_the_forest": "Heart Of The Forest",
 	"item.druids.copper_nugget": "Copper Nugget",
+	"item.druids.blowgun": "Blowgun",
 
 	"item.druids.druid_spell_book": "Druidic Grimoire",
 	"item.druids.druid.spell_scroll": "Druidic Scroll",
@@ -24,6 +25,8 @@
 	"item.druids.staff_netherite_nature": "Netherite Nature Staff",
 	"item.druids.staff_moon": "Crescent Staff Of The Forest",
 
+	"spell.druids.dart_shot.name": "Dart Shot",
+	"spell.druids.dart_shot.name.description": "Shoots a dart that deals damage.",
 	"spell.druids.bramble_shot.name": "Bramble Shot",
 	"spell.druids.bramble_shot.description": "Launches a wood projectile, causing up to {damage} nature spell damage and poisoning on hit.",
 	"spell.druids.bramble_volley.name": "Bramble Volley",

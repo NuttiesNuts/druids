@@ -13,6 +13,7 @@ public final class FabricMod implements ModInitializer {
         // Run our common setup.
         Druids.init();
 		Druids.registerItems();
+		Druids.registerSounds();
 		Druids.registerEffects();
     }
 }

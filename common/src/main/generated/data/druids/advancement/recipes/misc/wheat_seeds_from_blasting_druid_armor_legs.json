@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "druids:wheat_seeds_from_blasting_druid_armor_legs"
+        "recipe": "minecraft:wheat_seeds_from_blasting_druid_armor_legs"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "druids:wheat_seeds_from_blasting_druid_armor_legs"
+      "minecraft:wheat_seeds_from_blasting_druid_armor_legs"
     ]
   }
 }

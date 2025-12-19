@@ -1,0 +1,7 @@
+{
+	"parent": "druids:item/blowgun",
+	"textures": {
+		"layer0": "druids:item/blowgun",
+		"layer1": "druids:item/blowgun_filled"
+	}
+}

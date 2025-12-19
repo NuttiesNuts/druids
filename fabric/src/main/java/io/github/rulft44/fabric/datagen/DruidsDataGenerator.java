@@ -1,4 +1,4 @@
-package io.github.rulft44.druids.datagen;
+package io.github.rulft44.fabric.datagen;
 
 import io.github.rulft44.druids.item.ModArmors;
 import io.github.rulft44.druids.item.ModWeapons;

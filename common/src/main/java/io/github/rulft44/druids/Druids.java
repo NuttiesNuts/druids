@@ -5,6 +5,7 @@ import io.github.rulft44.druids.config.EffectsConfig;
 import io.github.rulft44.druids.config.TweaksConfig;
 import io.github.rulft44.druids.effect.ModEffects;
 import io.github.rulft44.druids.item.*;
+import io.github.rulft44.druids.sounds.ModSounds;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
 import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
@@ -93,6 +94,10 @@ public class Druids {
 		});
 	}
 
+	public static void registerSounds(){
+		ModSounds.register();
+	}
+
 	public static void registerItems(){
 		Group.DRUIDS = FabricItemGroup.builder()
 			.icon(() -> new ItemStack(ModArmors.druidArmorSet.head))
@@ -110,5 +115,6 @@ public class Druids {
 
 	public static void registerEffects() {
 		ModEffects.register();
+		effectsConfig.save();
 	}
 }
