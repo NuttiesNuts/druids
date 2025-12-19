@@ -175,13 +175,13 @@ publisher {
 	// Modrinth Dependencies
 	modrinthDepends {
 		// Multiple required dependencies
-		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'runes'
+		required 'fabric-api', 'spell-engine', 'runes', 'azurelib-armor', 'more-rpg-library'
 	}
 
 	// Curse Dependencies
 	curseDepends {
 		// Multiple required dependencies
-		required 'fabric-api', 'spell-engine', 'more-rpg-library', 'rune-crafting'
+		required 'fabric-api', 'spell-engine', 'azurelib-armor', 'rune-crafting', 'more-rpg-library'
 	}
 }
 

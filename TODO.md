@@ -4,7 +4,8 @@
 
 High Priority:
 - 
-- 
+- Mass Entanglement update
+- Skill Tree
 
 Low Priority:
 -
