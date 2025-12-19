@@ -28,6 +28,13 @@ architectury {
     neoForge()
 }
 
+def generatedResources = project(':common').file('src/main/generated')
+sourceSets {
+	main {
+		resources.srcDir generatedResources
+	}
+}
+
 configurations {
     common {
         canBeResolved = true
@@ -109,12 +116,8 @@ repositories {
 
 dependencies {
     neoForge libs.neo
-
-	//modImplementation libs.jei
-
     common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
-
 	modImplementation ("org.sinytra.forgified-fabric-api:forgified-fabric-api:"+libs.versions.fofapi.get())
 
 	modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:"+libs.versions.playeranim.get())

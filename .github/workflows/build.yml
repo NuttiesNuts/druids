@@ -43,7 +43,7 @@ jobs:
       - name: Attest Build Provenance
         uses: actions/attest-build-provenance@v2
         with:
-          subject-path: 'fabric/build/libs/*.jar, !fabric/build/libs/*-shadow.jar'
+          subject-path: 'fabric/build/libs/*.jar, !fabric/build/libs/*-shadow.jar, neoforge/build/libs/*.jar, !neoforge/build/libs/*-shadow.jar'
 
       - name: Upload Artifacts
         uses: actions/upload-artifact@v4
@@ -52,6 +52,8 @@ jobs:
           path: |
             fabric/build/libs/*.jar
             !fabric/build/libs/*-shadow.jar
+            neoforge/build/libs/*.jar
+            !neoforge/build/libs/*-shadow.jar
 
       - name: Maven Publish
         if: github.event_name == 'release' && github.event.action == 'published'
@@ -61,7 +63,7 @@ jobs:
         if: github.event_name == 'release' && github.event.action == 'published'
         uses: AButler/upload-release-assets@v2.0
         with:
-          files: 'fabric/build/libs/*.jar;!fabric/build/libs/*-shadow.jar'
+          files: 'fabric/build/libs/*.jar;!neoforge/build/libs/*-shadow.jar;fabric/build/libs/*.jar;!neoforge/build/libs/*-shadow.jar'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Fabric Mod Publish
@@ -70,7 +72,7 @@ jobs:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.CURSEFORGE_TOKEN != '' && env.MODRINTH_TOKEN != ''}}
         run: |
-          ./gradlew :fabric:publishMod      
+          ./gradlew :fabric:publishMod
       
 
       - name: NeoForge Mod Publish
@@ -79,3 +81,4 @@ jobs:
           MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
         if: ${{ github.event_name == 'release' && github.event.action == 'published' && env.CURSEFORGE_TOKEN != '' && env.MODRINTH_TOKEN != ''}}
         run: |
+          ./gradlew :neoforge:publishMod
