@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:netherite_druid_armor_head_smithing"
+        "recipe": "druids:netherite_druid_armor_head_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:netherite_druid_armor_head_smithing"
+      "druids:netherite_druid_armor_head_smithing"
     ]
   }
 }

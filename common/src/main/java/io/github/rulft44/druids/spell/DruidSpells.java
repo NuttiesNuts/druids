@@ -7,6 +7,7 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.client.particle.MoreParticles;
 import net.more_rpg_classes.custom.MoreSpellSchools;
+import net.more_rpg_classes.custom.spell_impacts.PullInToCasterDirectSpellImpact;
 import net.more_rpg_classes.effect.MRPGCEffects;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.more_rpg_classes.sounds.ModSounds;
@@ -17,6 +18,7 @@ import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
+import net.spell_engine.internals.target.SpellTarget;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -60,6 +62,15 @@ public class DruidSpells {
 		buff.action.status_effect.duration = duration;
 		return buff;
 	}
+	private static Spell.Impact customImpact(String impactId, SpellTarget.Intent intent) {
+		var effect = new Spell.Impact();
+		effect.action = new Spell.Impact.Action();
+		effect.action.type = Spell.Impact.Action.Type.CUSTOM;
+		effect.action.custom = new Spell.Impact.Action.Custom();
+		effect.action.custom.handler = impactId;
+		effect.action.custom.intent = intent;
+		return effect;
+	}
 	private static void configureNatureRuneCost(Spell spell) {
 		if (spell.cost == null) {
 			spell.cost = new Spell.Cost();
@@ -78,6 +89,43 @@ public class DruidSpells {
 				ParticleBatch.Shape.PIPE, ParticleBatch.Origin.FEET,
 				0.5F, 0.05F, 0.1F).scale(0.5F).maxAge(0.25F)
 		};
+	}
+
+	public static final Entry vine_whip = add(vine_whip());
+	private static Entry vine_whip() {
+		var id = Identifier.of(Druids.ID, "vine_whip");
+		var title = "";
+		var description = "";
+		var spell = SpellBuilder.createSpellActive();
+		spell.range = 16F;
+		spell.tier = 3;
+		spell.school = MoreSpellSchools.NATURE;
+
+		spell.active.cast.duration = 0.75F;
+		spell.active.cast.particles = natureCastingParticles();
+		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
+		spell.active.cast.animation = "spell_engine:one_handed_healing_charge";
+
+		spell.release.sound = new Sound(ModSounds.NATURE_RELEASE_2_ID);
+		spell.release.animation = "spell_engine:one_handed_healing_release";
+
+		spell.target.type = Spell.Target.Type.AIM;
+		spell.target.aim = new Spell.Target.Aim();
+		spell.target.aim.sticky = true;
+
+		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
+		poison.action.status_effect.amplifier = 2;
+		poison.action.status_effect.amplifier_cap_power_multiplier = 0.5F;
+		poison.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+
+		var pull = customImpact("more_rpg_classes:pull_to_caster_direct", SpellTarget.Intent.HARMFUL);
+		pull.sound = new Sound(ModSounds.NATURE_IMPACT_1_ID);
+
+		spell.impacts = List.of(poison, pull);
+
+		configureCooldown(spell, 4);
+		configureNatureRuneCost(spell);
+		return new Entry(id, spell, title, description, null);
 	}
 
 	public static final Entry bramble_volley = add(bramble_volley());

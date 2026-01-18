@@ -3,7 +3,7 @@
   "criteria": {
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:charcoal_from_smelting_wand_nature"
+        "recipe": "druids:charcoal_from_smelting_wand_nature"
       },
       "trigger": "minecraft:recipe_unlocked"
     },
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:charcoal_from_smelting_wand_nature"
+      "druids:charcoal_from_smelting_wand_nature"
     ]
   }
 }

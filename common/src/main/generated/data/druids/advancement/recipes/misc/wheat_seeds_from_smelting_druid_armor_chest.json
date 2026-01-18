@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "minecraft:wheat_seeds_from_smelting_druid_armor_chest"
+        "recipe": "druids:wheat_seeds_from_smelting_druid_armor_chest"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "minecraft:wheat_seeds_from_smelting_druid_armor_chest"
+      "druids:wheat_seeds_from_smelting_druid_armor_chest"
     ]
   }
 }
