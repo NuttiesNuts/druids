@@ -143,6 +143,6 @@ public class DruidRecipes extends FabricRecipeProvider {
 
 	@Override
 	public String getName() {
-		return "Wizard Crafting Recipes";
+		return "Druid Crafting Recipes";
 	}
 }

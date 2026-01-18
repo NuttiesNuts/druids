@@ -31,8 +31,8 @@
 	"spell.druids.bramble_volley.description": "Dispara 3 projéteis de espinhos, causando até {damage} dano de feitiço de natureza, reduzindo cura e envenenando.",
 	"spell.druids.barkskin.name": "Pele de Casca de Árvore",
 	"spell.druids.barkskin.description": "Protege voçê e dá-lhe espinhos",
-	"spell.druids.vine_surge.name": "Onda de Trepadeiras",
-	"spell.druids.vine_surge.description": "Envia vinhas que imobilizam e envenenam o inimigo.",
+	"spell.druids.vine_whip.name": "Chicote de Trepadeiras",
+	"spell.druids.vine_whip.description": "Lança um chicote de vinhas que puxa e envenena o inimigo.",
 	"spell.druids.mass_entanglement.name": "Emaranhamento em Massa",
 	"spell.druids.mass_entanglement.description": "Enraíza, causa dano e envenena todos os inimigos no alcance.",
 

@@ -51,6 +51,7 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 
 		@Override
 		protected void configure(RegistryWrapper.WrapperLookup wrapperLookup) {
+			generateWeaponTags(ModWeapons.entries);
 			generateArmorTags(ModArmors.entries, RPGSeriesItemTags.ArmorMetaType.MAGIC);
 		}
 	}

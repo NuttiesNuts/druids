@@ -1,0 +1,82 @@
+{
+  "school": "spell_power:nature",
+  "range": 16.0,
+  "tier": 3,
+  "learn": {},
+  "active": {
+    "cast": {
+      "duration": 0.75,
+      "animation": "spell_engine:one_handed_healing_charge",
+      "sound": {
+        "id": "more_rpg_classes:nature_cast_1"
+      },
+      "particles": [
+        {
+          "particle_id": "spell_engine:magic_spark_float",
+          "origin": "FEET",
+          "shape": "WIDE_PIPE",
+          "count": 1.5,
+          "min_speed": 0.05,
+          "max_speed": 0.2,
+          "color_rgba": 4294954239
+        },
+        {
+          "particle_id": "more_rpg_classes:leaf",
+          "origin": "FEET",
+          "shape": "PIPE",
+          "count": 0.5,
+          "min_speed": 0.05,
+          "max_speed": 0.1,
+          "scale": 0.5,
+          "max_age": 0.25
+        }
+      ]
+    }
+  },
+  "release": {
+    "animation": "spell_engine:one_handed_healing_release",
+    "sound": {
+      "id": "more_rpg_classes:nature_release_2"
+    }
+  },
+  "target": {
+    "type": "AIM",
+    "aim": {
+      "sticky": true
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "more_rpg_classes:fatal_poison",
+          "duration": 5.0,
+          "amplifier": 2,
+          "amplifier_cap_power_multiplier": 0.5,
+          "apply_mode": "ADD"
+        }
+      }
+    },
+    {
+      "action": {
+        "type": "CUSTOM",
+        "custom": {
+          "intent": "HARMFUL",
+          "handler": "more_rpg_classes:pull_to_caster_direct"
+        }
+      },
+      "sound": {
+        "id": "more_rpg_classes:nature_impact_1"
+      }
+    }
+  ],
+  "cost": {
+    "cooldown": {
+      "duration": 4.0
+    },
+    "item": {
+      "id": "more_rpg_classes:nature_stone"
+    }
+  }
+}
