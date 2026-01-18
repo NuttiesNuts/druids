@@ -4,6 +4,8 @@
 
 High Priority:
 - 
+
+- Photos for Modrinth & Curseforge Gallery
 - Mass Entanglement update
 - Skill Tree
 

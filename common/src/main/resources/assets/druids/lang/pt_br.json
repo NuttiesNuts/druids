@@ -62,5 +62,6 @@
 	"advancements.rpg_series.spell_cast_druid_wand.description": "Lance um feitiço com uma Varinha de Natureza",
 
 	"advancements.rpg_series.spell_cast_druid_book.title": "Empoderamento da Natureza",
-	"advancements.rpg_series.spell_cast_druid_book.description": "Lance um feitiço do Grimório Druidico."
+	"advancements.rpg_series.spell_cast_druid_book.description": "Lance um feitiço do Grimório Druidico.",
+	"item.druids.fatal_poison_potion": "Poção de Veneno Fatal"
 }
