@@ -6,7 +6,7 @@
 			"entries": [
 				{
 					"type": "minecraft:loot_table",
-					"value": "elemental_wizards_rpg:spell_scrolls/beginner_nature"
+					"value": "druids:spell_scrolls/beginner_nature"
 				}
 			]
 		},
