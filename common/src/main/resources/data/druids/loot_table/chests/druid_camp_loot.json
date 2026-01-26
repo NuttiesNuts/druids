@@ -34,7 +34,7 @@
 			"entries": [
 				{
 					"type": "minecraft:item",
-					"weight": 2,
+					"weight": 4,
 					"name": "more_rpg_classes:nature_stone",
 					"functions": [
 						{
@@ -52,23 +52,6 @@
 					"type": "minecraft:item",
 					"weight": 3,
 					"name": "minecraft:copper_ingot",
-					"functions": [
-						{
-							"function": "minecraft:set_count",
-							"count": {
-								"type": "minecraft:uniform",
-								"min": 1,
-								"max": 8
-							},
-							"add": false
-						}
-					]
-				},
-				{
-					"type": "minecraft:tag",
-					"expand": true,
-					"weight": 3,
-					"name": "minecraft:leaves",
 					"functions": [
 						{
 							"function": "minecraft:set_count",
@@ -100,8 +83,14 @@
 					"type": "minecraft:item",
 					"name": "druids:druid_armor_feet",
 					"weight": 1
+				},
+				{
+					"type": "minecraft:item",
+					"name": "druids:fatal_poison_potion",
+					"weight": 4
 				}
-			]
+			],
+			"conditions": []
 		}
 	]
 }
