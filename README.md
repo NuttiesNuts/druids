@@ -82,4 +82,4 @@ Item attributes of druid equipment and other tweaks can be configured by changin
 
 Create your own RPG server. Using this link gets you cheaper prices and supports me.
 
-[![Get a server](https://raw.githubusercontent.com/Rulft44/druids/refs/heads/1.21.1/.github/marketing/banner)](https://url-shortener.curseforge.com/LR2Lp)
+[![Get a server](https://raw.githubusercontent.com/Rulft44/druids/refs/heads/1.21.1/.github/marketing/banner.png)](https://url-shortener.curseforge.com/LR2Lp)
