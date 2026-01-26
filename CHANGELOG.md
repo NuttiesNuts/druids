@@ -1,3 +1,11 @@
+# BETA 0.7
+- Add Fatal Poison potion
+- Update Camp Loot Table
+- Changed Vine Surge to Vine Whip (pulls target towards the caster)
+- Improved Mass Entanglement
+- Fixed Critical JSON Syntax Errors
+- Removed Runes Dependency
+
 # BETA 0.6
 
 - Fix Crescent Staff recipe not loading
