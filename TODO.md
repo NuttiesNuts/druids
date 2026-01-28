@@ -5,8 +5,8 @@ High Priority:
 - 
 
 - Skill Tree
+- Barkskin overlay render
 
 Low Priority:
 -
-- Barkskin overlay render
 - Barkskin on allies

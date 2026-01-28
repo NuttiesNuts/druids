@@ -1,4 +1,4 @@
-# BETA 0.7
+# 1.0
 - Add Fatal Poison potion
 - Update Camp Loot Table
 - Changed Vine Surge to Vine Whip (pulls target towards the caster)
