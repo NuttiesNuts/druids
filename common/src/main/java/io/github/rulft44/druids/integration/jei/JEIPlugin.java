@@ -21,6 +21,7 @@ public class JEIPlugin implements IModPlugin {
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
 		registration.addIngredientInfo(new ItemStack(ModItems.HEART_OF_THE_FOREST), VanillaTypes.ITEM_STACK, Text.translatable("druids.jei.info.heart_of_the_forest"));
+		registration.addIngredientInfo(new ItemStack(ModItems.FATAL_POISON_POTION), VanillaTypes.ITEM_STACK, Text.translatable("druids.jei.info.poison_potion"));
 	}
 
 	@Override

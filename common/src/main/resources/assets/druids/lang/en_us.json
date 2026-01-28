@@ -47,6 +47,9 @@
 	"druids.jei.info.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
 	"lore.druids.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
 
+	"druids.jei.info.poison_potion": "A strange poison fatal to anything. The recipe for it is unknown since the ancient druids are the only ones who knew how to brew it.",
+	"lore.druids.fatal_poison_potion": "A strange poison fatal to anything. The recipe for it is unknown since the ancient druids are the only ones who knew how to brew it.",
+
 	"advancements.rpg_series.path_choose_druid.title": "Path of Nature",
 	"advancements.rpg_series.path_choose_druid.description": "Create a Druidic Grimoire",
 
