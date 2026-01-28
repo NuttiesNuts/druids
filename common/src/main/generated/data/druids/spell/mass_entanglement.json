@@ -5,8 +5,7 @@
   "learn": {},
   "active": {
     "cast": {
-      "duration": 6.0,
-      "channel_ticks": 14,
+      "duration": 10.0,
       "animation": "spell_engine:one_handed_area_charge",
       "sound": {
         "id": "more_rpg_classes:nature_cast_1"
@@ -36,18 +35,6 @@
   },
   "release": {
     "animation": "spell_engine:one_handed_area_release",
-    "particles": [
-      {
-        "particle_id": "spell_engine:area_swirl",
-        "origin": "FEET",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "min_speed": 0.5,
-        "max_speed": 0.5,
-        "color_rgba": 10279747,
-        "scale": 5.0
-      }
-    ],
     "particles_scaled_with_ranged": [
       {
         "particle_id": "spell_engine:area_effect_658",
@@ -63,17 +50,244 @@
     }
   },
   "target": {
-    "type": "AREA",
-    "area": {
-      "angle_degrees": 360.0
+    "type": "AIM",
+    "aim": {
+      "sticky": true,
+      "use_caster_as_fallback": true
     }
+  },
+  "deliver": {
+    "type": "CLOUD",
+    "clouds": [
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 8,
+        "placement": {
+          "location_offset_by_look": 3.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement1",
+            "light_emission": "NONE",
+            "scale": 1.2,
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 9,
+        "placement": {
+          "location_offset_by_look": 3.0,
+          "location_yaw_offset": 90.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement11",
+            "light_emission": "NONE",
+            "scale": 1.2,
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 10,
+        "placement": {
+          "location_offset_by_look": 3.0,
+          "location_yaw_offset": 180.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement1",
+            "light_emission": "NONE",
+            "scale": 1.2,
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 11,
+        "placement": {
+          "location_offset_by_look": 3.0,
+          "location_yaw_offset": 270.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement11",
+            "light_emission": "NONE",
+            "scale": 1.2,
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 8,
+        "placement": {
+          "location_offset_by_look": 2.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement2",
+            "light_emission": "NONE",
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 9,
+        "placement": {
+          "location_offset_by_look": 2.5,
+          "location_yaw_offset": 110.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement2",
+            "light_emission": "NONE",
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 10,
+        "placement": {
+          "location_offset_by_look": 2.0,
+          "location_yaw_offset": 180.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement2",
+            "light_emission": "NONE",
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 11,
+        "placement": {
+          "location_offset_by_look": 1.75,
+          "location_yaw_offset": 300.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/entanglement2",
+            "light_emission": "NONE",
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 14,
+        "placement": {
+          "location_offset_by_look": 1.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/poppy",
+            "light_emission": "NONE",
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      },
+      {
+        "volume": {
+          "area": {
+            "vertical_range_multiplier": 2.0
+          }
+        },
+        "time_to_live_seconds": 10.0,
+        "impact_tick_interval": 20,
+        "delay_ticks": 15,
+        "placement": {
+          "location_offset_by_look": 1.0,
+          "location_yaw_offset": 180.0,
+          "apply_yaw": true
+        },
+        "client_data": {
+          "model": {
+            "model_id": "druids:effect/dandelion",
+            "light_emission": "NONE",
+            "rotate_degrees_per_tick": 0.0
+          }
+        }
+      }
+    ]
   },
   "impacts": [
     {
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "more_rpg_classes:stagger",
+          "effect_id": "spell_engine:stun",
           "duration": 15.0,
           "amplifier": 1,
           "amplifier_cap": 5,
@@ -108,8 +322,8 @@
       "action": {
         "type": "DAMAGE",
         "damage": {
-          "spell_power_coefficient": 0.25,
-          "knockback": 0.5
+          "spell_power_coefficient": 0.15,
+          "knockback": 0.0
         }
       }
     }

@@ -15,7 +15,12 @@ import java.util.function.Supplier;
 public class DruidsClient{
 	public static void init() {
 		CustomModels.registerModelIds(List.of(
-			Identifier.of(Druids.ID, "projectile/bramble_shot")
+			Identifier.of(Druids.ID, "projectile/bramble_shot"),
+			Identifier.of(Druids.ID, "effect/entanglement1"),
+			Identifier.of(Druids.ID, "effect/entanglement11"),
+			Identifier.of(Druids.ID, "effect/entanglement2"),
+			Identifier.of(Druids.ID, "effect/dandelion"),
+			Identifier.of(Druids.ID, "effect/poppy")
 		));
 
 		registerArmorRenderer(ModArmors.druidArmorSet, DruidArmorRenderer::druid);

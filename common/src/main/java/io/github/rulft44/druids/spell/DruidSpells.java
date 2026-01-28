@@ -12,6 +12,8 @@ import net.more_rpg_classes.effect.MRPGCEffects;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.more_rpg_classes.sounds.ModSounds;
 import net.spell_engine.api.datagen.SpellBuilder;
+import net.spell_engine.api.effect.SpellEngineEffects;
+import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.Sound;
@@ -90,6 +92,35 @@ public class DruidSpells {
 				0.5F, 0.05F, 0.1F).scale(0.5F).maxAge(0.25F)
 		};
 	}
+
+	private static Spell.Delivery.Cloud makeRootCluster(
+		String model,
+		float scale,
+		int delay,
+		float distance_from_caster,
+		int placement_angle,
+		int rotation
+	) {
+		var c = new Spell.Delivery.Cloud();
+		c.volume.radius = 1F;
+		c.volume.area.vertical_range_multiplier = 2F;
+		c.delay_ticks = delay;
+		c.impact_tick_interval = 20;
+		c.time_to_live_seconds = 10;
+		c.spawn = new Spell.Delivery.Cloud.Spawn();
+
+		c.client_data = new Spell.Delivery.Cloud.ClientData();
+		c.client_data.model = new Spell.ProjectileModel();
+		c.client_data.model.model_id = model;
+		c.client_data.model.scale = scale;
+		c.client_data.model.rotate_degrees_per_tick = 0;
+		//c.client_data.model.orientation = Spell.ProjectileModel.Orientation.TOWARDS_MOTION;
+		c.client_data.model.light_emission = LightEmission.NONE;
+
+		c.placement = SpellBuilder.Deliver.placementByLook(distance_from_caster, placement_angle, 0);
+		return c;
+	}
+
 
 	public static final Entry vine_whip = add(vine_whip());
 	private static Entry vine_whip() {
@@ -206,7 +237,7 @@ public class DruidSpells {
 		var id = Identifier.of(Druids.ID, "mass_entanglement");
 		var title = "";
 		var description = "";
-		var debuffEffect = MRPGCEffects.STAGGER;
+		var debuffEffect = SpellEngineEffects.STUN;
 		var spell = SpellBuilder.createSpellActive();
 		spell.range = 10F;
 		spell.tier = 4;
@@ -214,8 +245,8 @@ public class DruidSpells {
 
 		spell.active.cast.animation = "spell_engine:one_handed_area_charge";
 		spell.active.cast.particles = natureCastingParticles();
-		spell.active.cast.duration = 6;
-		spell.active.cast.channel_ticks = 14;
+		spell.active.cast.duration = 10;
+		//spell.active.cast.channel_ticks = 14;
 		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
 
 		spell.release.animation = "spell_engine:one_handed_area_release";
@@ -239,30 +270,38 @@ public class DruidSpells {
 		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.5F;
 
 
-		spell.target.type = Spell.Target.Type.AREA;
-		spell.target.area = new Spell.Target.Area();
-		spell.target.area.vertical_range_multiplier = 1F;
-		spell.target.area.angle_degrees = 360;
+		spell.target.type = Spell.Target.Type.AIM;
+		spell.target.aim = new Spell.Target.Aim();
+		spell.target.aim.use_caster_as_fallback = true;
+		spell.target.aim.sticky = true;
+
+		spell.deliver.type = Spell.Delivery.Type.CLOUD;
+
+		var outer1 = makeRootCluster("druids:effect/entanglement1", 1.2F, 8, 3F, 0, 0);
+		var outer2 = makeRootCluster("druids:effect/entanglement11", 1.2F, 9, 3F, 90, 0);
+		var outer3 = makeRootCluster("druids:effect/entanglement1", 1.2F, 10, 3F, 180, 0);
+		var outer4 = makeRootCluster("druids:effect/entanglement11", 1.2F, 11, 3F, 270, 0);
+
+		var inner1 = makeRootCluster("druids:effect/entanglement2", 1F, 8, 2F, 0, 0);
+		var inner2 = makeRootCluster("druids:effect/entanglement2", 1F, 9, 2.5F, 110, 0);
+		var inner3 = makeRootCluster("druids:effect/entanglement2", 1F, 10, 2F, 180, 0);
+		var inner4 = makeRootCluster("druids:effect/entanglement2", 1F, 11, 1.75F, 300, 0);
+
+		var flower1 = makeRootCluster("druids:effect/poppy", 1F, 14, 1F, 0, 0);
+		var flower2 = makeRootCluster("druids:effect/dandelion", 1F, 15, 1F, 180, 0);
+
+
+		spell.deliver.clouds = List.of(outer1,outer2,outer3,outer4,inner1,inner2,inner3,inner4,flower1,flower2);
 
 		spell.release.sound = new Sound(ModSounds.NATURE_IMPACT_1_ID);
-		spell.release.particles = new ParticleBatch[]{
-			new ParticleBatch(
-				SpellEngineParticles.roots.id().toString(),
-				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.GROUND,
-				3F, 0, 0.5F)
-		};
+
 		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
 			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
 				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
 				1, 0, 0).color(4283786581L)//.scale(0.8F)
 		};
-		spell.release.particles = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.area_swirl.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-				1, 0.5F, 0.5F).color(10279747L).scale(5F)
-		};
 
-		var damage = damageImpact(0.25F, 0.5F);
+		var damage = damageImpact(0.15F, 0F);
 
 		spell.impacts = List.of(debuff, debuff2, damage);
 
