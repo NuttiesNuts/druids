@@ -1,6 +1,7 @@
 package io.github.rulft44.druids.item;
 
 import io.github.rulft44.druids.Druids;
+import io.github.rulft44.druids.spell.DruidSpells;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
@@ -12,26 +13,24 @@ import net.minecraft.util.Rarity;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.api.config.AttributeModifier;
 import net.spell_engine.api.config.WeaponConfig;
-import net.spell_engine.api.item.Equipment;
+import net.spell_engine.api.spell.container.SpellContainers;
+import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.api.item.weapon.StaffItem;
-import net.spell_engine.api.item.weapon.Weapon;
+import net.spell_engine.rpg_series.item.Weapon;
+import net.spell_engine.rpg_series.item.Weapons;
 import net.spell_power.api.SpellSchools;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModWeapons {
 	public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
-
-	private static Weapon.Entry entry(String name, Weapon.CustomMaterial material, Weapon.Factory factory, WeaponConfig defaults, Equipment.WeaponType category) {
-		var entry = new Weapon.Entry(Druids.ID, name, material, factory, defaults, category);
-		if (entry.isRequiredModInstalled()) {
-			entries.add(entry);
-		}
+	private static Weapon.Entry add(Weapon.Entry entry) {
+		entries.add(entry);
 		return entry;
 	}
-
 	private static Supplier<Ingredient> ingredient(String idString, boolean requirement, Item fallback) {
 		var id = Identifier.of(idString);
 		if (requirement) {
@@ -51,52 +50,34 @@ public class ModWeapons {
 
 	// MARK: Wands
 
-	private static final float wandAttackDamage = 2;
-	private static final float wandAttackSpeed = -2.4F;
+	public static final Weapon.Entry natureWand = add(Weapons.damageWand(
+			Druids.ID, "wand_nature",
+			Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.EMERALD),
+			List.of(MoreSpellSchools.NATURE.id))
+		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(Identifier.of(Druids.ID, "bramble_shot")))
+	);
 
-	// Wand spell power bonuses
-	private static final float T0_WAND_POWER = 3F;
-	private static final float T1_WAND_POWER = 4F;
-	private static final float T2_WAND_POWER = 5F;
-	private static final float T3_WAND_POWER = 5.5F;
-	private static final float T1_STAFF_POWER = 5F;
-	private static final float T2_STAFF_POWER = 6F;
-	private static final float T3_STAFF_POWER = 7F;
-	private static final float T4_STAFF_POWER = 8F;
-
-	private static Weapon.Entry wand(String name, Weapon.CustomMaterial material) {
-		return entry(name, material, StaffItem::new, new WeaponConfig(wandAttackDamage, wandAttackSpeed), Equipment.WeaponType.DAMAGE_WAND);
-	}
-
-	public static final Weapon.Entry natureWand = wand("wand_nature",
-		Weapon.CustomMaterial.matching(ToolMaterials.IRON, () -> Ingredient.ofItems(Items.STICK)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T2_WAND_POWER))
-		.loot(Equipment.LootProperties.of(2));
-
-	public static final Weapon.Entry netheriteNatureWand = wand("wand_netherite_nature",
-		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T3_WAND_POWER))
-		.loot(Equipment.LootProperties.of(3));
-
+	public static final Weapon.Entry netheriteNatureWand = add(Weapons.damageWand(
+			Druids.ID, "wand_netherite_nature",
+			Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
+			List.of(MoreSpellSchools.NATURE.id))
+		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(Identifier.of(Druids.ID, "bramble_shot")))
+	);
 	// MARK: Staves
 
-	private static final float staffAttackDamage = 4;
-	private static final float staffAttackSpeed = -3F;
+	public static final Weapon.Entry natureStaff = add(Weapons.damageStaff(
+			Druids.ID, "staff_nature",
+			Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.EMERALD),
+			List.of(MoreSpellSchools.NATURE.id))
+		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
+	);
 
-	private static Weapon.Entry staff(String name, Weapon.CustomMaterial material) {
-		return entry(name, material, StaffItem::new, new WeaponConfig(staffAttackDamage, staffAttackSpeed), Equipment.WeaponType.DAMAGE_STAFF);
-	}
-
-	public static final Weapon.Entry natureStaff = staff("staff_nature",
-		Weapon.CustomMaterial.matching(ToolMaterials.DIAMOND, () -> Ingredient.ofItems(Items.EMERALD)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T2_STAFF_POWER))
-		.loot(Equipment.LootProperties.of(2));
-
-	public static final Weapon.Entry netheriteNatureStaff = staff("staff_netherite_nature",
-		Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, () -> Ingredient.ofItems(Items.NETHERITE_INGOT)))
-		.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T3_STAFF_POWER))
-		.loot(Equipment.LootProperties.of(3));
-
+	public static final Weapon.Entry netheriteNatureStaff = add(Weapons.damageStaff(
+			Druids.ID, "staff_netherite_nature",
+			Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
+			List.of(MoreSpellSchools.NATURE.id))
+		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
+	);
 
 
 	// MARK: Register
@@ -104,12 +85,9 @@ public class ModWeapons {
 	public static void register(Map<String, WeaponConfig> configs) {
 		if (Druids.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(ARSENAL)) {
 			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), FabricLoader.getInstance().isModLoaded(ARSENAL), Items.NETHERITE_INGOT);
-			staff("staff_moon",
-				Weapon.CustomMaterial.matching(ToolMaterials.NETHERITE, repair))
-				.attribute(AttributeModifier.bonus(SpellSchools.HEALING.id, T1_STAFF_POWER))
-				.attribute(AttributeModifier.bonus(MoreSpellSchools.NATURE.id, T4_STAFF_POWER))
-				.loot(Equipment.LootProperties.of(4))
-				.rarity = Rarity.EPIC;
+			add(Weapons.damageStaff(Druids.ID, "staff_moon", Equipment.Tier.TIER_4, repair, List.of(MoreSpellSchools.NATURE.id))
+				.spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
+			);
 		}
 
 		Weapon.register(configs, entries, Group.KEY);

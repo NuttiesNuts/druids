@@ -60,13 +60,6 @@ public class Druids {
 			tweaksConfig.value.ignore_items_required_mods = true;
 		}
 
-		FabricLoader.getInstance().getModContainer(ID).ifPresent(modContainer -> {
-				ResourceManagerHelper.registerBuiltinResourcePack(
-					Identifier.of(ID, "druid_book_variant"),
-					modContainer,
-					ResourcePackActivationType.NORMAL);
-			});
-
 		// Modify some loot tables to have a Heart Of The Forest
 		LootTableEvents.MODIFY.register((key, tableBuilder, source, registries) -> {
 			if (LootTables.JUNGLE_TEMPLE_CHEST == key && source.isBuiltin()) {
@@ -92,6 +85,19 @@ public class Druids {
 				tableBuilder.pool(pool);
 			}
 		});
+	}
+
+	public static void registerResourcePack() {
+		if (!Druids.tweaksConfig.value.disable_druids_skilltree_changes) {
+			FabricLoader.getInstance().getModContainer(ID).ifPresent(modContainer -> {
+				ResourceManagerHelper.registerBuiltinResourcePack(
+					Identifier.of(ID, "druids_skill_tree_changes"),
+					modContainer,
+					ResourcePackActivationType.ALWAYS_ENABLED
+				);
+			});
+		}
+		tweaksConfig.save();
 	}
 
 	public static void registerSounds(){

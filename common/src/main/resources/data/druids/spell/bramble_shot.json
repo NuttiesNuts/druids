@@ -8,7 +8,7 @@
 		"scroll": { },
 		"cast": {
 			"duration": 1.5,
-			"animation": "spell_engine:one_handed_projectile_charge",
+			"animation": { "id": "spell_engine:one_handed_projectile_charge" },
 			"sound": {
 				"id": "more_rpg_classes:nature_cast_1",
 				"randomness": 0
@@ -38,7 +38,7 @@
 		}
 	},
 	"release": {
-		"animation": "spell_engine:one_handed_projectile_release"
+		"animation": { "id": "spell_engine:one_handed_projectile_release" }
 	},
 	"target": {
 		"type": "AIM",
@@ -68,7 +68,7 @@
 						}
 					],
 					"model": {
-						"model_id": "druids:projectile/bramble_shot",
+						"model_id": "druids:spell_projectile/bramble_shot",
 						"scale": 0.5
 					}
 				}

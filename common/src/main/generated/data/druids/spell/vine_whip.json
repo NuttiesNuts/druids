@@ -6,7 +6,9 @@
   "active": {
     "cast": {
       "duration": 0.75,
-      "animation": "spell_engine:one_handed_healing_charge",
+      "animation": {
+        "id": "spell_engine:one_handed_healing_charge"
+      },
       "sound": {
         "id": "more_rpg_classes:nature_cast_1"
       },
@@ -34,7 +36,9 @@
     }
   },
   "release": {
-    "animation": "spell_engine:one_handed_healing_release",
+    "animation": {
+      "id": "spell_engine:one_handed_healing_release"
+    },
     "sound": {
       "id": "more_rpg_classes:nature_release_2"
     }
@@ -73,7 +77,7 @@
   ],
   "cost": {
     "cooldown": {
-      "duration": 4.0
+      "duration": 8.0
     },
     "item": {
       "id": "more_rpg_classes:nature_stone"

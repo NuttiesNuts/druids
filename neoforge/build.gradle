@@ -112,6 +112,9 @@ repositories {
 	maven { url 'https://maven.su5ed.dev/releases' }
 	maven { url 'https://maven.fabricmc.net' }
 
+	maven {
+		url = uri("https://maven.puffish.net")
+	}
 }
 
 dependencies {
@@ -138,6 +141,10 @@ dependencies {
 	modImplementation("maven.modrinth:spell-power:"+libs.versions.spellpowneo.get())
 	modImplementation("maven.modrinth:spell-engine:"+libs.versions.spellneo.get())
 	modImplementation("maven.modrinth:more-rpg-library:"+libs.versions.rpgneo.get())
+	modImplementation("maven.modrinth:skill-tree:"+libs.versions.rpgtreeneo.get())
+	modImplementation("maven.modrinth:ranged-weapon-api:"+libs.versions.rangedneo.get())
+
+	modImplementation("net.puffish:skillsmod:"+libs.versions.puff.get()+platform)
 }
 
 processResources {

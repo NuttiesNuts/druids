@@ -7,7 +7,7 @@
 		"scroll": {},
 		"cast": {
 			"duration": 0.75,
-			"animation": "spell_engine:one_handed_area_charge",
+			"animation": { "id": "spell_engine:one_handed_area_charge" },
 			"sound": {
 				"id": "more_rpg_classes:nature_cast_1",
 				"randomness": 0
@@ -46,7 +46,7 @@
 	},
 
 	"release": {
-		"animation": "spell_engine:dual_handed_ground_release",
+		"animation": { "id": "spell_engine:dual_handed_ground_release" },
 		"sound": {
 			"id": "more_rpg_classes:nature_release_1",
 			"volume": 0.5

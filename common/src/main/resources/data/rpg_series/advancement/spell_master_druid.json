@@ -20,7 +20,7 @@
 			"trigger": "spell_engine:spell_binding",
 			"conditions": {
 				"complete": true,
-				"spell_pool": "druids:druid"
+				"spell_pool": "druids:spell_book/nature"
 			}
 		}
 	},

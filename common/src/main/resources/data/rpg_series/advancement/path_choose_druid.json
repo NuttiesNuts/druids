@@ -1,7 +1,10 @@
 {
 	"display": {
 		"icon": {
-			"id": "druids:druid_spell_book"
+			"id": "spell_engine:spell_book",
+			"components": {
+				"spell_engine:item_model": "druids:item/spell_book/nature"
+			}
 		},
 		"title": {
 			"translate": "advancements.rpg_series.path_choose_druid.title"
@@ -19,7 +22,7 @@
 		"book": {
 			"trigger": "spell_engine:spell_book_creation",
 			"conditions": {
-				"spell_pool": "druids:druid"
+				"spell_pool": "druids:spell_book/nature"
 			}
 		}
 	},

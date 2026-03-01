@@ -6,7 +6,7 @@ license = "MIT"
 [[mods]]
 modId = "druids"
 version = "${version}"
-displayName = "Druids (RPG Class)"
+displayName = "Druids (RPG Series Plus)"
 authors = "Rulft"
 description = '''
 Engulf foes in deadly vines and poison targets.
@@ -30,6 +30,20 @@ side = "BOTH"
 [[dependencies.druids]]
 modId = "more_rpg_classes"
 type = "required"
-versionRange = "[2.2.0-1.21.1,)"
+versionRange = "[2.5.18,)"
 ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.druids]]
+modId = "spell_engine"
+type = "required"
+versionRange = "[1.9.0,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.druids]]
+modId = "mrpgc_skill_tree"
+type = "optional"
+versionRange = ""
+ordering = "AFTER"
 side = "BOTH"

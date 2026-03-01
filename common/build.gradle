@@ -51,6 +51,10 @@ repositories {
 		name = "AzureDoom Mods"
 		url = "https://maven.azuredoom.com/mods"
 	}
+
+	maven {
+		url = uri("https://maven.puffish.net")
+	}
 }
 
 dependencies {
@@ -69,6 +73,10 @@ dependencies {
 	modImplementation libs.playeranim
 	modImplementation libs.trink
 	modImplementation libs.tiny
+	modImplementation libs.ranged
+	modImplementation libs.rpgtree
+
+	modImplementation("net.puffish:skillsmod:${project.libs.versions.puff.get()}"+"fabric")
 
 	modImplementation libs.jei
 }

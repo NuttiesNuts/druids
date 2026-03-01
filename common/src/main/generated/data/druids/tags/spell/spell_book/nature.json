@@ -1,0 +1,16 @@
+{
+  "values": [
+    {
+      "id": "druids:barkskin",
+      "required": false
+    },
+    {
+      "id": "druids:vine_whip",
+      "required": false
+    },
+    {
+      "id": "druids:mass_entanglement",
+      "required": false
+    }
+  ]
+}

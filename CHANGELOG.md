@@ -1,3 +1,9 @@
+# 1.1
+
+`Warning: All spell books and spell scrolls will be reset on first load. Communicate this to your users before releasing.`
+- Update for Spell Engine 1.9
+- Bramble Volley spell is now attached to Nature Staff variants
+
 # 1.0
 - Add Fatal Poison potion
 - Update Camp Loot Table

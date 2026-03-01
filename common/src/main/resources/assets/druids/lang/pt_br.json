@@ -5,9 +5,9 @@
 	"item.druids.copper_nugget": "Pepita de Cobre",
 	"item.druids.blowgun": "Zarabatana",
 
-	"item.druids.druid_spell_book": "Grimório Druidico",
-	"item.druids.druid.spell_scroll": "Pergaminho Druidico",
-	"item.druids.druid_spell_book.spell_binding.description": "Spell Book of Druids, bending nature magic to lock down and damage targets over time\n- Strengths: Magical damage over time and rooting\n- Weaknesses: Mediocre damage\n- Equipment: Lightly armored",
+	"item.druids.spell_book/nature": "Grimório Druidico",
+	"item.druids.spell_scroll/nature": "Pergaminho Druidico",
+	"item.druids.spell_book/nature.spell_binding.description": "Spell Book of Druids, bending nature magic to lock down and damage targets over time\n- Strengths: Magical damage over time and rooting\n- Weaknesses: Mediocre damage\n- Equipment: Lightly armored",
 
 	"item.druids.druid_armor_head": "Chapéu de druida",
 	"item.druids.druid_armor_chest": "Manto de druida",
@@ -63,5 +63,11 @@
 
 	"advancements.rpg_series.spell_cast_druid_book.title": "Empoderamento da Natureza",
 	"advancements.rpg_series.spell_cast_druid_book.description": "Lance um feitiço do Grimório Druidico.",
-	"item.druids.fatal_poison_potion": "Poção de Veneno Fatal"
+	"item.druids.fatal_poison_potion": "Poção de Veneno Fatal",
+	"skill.druids.nature_boost.title": "Nature Attunement",
+	"skill.druids.nature_root.title": "Path of Nature",
+	"item.druids.fatal_poison_potion_description": "Fatal Poison (01:00)",
+	"effect.druids.thorned.description": "Gives the user thorns and armor.",
+	"druids.jei.info.poison_potion": "A strange poison fatal to anything. The recipe for it is unknown since the ancient druids are the only ones who knew how to brew it.",
+	"lore.druids.fatal_poison_potion": "A strange poison fatal to anything. The recipe for it is unknown since the ancient druids are the only ones who knew how to brew it."
 }

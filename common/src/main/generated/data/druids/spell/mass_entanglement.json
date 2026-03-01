@@ -6,7 +6,9 @@
   "active": {
     "cast": {
       "duration": 10.0,
-      "animation": "spell_engine:one_handed_area_charge",
+      "animation": {
+        "id": "spell_engine:one_handed_area_charge"
+      },
       "sound": {
         "id": "more_rpg_classes:nature_cast_1"
       },
@@ -34,7 +36,9 @@
     }
   },
   "release": {
-    "animation": "spell_engine:one_handed_area_release",
+    "animation": {
+      "id": "spell_engine:one_handed_area_release"
+    },
     "particles_scaled_with_ranged": [
       {
         "particle_id": "spell_engine:area_effect_658",
@@ -74,7 +78,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement1",
+            "model_id": "druids:spell_effect/entanglement1",
             "light_emission": "NONE",
             "scale": 1.2,
             "rotate_degrees_per_tick": 0.0
@@ -97,7 +101,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement11",
+            "model_id": "druids:spell_effect/entanglement11",
             "light_emission": "NONE",
             "scale": 1.2,
             "rotate_degrees_per_tick": 0.0
@@ -120,7 +124,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement1",
+            "model_id": "druids:spell_effect/entanglement1",
             "light_emission": "NONE",
             "scale": 1.2,
             "rotate_degrees_per_tick": 0.0
@@ -143,7 +147,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement11",
+            "model_id": "druids:spell_effect/entanglement11",
             "light_emission": "NONE",
             "scale": 1.2,
             "rotate_degrees_per_tick": 0.0
@@ -165,7 +169,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement2",
+            "model_id": "druids:spell_effect/entanglement2",
             "light_emission": "NONE",
             "rotate_degrees_per_tick": 0.0
           }
@@ -187,7 +191,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement2",
+            "model_id": "druids:spell_effect/entanglement2",
             "light_emission": "NONE",
             "rotate_degrees_per_tick": 0.0
           }
@@ -209,7 +213,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement2",
+            "model_id": "druids:spell_effect/entanglement2",
             "light_emission": "NONE",
             "rotate_degrees_per_tick": 0.0
           }
@@ -231,7 +235,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/entanglement2",
+            "model_id": "druids:spell_effect/entanglement2",
             "light_emission": "NONE",
             "rotate_degrees_per_tick": 0.0
           }
@@ -252,7 +256,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/poppy",
+            "model_id": "druids:spell_effect/poppy",
             "light_emission": "NONE",
             "rotate_degrees_per_tick": 0.0
           }
@@ -274,7 +278,7 @@
         },
         "client_data": {
           "model": {
-            "model_id": "druids:effect/dandelion",
+            "model_id": "druids:spell_effect/dandelion",
             "light_emission": "NONE",
             "rotate_degrees_per_tick": 0.0
           }

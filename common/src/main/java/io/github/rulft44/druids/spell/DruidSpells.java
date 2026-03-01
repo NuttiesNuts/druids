@@ -1,13 +1,12 @@
 package io.github.rulft44.druids.spell;
 
 import io.github.rulft44.druids.Druids;
-import net.minecraft.entity.effect.StatusEffects;
+import io.github.rulft44.druids.effect.ModEffects;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
+import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
-import net.more_rpg_classes.client.particle.MoreParticles;
 import net.more_rpg_classes.custom.MoreSpellSchools;
-import net.more_rpg_classes.custom.spell_impacts.PullInToCasterDirectSpellImpact;
 import net.more_rpg_classes.effect.MRPGCEffects;
 import net.more_rpg_classes.item.MRPGCItems;
 import net.more_rpg_classes.sounds.ModSounds;
@@ -16,9 +15,9 @@ import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.fx.ParticleBatch;
+import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
-import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.internals.target.SpellTarget;
 import org.jetbrains.annotations.Nullable;
@@ -27,10 +26,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DruidSpells {
-
+	public enum WeaponGroup { NATURE_STAFF}
+	public enum Book { NATURE }
 	public record Entry(Identifier id, Spell spell, String title, String description,
-						@Nullable SpellTooltip.DescriptionMutator mutator) {
+						@Nullable SpellTooltip.DescriptionMutator mutator,
+						@Nullable List<WeaponGroup> weaponGroups,
+						@Nullable Book book) {
+		public Entry(Identifier id, Spell spell, String title, String description) {
+			this(id, spell, title, description, null, List.of(), null);
+		}
+		public Entry mutator(SpellTooltip.DescriptionMutator mutator) {
+			return new Entry(id, spell, title, description, mutator, weaponGroups, book);
+		}
+		public Entry weaponGroup(WeaponGroup weaponGroup) {
+			var newGroups = new ArrayList<>(weaponGroups != null ? weaponGroups : List.of());
+			newGroups.add(weaponGroup);
+			return new Entry(id, spell, title, description, mutator, newGroups, book);
+		}
+		public Entry book(Book book) {
+			return new Entry(id, spell, title, description, mutator, weaponGroups, book);
+		}
 	}
+
 
 	public static final List<Entry> entries = new ArrayList<>();
 
@@ -39,6 +56,30 @@ public class DruidSpells {
 		return entry;
 	}
 
+	private static Spell modifierSpellBase() {
+		var spell = new Spell();
+		spell.range = 0;
+		spell.tier = 1;
+
+		spell.type = Spell.Type.MODIFIER;
+
+		spell.tooltip = new Spell.Tooltip();
+		spell.tooltip.name = new Spell.Tooltip.LineOptions(false, true);
+		spell.tooltip.description.color = Formatting.GRAY.asString();
+		spell.tooltip.description.show_in_compact = true;
+		spell.tooltip.name.show_in_compact = false;
+		spell.tooltip.name.show_in_details = false;
+		spell.tooltip.show_header = false;
+
+		return spell;
+	}
+	private static Spell createModifierAlikePassiveSpell() {
+		var spell = SpellBuilder.createSpellPassive();
+		spell.range = 0;
+		spell.tooltip = new Spell.Tooltip();
+		spell.tooltip.show_activation = false;
+		return spell;
+	}
 	private static Spell.Impact damageImpact(float coefficient, float knockback) {
 		var damage = new Spell.Impact();
 		damage.action = new Spell.Impact.Action();
@@ -62,6 +103,14 @@ public class DruidSpells {
 		buff.action.status_effect = new Spell.Impact.Action.StatusEffect();
 		buff.action.status_effect.effect_id = effectId.toString();
 		buff.action.status_effect.duration = duration;
+		return buff;
+	}
+	private static Spell.Impact createHeal(float coefficient) {
+		var buff = new Spell.Impact();
+		buff.action = new Spell.Impact.Action();
+		buff.action.type = Spell.Impact.Action.Type.HEAL;
+		buff.action.heal = new Spell.Impact.Action.Heal();
+		buff.action.heal.spell_power_coefficient = coefficient;
 		return buff;
 	}
 	private static Spell.Impact customImpact(String impactId, SpellTarget.Intent intent) {
@@ -92,14 +141,7 @@ public class DruidSpells {
 				0.5F, 0.05F, 0.1F).scale(0.5F).maxAge(0.25F)
 		};
 	}
-
-	private static Spell.Delivery.Cloud makeRootCluster(
-		String model,
-		float scale,
-		int delay,
-		float distance_from_caster,
-		int placement_angle,
-		int rotation
+	private static Spell.Delivery.Cloud makeRootCluster(String model, float scale, int delay, float distance_from_caster, int placement_angle, int rotation
 	) {
 		var c = new Spell.Delivery.Cloud();
 		c.volume.radius = 1F;
@@ -121,60 +163,24 @@ public class DruidSpells {
 		return c;
 	}
 
-
-	public static final Entry vine_whip = add(vine_whip());
-	private static Entry vine_whip() {
-		var id = Identifier.of(Druids.ID, "vine_whip");
-		var title = "";
-		var description = "";
-		var spell = SpellBuilder.createSpellActive();
-		spell.range = 16F;
-		spell.tier = 3;
-		spell.school = MoreSpellSchools.NATURE;
-
-		spell.active.cast.duration = 0.75F;
-		spell.active.cast.particles = natureCastingParticles();
-		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
-		spell.active.cast.animation = "spell_engine:one_handed_healing_charge";
-
-		spell.release.sound = new Sound(ModSounds.NATURE_RELEASE_2_ID);
-		spell.release.animation = "spell_engine:one_handed_healing_release";
-
-		spell.target.type = Spell.Target.Type.AIM;
-		spell.target.aim = new Spell.Target.Aim();
-		spell.target.aim.sticky = true;
-
-		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
-		poison.action.status_effect.amplifier = 2;
-		poison.action.status_effect.amplifier_cap_power_multiplier = 0.5F;
-		poison.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-
-		var pull = customImpact("more_rpg_classes:pull_to_caster_direct", SpellTarget.Intent.HARMFUL);
-		pull.sound = new Sound(ModSounds.NATURE_IMPACT_1_ID);
-
-		spell.impacts = List.of(poison, pull);
-
-		configureCooldown(spell, 4);
-		configureNatureRuneCost(spell);
-		return new Entry(id, spell, title, description, null);
-	}
+	// Main Spells
 
 	public static final Entry bramble_volley = add(bramble_volley());
 	private static Entry bramble_volley() {
 		var id = Identifier.of(Druids.ID, "bramble_volley");
 		var title = "";
 		var description = "";
-		var spell = SpellBuilder.createSpellActive();
+		var spell = SpellBuilder.createWeaponSpell();
 		spell.group = "primary";
 		spell.range = 64F;
 		spell.tier = 1;
 		spell.school = MoreSpellSchools.NATURE;
 
-		spell.active.cast.duration = 0.25F;
-		spell.active.cast.channel_ticks = 2;
+		spell.active.cast.duration = 0.3F;
+		spell.active.cast.channel_ticks = 3;
 
-		spell.active.cast.animation = "spell_engine:one_handed_projectile_charge";
-		spell.release.animation = "spell_engine:one_handed_projectile_release";
+		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_charge");
+		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_release");
 
 		var debuff1 = createEffectImpact(MRPGCEffects.GRIEVOUS_WOUNDS.id, 5);
 		debuff1.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
@@ -202,8 +208,8 @@ public class DruidSpells {
 		spell.deliver.projectile.launch_properties.velocity = 1F;
 		spell.deliver.projectile.direction_offsets = new Spell.Delivery.ShootProjectile.DirectionOffset[] {
 			new Spell.Delivery.ShootProjectile.DirectionOffset(-10.0F, 0.0F), // left
-			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, 0.0F),   // center
-			new Spell.Delivery.ShootProjectile.DirectionOffset(10.0F, 0.0F)   // right
+			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, 2.0F),   // center
+			new Spell.Delivery.ShootProjectile.DirectionOffset(10.0F, 0.0F),   // right
 		};
 		spell.deliver.projectile.launch_properties.sound = new Sound(ModSounds.NATURE_RELEASE_1_ID.toString(), 0.75F, 1F, 0.1F);
 
@@ -218,7 +224,7 @@ public class DruidSpells {
 					ParticleBatch.Rotation.LOOK, 1, 0, 0.1F, 0),
 			};
 			projectile.client_data.model = new Spell.ProjectileModel();
-			projectile.client_data.model.model_id = "druids:projectile/bramble_shot";
+			projectile.client_data.model.model_id = "druids:spell_projectile/bramble_shot";
 			projectile.client_data.model.scale = 0.5F;
 			spell.deliver.projectile.projectile = projectile;
 
@@ -229,7 +235,84 @@ public class DruidSpells {
 
 		configureCooldown(spell, 3);
 		configureNatureRuneCost(spell);
-		return new Entry(id, spell, title, description, null);
+		return new Entry(id, spell, title, description).weaponGroup(WeaponGroup.NATURE_STAFF);
+	}
+
+	public static final Entry barkskin = add(barkskin());
+	private static Entry barkskin() {
+		var id = Identifier.of(Druids.ID, "barkskin");
+		var title = "";
+		var description = "";
+		var spell = SpellBuilder.createSpellActive();
+		spell.range = 0F;
+		spell.tier = 2;
+		spell.school = MoreSpellSchools.NATURE;
+
+		spell.active.cast.duration = 0.75F;
+		spell.active.cast.particles = natureCastingParticles();
+		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
+		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
+
+		spell.release.sound = Sound.withVolume(ModSounds.NATURE_RELEASE_1_ID, 0.5F);
+		spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_ground_release");
+
+		spell.release.particles = new ParticleBatch[]{new ParticleBatch("more_rpg_classes:leaf",
+			ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+			3F, 0.01F, 0.05F).scale(0.5F)};
+
+		spell.target.type = Spell.Target.Type.AREA;
+		spell.target.area = new Spell.Target.Area();
+		spell.target.area.vertical_range_multiplier = 1;
+		spell.target.area.include_caster = true;
+
+		var effect = createEffectImpact(Identifier.of(ModEffects.THORNED.getIdAsString()), 5);
+		effect.action.status_effect.duration = 17;
+		effect.action.status_effect.amplifier = 1;
+		effect.action.status_effect.amplifier_cap_power_multiplier = 0.10F;
+
+		spell.impacts = List.of(effect);
+
+		spell.cost.exhaust = 0.5F;
+		configureCooldown(spell, 20);
+		configureNatureRuneCost(spell);
+		return new Entry(id, spell, title, description).book(Book.NATURE);
+	}
+
+	public static final Entry vine_whip = add(vine_whip());
+	private static Entry vine_whip() {
+		var id = Identifier.of(Druids.ID, "vine_whip");
+		var title = "";
+		var description = "";
+		var spell = SpellBuilder.createSpellActive();
+		spell.range = 16F;
+		spell.tier = 3;
+		spell.school = MoreSpellSchools.NATURE;
+
+		spell.active.cast.duration = 0.75F;
+		spell.active.cast.particles = natureCastingParticles();
+		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
+		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_healing_charge");
+
+		spell.release.sound = new Sound(ModSounds.NATURE_RELEASE_2_ID);
+		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_healing_release");
+
+		spell.target.type = Spell.Target.Type.AIM;
+		spell.target.aim = new Spell.Target.Aim();
+		spell.target.aim.sticky = true;
+
+		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
+		poison.action.status_effect.amplifier = 2;
+		poison.action.status_effect.amplifier_cap_power_multiplier = 0.5F;
+		poison.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+
+		var pull = customImpact("more_rpg_classes:pull_to_caster_direct", SpellTarget.Intent.HARMFUL);
+		pull.sound = new Sound(ModSounds.NATURE_IMPACT_1_ID);
+
+		spell.impacts = List.of(poison, pull);
+
+		configureCooldown(spell, 8);
+		configureNatureRuneCost(spell);
+		return new Entry(id, spell, title, description).book(Book.NATURE);
 	}
 
 	public static final Entry mass_entanglement = add(mass_entanglement());
@@ -243,13 +326,12 @@ public class DruidSpells {
 		spell.tier = 4;
 		spell.school = MoreSpellSchools.NATURE;
 
-		spell.active.cast.animation = "spell_engine:one_handed_area_charge";
+		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
 		spell.active.cast.particles = natureCastingParticles();
 		spell.active.cast.duration = 10;
-		//spell.active.cast.channel_ticks = 14;
 		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
 
-		spell.release.animation = "spell_engine:one_handed_area_release";
+		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
 
 		var debuff = createEffectImpact(debuffEffect.id, 15);
 		debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
@@ -277,18 +359,18 @@ public class DruidSpells {
 
 		spell.deliver.type = Spell.Delivery.Type.CLOUD;
 
-		var outer1 = makeRootCluster("druids:effect/entanglement1", 1.2F, 8, 3F, 0, 0);
-		var outer2 = makeRootCluster("druids:effect/entanglement11", 1.2F, 9, 3F, 90, 0);
-		var outer3 = makeRootCluster("druids:effect/entanglement1", 1.2F, 10, 3F, 180, 0);
-		var outer4 = makeRootCluster("druids:effect/entanglement11", 1.2F, 11, 3F, 270, 0);
+		var outer1 = makeRootCluster("druids:spell_effect/entanglement1", 1.2F, 8, 3F, 0, 0);
+		var outer2 = makeRootCluster("druids:spell_effect/entanglement11", 1.2F, 9, 3F, 90, 0);
+		var outer3 = makeRootCluster("druids:spell_effect/entanglement1", 1.2F, 10, 3F, 180, 0);
+		var outer4 = makeRootCluster("druids:spell_effect/entanglement11", 1.2F, 11, 3F, 270, 0);
 
-		var inner1 = makeRootCluster("druids:effect/entanglement2", 1F, 8, 2F, 0, 0);
-		var inner2 = makeRootCluster("druids:effect/entanglement2", 1F, 9, 2.5F, 110, 0);
-		var inner3 = makeRootCluster("druids:effect/entanglement2", 1F, 10, 2F, 180, 0);
-		var inner4 = makeRootCluster("druids:effect/entanglement2", 1F, 11, 1.75F, 300, 0);
+		var inner1 = makeRootCluster("druids:spell_effect/entanglement2", 1F, 8, 2F, 0, 0);
+		var inner2 = makeRootCluster("druids:spell_effect/entanglement2", 1F, 9, 2.5F, 110, 0);
+		var inner3 = makeRootCluster("druids:spell_effect/entanglement2", 1F, 10, 2F, 180, 0);
+		var inner4 = makeRootCluster("druids:spell_effect/entanglement2", 1F, 11, 1.75F, 300, 0);
 
-		var flower1 = makeRootCluster("druids:effect/poppy", 1F, 14, 1F, 0, 0);
-		var flower2 = makeRootCluster("druids:effect/dandelion", 1F, 15, 1F, 180, 0);
+		var flower1 = makeRootCluster("druids:spell_effect/poppy", 1F, 14, 1F, 0, 0);
+		var flower2 = makeRootCluster("druids:spell_effect/dandelion", 1F, 15, 1F, 180, 0);
 
 
 		spell.deliver.clouds = List.of(outer1,outer2,outer3,outer4,inner1,inner2,inner3,inner4,flower1,flower2);
@@ -307,7 +389,7 @@ public class DruidSpells {
 
 		configureCooldown(spell, 25);
 		configureNatureRuneCost(spell);
-		return new Entry(id, spell, title, description, null);
+		return new Entry(id, spell, title, description).book(Book.NATURE);
 	}
 
 	public static Entry dart_shot = add(dart_shot());
@@ -321,10 +403,10 @@ public class DruidSpells {
 		spell.tier = 0;
 		spell.range = 64;
 		spell.active.cast.duration = 0;
-		//spell.active.cast.animation = "spell_engine:one_handed_projectile_charge";
+		//spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_charge");
 
 		spell.release = new Spell.Release();
-		//spell.release.animation = "spell_engine:one_handed_projectile_release";
+		//spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_release");
 		spell.release.sound = new Sound(io.github.rulft44.druids.sounds.ModSounds.DART_RELEASE_ID);
 
 		spell.target.type = Spell.Target.Type.AIM;
@@ -350,7 +432,74 @@ public class DruidSpells {
 		spell.impacts = List.of(damage, debuff2);
 
 		configureCooldown(spell, 0.5F);
-		return new Entry(id, spell, title, description, null);
+		return new Entry(id, spell, title, description);
 	}
+
+	// Modifiers
+
+	/*public static Entry nature_spec_a_modifier_1 = add(nature_spec_a_modifier_1());
+	private static Entry nature_spec_a_modifier_1() {
+		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_1");
+		var title = "Mass Bramble Volley";
+		var description = "Increases the maximum number of bramble projectiles by 1.";
+		var spell = createModifierAlikePassiveSpell();
+		spell.school = MoreSpellSchools.NATURE;
+
+		spell.active.cast.duration = 0.25F;
+		spell.active.cast.channel_ticks = 3;
+
+		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_charge");
+		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_release");
+
+		var debuff1 = createEffectImpact(MRPGCEffects.GRIEVOUS_WOUNDS.id, 5);
+		debuff1.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		debuff1.action.status_effect.show_particles = false;
+		debuff1.action.status_effect.amplifier = 1;
+		debuff1.action.status_effect.amplifier_cap = 5;
+		debuff1.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+		debuff1.particles = new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+				10, 0.05F, 0.3F),
+		};
+		var debuff2 = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
+		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		debuff2.action.status_effect.show_particles = false;
+		debuff2.action.status_effect.amplifier = 1;
+		debuff2.action.status_effect.amplifier_cap = 5;
+		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+
+		spell.target.type = Spell.Target.Type.AIM;
+		spell.target.aim = new Spell.Target.Aim();
+
+		spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
+		spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
+		spell.deliver.projectile.launch_properties.velocity = 1F;
+		spell.deliver.projectile.direction_offsets = new Spell.Delivery.ShootProjectile.DirectionOffset[] {
+			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, -2.0F)   // center
+		};
+		spell.deliver.projectile.launch_properties.sound = new Sound(ModSounds.NATURE_RELEASE_1_ID.toString(), 0.75F, 1F, 0.1F);
+
+		var projectile = new Spell.ProjectileData();
+		projectile.homing_angle = 1;
+		projectile.client_data = new Spell.ProjectileData.Client();
+		projectile.client_data.light_level = 6;
+		projectile.client_data.travel_particles = new ParticleBatch[]{
+			new ParticleBatch(
+				Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR).toString(),
+				ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
+				ParticleBatch.Rotation.LOOK, 1, 0, 0.1F, 0),
+		};
+		projectile.client_data.model = new Spell.ProjectileModel();
+		projectile.client_data.model.model_id = "druids:spell_projectile/bramble_shot";
+		projectile.client_data.model.scale = 0.5F;
+		spell.deliver.projectile.projectile = projectile;
+
+		var damage = damageImpact(0.50F, 0.8F);
+		damage.sound = new Sound(ModSounds.CRIPPLING_STRIKE_ID.toString(), 0.5F, 1F, 0.1F);
+
+		spell.impacts = List.of(debuff1, debuff2, damage);
+		return new Entry(id, spell, title, description);
+	}*/
 
 }

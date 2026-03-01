@@ -6,13 +6,17 @@
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.25,
-      "channel_ticks": 2,
-      "animation": "spell_engine:one_handed_projectile_charge"
+      "duration": 0.3,
+      "channel_ticks": 3,
+      "animation": {
+        "id": "spell_engine:one_handed_projectile_charge"
+      }
     }
   },
   "release": {
-    "animation": "spell_engine:one_handed_projectile_release"
+    "animation": {
+      "id": "spell_engine:one_handed_projectile_release"
+    }
   },
   "target": {
     "type": "AIM",
@@ -25,7 +29,9 @@
         {
           "yaw": -10.0
         },
-        {},
+        {
+          "pitch": 2.0
+        },
         {
           "yaw": 10.0
         }
@@ -50,7 +56,7 @@
             }
           ],
           "model": {
-            "model_id": "druids:projectile/bramble_shot",
+            "model_id": "druids:spell_projectile/bramble_shot",
             "scale": 0.5
           }
         }

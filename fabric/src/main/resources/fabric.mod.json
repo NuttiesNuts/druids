@@ -2,7 +2,7 @@
 	"schemaVersion": 1,
 	"id": "druids",
 	"version": "${version}",
-	"name": "Druids (RPG Class)",
+	"name": "Druids (RPG Series Plus)",
 	"description": "Engulf foes in deadly vines and poison targets.",
 	"authors": [
 		"Rulft"
@@ -23,10 +23,14 @@
 		"java": ">=21",
 		"fabric-api": "*",
 		"azurelibarmor": "*",
-		"spell_engine": ">=1.5.0",
-		"spell_power": ">=1.2.0",
-		"more_rpg_classes": ">=2.2.0-1.21.1"
+		"spell_engine": ">=1.9.0",
+		"spell_power": "*",
+		"more_rpg_classes": ">=2.5.18-1.21.1"
 	},
+	"recommends": {
+	"skill_tree_rpgs": "*",
+	"mrpgc_skill_tree": "*"
+},
 	"suggests": {
 		"archers": "*",
 		"better_combat": "*"

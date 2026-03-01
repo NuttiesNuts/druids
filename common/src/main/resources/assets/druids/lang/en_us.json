@@ -7,9 +7,9 @@
 	"item.druids.fatal_poison_potion_description": "Fatal Poison (01:00)",
 	"item.druids.blowgun": "Blowgun",
 
-	"item.druids.druid_spell_book": "Druidic Grimoire",
-	"item.druids.druid.spell_scroll": "Druidic Scroll",
-	"item.druids.druid_spell_book.spell_binding.description": "Spell Book of Druids, bending nature magic to lock down and damage targets over time\n- Strengths: Magical damage over time and rooting\n- Weaknesses: Mediocre damage\n- Equipment: Lightly armored",
+	"item.druids.spell_book/nature": "Druidic Grimoire",
+	"item.druids.spell_scroll/nature": "Druidic Scroll",
+	"item.druids.spell_book/nature.spell_binding.description": "Spell Book of Druids, bending nature magic to lock down and damage targets over time\n- Strengths: Magical damage over time and rooting\n- Weaknesses: Mediocre damage\n- Equipment: Lightly armored",
 
 	"item.druids.druid_armor_head": "Druid Hood",
 	"item.druids.druid_armor_chest": "Druid Robe",
@@ -43,6 +43,7 @@
 	"tag.item.c.nuggets.copper": "Copper Nuggets",
 
 	"effect.druids.thorned": "Thorned",
+	"effect.druids.thorned.description": "Gives the user thorns and armor.",
 
 	"druids.jei.info.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
 	"lore.druids.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
