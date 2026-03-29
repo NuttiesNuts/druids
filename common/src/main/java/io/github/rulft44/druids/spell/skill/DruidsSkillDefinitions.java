@@ -9,22 +9,25 @@ import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.puffish.skillsmod.common.IconType;
 import net.spell_engine.api.spell.container.SpellContainer;
-import net.spell_engine.api.spell.container.SpellContainerHelper;
+import net.spell_engine.api.spell.container.SpellContainers;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DruidsSkillDefinitions {
-	public static final Identifier CATEGORY_ID = Identifier.of(Druids.ID, "skill_tree_rpgs");
-	public record Icon(IconType type, String value) {
+	public static final Identifier CATEGORY_ID = Identifier.of(Druids.ID, "druids");
+	public record Icon(IconType type, String value, String modelId) {
 		public static Icon texture(String texture) {
-			return new Icon(IconType.TEXTURE, texture);
+			return new Icon(IconType.TEXTURE, texture, null);
 		}
 		public static Icon item(String item) {
-			return new Icon(IconType.ITEM, item);
+			return new Icon(IconType.ITEM, item, null);
+		}
+		public static Icon itemWithModel(String item, String modelId) {
+			return new Icon(IconType.ITEM, item, modelId);
 		}
 		public static Icon effect(String effect) {
-			return new Icon(IconType.EFFECT, effect);
+			return new Icon(IconType.EFFECT, effect, null);
 		}
 		public static Icon spell(Identifier spellId) {
 			return texture(spellId.getNamespace() + ":textures/spell/" + spellId.getPath() + ".png");
@@ -71,7 +74,7 @@ public class DruidsSkillDefinitions {
 	public static final float BOOST_MULTIPLIER = 0.01f;
 
 	private static List<SpellContainer> dummyContainer() {
-		return List.of(SpellContainerHelper.createForSpellHost(Identifier.of("wizards:fireball")));
+		return List.of(SpellContainers.forModifier(Identifier.of("wizards:fireball")));
 	}
 
 	private static Entry modifierSpell(DruidSpells.Entry entry) {
@@ -80,7 +83,7 @@ public class DruidsSkillDefinitions {
 			entry.title(),
 			null,
 			Icon.spell(modifiedSpellId),
-			List.of(SpellContainerHelper.createForModifier(entry.id()))
+			List.of(SpellContainers.forModifier(entry.id()))
 		);
 	}
 
@@ -89,7 +92,7 @@ public class DruidsSkillDefinitions {
 			entry.title(),
 			null,
 			Icon.spell(entry.id()),
-			List.of(SpellContainerHelper.createForSpellHost(entry.id()))
+			List.of(SpellContainers.forModifier(entry.id()))
 		);
 	}
 	
@@ -98,7 +101,7 @@ public class DruidsSkillDefinitions {
 		Entry.attribute("nature_root",
 			"Path of Nature",
 			null,
-			Icon.item("druids:druid_spell_book"),
+			Icon.itemWithModel("spell_engine:spell_book", "druids:item/spell_book/nature"),
 			MoreSpellSchools.NATURE.attributeEntry,
 			0.01,
 			EntityAttributeModifier.Operation.ADD_MULTIPLIED_BASE
@@ -111,8 +114,8 @@ public class DruidsSkillDefinitions {
 			Icon.item("druids:wand_nature"),
 			NATURE_ROOT.attributeReward()).require(DRUIDS)
 	);
-	//public static final Entry NATURE_SPEC_A_MODIFIER_1 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_1).require(DRUIDS));
-	/*public static final Entry NATURE_SPEC_B_MODIFIER_1 = add(modifierSpell(DruidSpells.nature_spec_b_modifier_1).require(DRUIDS));
+	public static final Entry NATURE_SPEC_A_MODIFIER_1 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_1).require(DRUIDS));
+	public static final Entry NATURE_SPEC_B_MODIFIER_1 = add(modifierSpell(DruidSpells.nature_spec_b_modifier_1).require(DRUIDS));
 	public static final Entry NATURE_SPEC_A_MODIFIER_2 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_2).require(DRUIDS));
 	public static final Entry NATURE_SPEC_B_MODIFIER_2 = add(modifierSpell(DruidSpells.nature_spec_b_modifier_2).require(DRUIDS));
 	public static final Entry NATURE_SPEC_A_MODIFIER_3 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_3).require(DRUIDS));
@@ -123,7 +126,6 @@ public class DruidsSkillDefinitions {
 	public static final Entry NATURE_SPEC_B_PASSIVE_1 = add(passiveSpell(DruidSpells.nature_spec_b_passive_1).require(DRUIDS));
 	public static final Entry NATURE_SPEC_A_PASSIVE_2 = add(passiveSpell(DruidSpells.nature_spec_a_passive_2).require(DRUIDS));
 	public static final Entry NATURE_SPEC_B_PASSIVE_2 = add(passiveSpell(DruidSpells.nature_spec_b_passive_2).require(DRUIDS));
-	public static final Entry NATURE_SPEC_A_PASSIVE_3 = add(passiveSpell(DruidSpells.nature_spec_a_passive_3).require(DRUIDS));
-	public static final Entry NATURE_SPEC_B_PASSIVE_3 = add(passiveSpell(DruidSpells.nature_spec_b_passive_3).require(DRUIDS));
-*/
+//	public static final Entry NATURE_SPEC_A_PASSIVE_3 = add(passiveSpell(DruidSpells.nature_spec_a_passive_3).require(DRUIDS));
+//	public static final Entry NATURE_SPEC_B_PASSIVE_3 = add(passiveSpell(DruidSpells.nature_spec_b_passive_3).require(DRUIDS));
 }

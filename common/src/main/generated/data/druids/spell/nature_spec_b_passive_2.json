@@ -1,0 +1,52 @@
+{
+  "school": "spell_power:nature",
+  "range": 0.0,
+  "tier": 1,
+  "type": "PASSIVE",
+  "passive": {
+    "triggers": [
+      {
+        "type": "ROLL",
+        "chance": 0.5
+      }
+    ]
+  },
+  "release": {
+    "particles_scaled_with_ranged": [
+      {
+        "particle_id": "spell_engine:area_effect_658",
+        "origin": "GROUND",
+        "shape": "SPHERE",
+        "count": 1.0,
+        "max_speed": 0.0,
+        "color_rgba": 5644570
+      }
+    ]
+  },
+  "target": {
+    "type": "AREA",
+    "area": {
+      "include_caster": true
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "druids:thorned",
+          "duration": 17.0,
+          "amplifier": 1,
+          "amplifier_cap_power_multiplier": 0.1
+        }
+      },
+      "sound": {
+        "id": "more_rpg_classes:nature_release_1",
+        "volume": 0.5
+      }
+    }
+  ],
+  "cost": {
+    "durability": 0
+  }
+}

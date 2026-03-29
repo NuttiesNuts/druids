@@ -27,23 +27,7 @@
 	"item.druids.staff_netherite_nature": "Netherite Nature Staff",
 	"item.druids.staff_moon": "Crescent Staff Of The Forest",
 
-	"spell.druids.dart_shot.name": "Dart Shot",
-	"spell.druids.dart_shot.name.description": "Shoots a dart that deals damage.",
-	"spell.druids.bramble_shot.name": "Bramble Shot",
-	"spell.druids.bramble_shot.description": "Launches a wood projectile, causing up to {damage} nature spell damage and poisoning on hit.",
-	"spell.druids.bramble_volley.name": "Bramble Volley",
-	"spell.druids.bramble_volley.description": "Launches 3 woods projectiles, dealing up to {damage} nature spell damage and applying Grievous Wounds + Poison.",
-	"spell.druids.barkskin.name": "Barkskin",
-	"spell.druids.barkskin.description": "Gives the caster some defense and thorns.",
-	"spell.druids.vine_whip.name": "Vine Whip",
-	"spell.druids.vine_whip.description": "Send forth vines that pull and poison an enemy.",
-	"spell.druids.mass_entanglement.name": "Mass Entanglement",
-	"spell.druids.mass_entanglement.description": "Roots, damages and poisons all enemies in range.",
-
 	"tag.item.c.nuggets.copper": "Copper Nuggets",
-
-	"effect.druids.thorned": "Thorned",
-	"effect.druids.thorned.description": "Gives the user thorns and armor.",
 
 	"druids.jei.info.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
 	"lore.druids.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",

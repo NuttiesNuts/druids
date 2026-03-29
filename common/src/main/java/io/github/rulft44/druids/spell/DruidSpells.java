@@ -9,7 +9,8 @@ import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.effect.MRPGCEffects;
 import net.more_rpg_classes.item.MRPGCItems;
-import net.more_rpg_classes.sounds.ModSounds;
+import net.more_rpg_classes.sounds.MRPGLibSounds;
+import net.skill_tree_rpgs.effect.SkillEffects;
 import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_engine.api.render.LightEmission;
@@ -18,7 +19,9 @@ import net.spell_engine.api.spell.fx.ParticleBatch;
 import net.spell_engine.api.spell.fx.PlayerAnimation;
 import net.spell_engine.api.spell.fx.Sound;
 import net.spell_engine.client.gui.SpellTooltip;
+import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
+import net.spell_engine.fx.SpellEngineSounds;
 import net.spell_engine.internals.target.SpellTarget;
 import org.jetbrains.annotations.Nullable;
 
@@ -26,7 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DruidSpells {
-	public enum WeaponGroup { NATURE_STAFF}
+	public enum WeaponGroup { NATURE_STAFF }
 	public enum Book { NATURE }
 	public record Entry(Identifier id, Spell spell, String title, String description,
 						@Nullable SpellTooltip.DescriptionMutator mutator,
@@ -72,6 +75,13 @@ public class DruidSpells {
 		spell.tooltip.show_header = false;
 
 		return spell;
+	}
+	private static Spell.Impact.TargetModifier createImpactModifier(String entityType) {
+		var condition = new Spell.TargetCondition();
+		condition.entity_type = entityType;
+		var modifier = new Spell.Impact.TargetModifier();
+		modifier.conditions = List.of(condition);
+		return modifier;
 	}
 	private static Spell createModifierAlikePassiveSpell() {
 		var spell = SpellBuilder.createSpellPassive();
@@ -163,13 +173,17 @@ public class DruidSpells {
 		return c;
 	}
 
+	private static final Identifier HEALING_PARTICLES = SpellEngineParticles.MagicParticles.get(
+		SpellEngineParticles.MagicParticles.Shape.HEAL,
+		SpellEngineParticles.MagicParticles.Motion.ASCEND).id();
+
 	// Main Spells
 
 	public static final Entry bramble_volley = add(bramble_volley());
 	private static Entry bramble_volley() {
 		var id = Identifier.of(Druids.ID, "bramble_volley");
-		var title = "";
-		var description = "";
+		var title = "Bramble Volley";
+		var description = "Launches 3 woods projectiles, dealing up to {damage} nature spell damage applying Fatal Poison and Grievous Wounds.";
 		var spell = SpellBuilder.createWeaponSpell();
 		spell.group = "primary";
 		spell.range = 64F;
@@ -210,8 +224,9 @@ public class DruidSpells {
 			new Spell.Delivery.ShootProjectile.DirectionOffset(-10.0F, 0.0F), // left
 			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, 2.0F),   // center
 			new Spell.Delivery.ShootProjectile.DirectionOffset(10.0F, 0.0F),   // right
+			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, -2.0F),   // center
 		};
-		spell.deliver.projectile.launch_properties.sound = new Sound(ModSounds.NATURE_RELEASE_1_ID.toString(), 0.75F, 1F, 0.1F);
+		spell.deliver.projectile.launch_properties.sound = new Sound(MRPGLibSounds.NATURE_RELEASE_1.id().toString(), 0.75F, 1F, 0.1F);
 
 			var projectile = new Spell.ProjectileData();
 			projectile.homing_angle = 1;
@@ -229,7 +244,7 @@ public class DruidSpells {
 			spell.deliver.projectile.projectile = projectile;
 
 		var damage = damageImpact(0.50F, 0.8F);
-		damage.sound = new Sound(ModSounds.CRIPPLING_STRIKE_ID.toString(), 0.5F, 1F, 0.1F);
+		damage.sound = new Sound(MRPGLibSounds.CRIPPLING_STRIKE.id().toString(), 0.5F, 1F, 0.1F);
 
 		spell.impacts = List.of(debuff1, debuff2, damage);
 
@@ -238,11 +253,74 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description).weaponGroup(WeaponGroup.NATURE_STAFF);
 	}
 
+	public static final Entry bramble_shot = add(bramble_shot());
+	private static Entry bramble_shot() {
+		var id = Identifier.of(Druids.ID, "bramble_shot");
+		var title = "Bramble Shot";
+		var description = "Launches a wood projectile, dealing up to {damage} nature spell damage and applying Fatal Poison";
+		var spell = SpellBuilder.createWeaponSpell();
+		spell.group = "primary";
+		spell.range = 28F;
+		spell.tier = 0;
+		spell.school = MoreSpellSchools.NATURE;
+
+		spell.active.cast.duration = 0.2F;
+		spell.active.cast.channel_ticks = 1;
+
+		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_charge");
+		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_release");
+		spell.active.cast.sound = new Sound(MRPGLibSounds.NATURE_CAST_1.id());
+
+		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
+		poison.action.status_effect.amplifier = 1;
+		poison.action.status_effect.show_particles = false;
+		poison.action.status_effect.amplifier_cap = 5;
+		poison.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+		poison.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+
+		spell.target.type = Spell.Target.Type.AIM;
+		spell.target.aim = new Spell.Target.Aim();
+
+		spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
+		spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
+		spell.deliver.projectile.launch_properties.velocity = 1F;
+
+		spell.deliver.projectile.launch_properties.sound = new Sound(MRPGLibSounds.NATURE_RELEASE_1.id().toString(), 0.75F, 1F, 0.1F);
+
+			var projectile = new Spell.ProjectileData();
+			projectile.homing_angle = 1;
+			projectile.client_data = new Spell.ProjectileData.Client();
+			projectile.client_data.light_level = 6;
+			projectile.client_data.travel_particles = new ParticleBatch[]{
+				new ParticleBatch(
+					Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR).toString(),
+					ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
+					ParticleBatch.Rotation.LOOK, 1, 0, 0.1F, 0),
+			};
+			projectile.client_data.model = new Spell.ProjectileModel();
+			projectile.client_data.model.model_id = "druids:spell_projectile/bramble_shot";
+			projectile.client_data.model.scale = 0.5F;
+			spell.deliver.projectile.projectile = projectile;
+
+		var damage = damageImpact(0.5F, 0.8F);
+		damage.sound = new Sound(MRPGLibSounds.CRIPPLING_STRIKE.id().toString(), 0.5F, 1F, 0.1F);
+		damage.particles =
+			new ParticleBatch[]{new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+				10, 0.05F, 0.3F)};
+
+		spell.impacts = List.of(poison, damage);
+
+		configureCooldown(spell, 2);
+		configureNatureRuneCost(spell);
+		return new Entry(id, spell, title, description).weaponGroup(WeaponGroup.NATURE_STAFF);
+	}
+
 	public static final Entry barkskin = add(barkskin());
 	private static Entry barkskin() {
 		var id = Identifier.of(Druids.ID, "barkskin");
-		var title = "";
-		var description = "";
+		var title = "Barkskin";
+		var description = "Gives the caster some defense and thorns.";
 		var spell = SpellBuilder.createSpellActive();
 		spell.range = 0F;
 		spell.tier = 2;
@@ -250,25 +328,27 @@ public class DruidSpells {
 
 		spell.active.cast.duration = 0.75F;
 		spell.active.cast.particles = natureCastingParticles();
-		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
+		spell.active.cast.sound = new Sound(MRPGLibSounds.NATURE_CAST_1.id());
 		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
 
-		spell.release.sound = Sound.withVolume(ModSounds.NATURE_RELEASE_1_ID, 0.5F);
+		spell.release.sound = Sound.withVolume(MRPGLibSounds.NATURE_RELEASE_1.id(), 0.5F);
 		spell.release.animation = PlayerAnimation.of("spell_engine:dual_handed_ground_release");
-
-		spell.release.particles = new ParticleBatch[]{new ParticleBatch("more_rpg_classes:leaf",
-			ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-			3F, 0.01F, 0.05F).scale(0.5F)};
 
 		spell.target.type = Spell.Target.Type.AREA;
 		spell.target.area = new Spell.Target.Area();
 		spell.target.area.vertical_range_multiplier = 1;
 		spell.target.area.include_caster = true;
 
-		var effect = createEffectImpact(Identifier.of(ModEffects.THORNED.getIdAsString()), 5);
+		var effect = createEffectImpact(ModEffects.THORNED.id, 5);
 		effect.action.status_effect.duration = 17;
 		effect.action.status_effect.amplifier = 1;
 		effect.action.status_effect.amplifier_cap_power_multiplier = 0.10F;
+
+		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
+				1, 0, 0).color(0x56211a)
+		};
 
 		spell.impacts = List.of(effect);
 
@@ -281,8 +361,8 @@ public class DruidSpells {
 	public static final Entry vine_whip = add(vine_whip());
 	private static Entry vine_whip() {
 		var id = Identifier.of(Druids.ID, "vine_whip");
-		var title = "";
-		var description = "";
+		var title = "Vine Whip";
+		var description = "Send forth vines that pull and poison an enemy.";
 		var spell = SpellBuilder.createSpellActive();
 		spell.range = 16F;
 		spell.tier = 3;
@@ -290,10 +370,10 @@ public class DruidSpells {
 
 		spell.active.cast.duration = 0.75F;
 		spell.active.cast.particles = natureCastingParticles();
-		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
+		spell.active.cast.sound = new Sound(MRPGLibSounds.NATURE_CAST_1.id());
 		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_healing_charge");
 
-		spell.release.sound = new Sound(ModSounds.NATURE_RELEASE_2_ID);
+		spell.release.sound = new Sound(MRPGLibSounds.NATURE_RELEASE_2.id());
 		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_healing_release");
 
 		spell.target.type = Spell.Target.Type.AIM;
@@ -306,7 +386,7 @@ public class DruidSpells {
 		poison.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
 
 		var pull = customImpact("more_rpg_classes:pull_to_caster_direct", SpellTarget.Intent.HARMFUL);
-		pull.sound = new Sound(ModSounds.NATURE_IMPACT_1_ID);
+		pull.sound = new Sound(MRPGLibSounds.NATURE_IMPACT_1.id());
 
 		spell.impacts = List.of(poison, pull);
 
@@ -318,8 +398,8 @@ public class DruidSpells {
 	public static final Entry mass_entanglement = add(mass_entanglement());
 	private static Entry mass_entanglement() {
 		var id = Identifier.of(Druids.ID, "mass_entanglement");
-		var title = "";
-		var description = "";
+		var title = "Mass Entanglement";
+		var description = "Roots, damages and poisons all enemies in range.";
 		var debuffEffect = SpellEngineEffects.STUN;
 		var spell = SpellBuilder.createSpellActive();
 		spell.range = 10F;
@@ -329,7 +409,7 @@ public class DruidSpells {
 		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
 		spell.active.cast.particles = natureCastingParticles();
 		spell.active.cast.duration = 10;
-		spell.active.cast.sound = new Sound(ModSounds.NATURE_CAST_1_ID);
+		spell.active.cast.sound = new Sound(MRPGLibSounds.NATURE_CAST_1.id());
 
 		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
 
@@ -375,12 +455,12 @@ public class DruidSpells {
 
 		spell.deliver.clouds = List.of(outer1,outer2,outer3,outer4,inner1,inner2,inner3,inner4,flower1,flower2);
 
-		spell.release.sound = new Sound(ModSounds.NATURE_IMPACT_1_ID);
+		spell.release.sound = new Sound(MRPGLibSounds.NATURE_IMPACT_3.id());
 
 		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
 			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
 				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-				1, 0, 0).color(4283786581L)//.scale(0.8F)
+				1, 0, 0).color(Color.NATURE.toRGBA())
 		};
 
 		var damage = damageImpact(0.15F, 0F);
@@ -396,8 +476,8 @@ public class DruidSpells {
 	private static Entry dart_shot() {
 		var id = Identifier.of(Druids.ID, "dart_shot");
 		var spell = SpellBuilder.createSpellActive();
-		var title = "";
-		var description = "";
+		var title = "Dart Shot";
+		var description = "Shoots a dart that deals {damage} damage.";
 		spell.school = MoreSpellSchools.NATURE;
 		spell.group = "primary";
 		spell.tier = 0;
@@ -437,69 +517,360 @@ public class DruidSpells {
 
 	// Modifiers
 
-	/*public static Entry nature_spec_a_modifier_1 = add(nature_spec_a_modifier_1());
+	public static Entry nature_spec_a_modifier_1 = add(nature_spec_a_modifier_1());
 	private static Entry nature_spec_a_modifier_1() {
 		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_1");
 		var title = "Mass Bramble Volley";
 		var description = "Increases the maximum number of bramble projectiles by 1.";
-		var spell = createModifierAlikePassiveSpell();
+		var spell = modifierSpellBase();
 		spell.school = MoreSpellSchools.NATURE;
 
-		spell.active.cast.duration = 0.25F;
-		spell.active.cast.channel_ticks = 3;
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = bramble_shot().id.toString();
+		var modifier2 = new Spell.Modifier();
+		modifier2.spell_pattern = bramble_volley().id.toString();
 
-		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_charge");
-		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_release");
+		modifier.power_modifier = new Spell.Impact.Modifier();
+		modifier2.power_modifier = new Spell.Impact.Modifier();
 
-		var debuff1 = createEffectImpact(MRPGCEffects.GRIEVOUS_WOUNDS.id, 5);
-		debuff1.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-		debuff1.action.status_effect.show_particles = false;
-		debuff1.action.status_effect.amplifier = 1;
-		debuff1.action.status_effect.amplifier_cap = 5;
-		debuff1.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
-		debuff1.particles = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				10, 0.05F, 0.3F),
-		};
-		var debuff2 = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
-		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
-		debuff2.action.status_effect.show_particles = false;
-		debuff2.action.status_effect.amplifier = 1;
-		debuff2.action.status_effect.amplifier_cap = 5;
-		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+		modifier.channel_ticks_add = 1;
+		modifier2.channel_ticks_add = 1;
 
-		spell.target.type = Spell.Target.Type.AIM;
-		spell.target.aim = new Spell.Target.Aim();
+		spell.modifiers = List.of(modifier, modifier2);
 
-		spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
-		spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
-		spell.deliver.projectile.launch_properties.velocity = 1F;
-		spell.deliver.projectile.direction_offsets = new Spell.Delivery.ShootProjectile.DirectionOffset[] {
-			new Spell.Delivery.ShootProjectile.DirectionOffset(0.0F, -2.0F)   // center
-		};
-		spell.deliver.projectile.launch_properties.sound = new Sound(ModSounds.NATURE_RELEASE_1_ID.toString(), 0.75F, 1F, 0.1F);
-
-		var projectile = new Spell.ProjectileData();
-		projectile.homing_angle = 1;
-		projectile.client_data = new Spell.ProjectileData.Client();
-		projectile.client_data.light_level = 6;
-		projectile.client_data.travel_particles = new ParticleBatch[]{
-			new ParticleBatch(
-				Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR).toString(),
-				ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-				ParticleBatch.Rotation.LOOK, 1, 0, 0.1F, 0),
-		};
-		projectile.client_data.model = new Spell.ProjectileModel();
-		projectile.client_data.model.model_id = "druids:spell_projectile/bramble_shot";
-		projectile.client_data.model.scale = 0.5F;
-		spell.deliver.projectile.projectile = projectile;
-
-		var damage = damageImpact(0.50F, 0.8F);
-		damage.sound = new Sound(ModSounds.CRIPPLING_STRIKE_ID.toString(), 0.5F, 1F, 0.1F);
-
-		spell.impacts = List.of(debuff1, debuff2, damage);
 		return new Entry(id, spell, title, description);
-	}*/
+	}
 
+	public static Entry nature_spec_b_modifier_1 = add(nature_spec_b_modifier_1());
+	private static Entry nature_spec_b_modifier_1() {
+		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_1");
+		var title = "Poison Tip";
+		var description = "Increases the poison duration of Bramble Volley by {effect_duration_add} seconds.";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = bramble_volley().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		modifier.effect_duration_add = 2;
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static Entry nature_spec_a_modifier_2 = add(nature_spec_a_modifier_2());
+	private static Entry nature_spec_a_modifier_2() {
+		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_2");
+		var title = "Friend of Nature";
+		var description = "Barkskin can be casted on allies";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = barkskin().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		modifier.range_add = 16;
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static Entry nature_spec_b_modifier_2 = add(nature_spec_b_modifier_2());
+	private static Entry nature_spec_b_modifier_2() {
+		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_2");
+		var title = "Poisonous Bark";
+		var description = "Barkskin has {impact_chance} chance to fatally poison you but increase nature spell power by {bonus} for {effect_duration} seconds.";
+		var spell = modifierSpellBase();
+		var effect = ModEffects.POISON_RITUAL;
+		spell.school = MoreSpellSchools.NATURE;
+		SpellTooltip.DescriptionMutator mutator = (args) -> {
+			var modifier = effect.config().firstModifier();
+			var bonus = SpellTooltip.bonus(modifier.value, modifier.operation);
+			return args.description()
+				.replace("{bonus}", bonus);
+		};
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = barkskin().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		var impact = createEffectImpact(effect.id, 10);
+		impact.action.status_effect.amplifier_cap = 0;
+		impact.action.apply_to_caster = true;
+		impact.chance = 0.15F;
+
+		modifier.mutate_impacts = Spell.Modifier.ImpactListModifier.APPEND;
+		modifier.impacts = List.of(impact);
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description).mutator(mutator);
+	}
+
+	public static Entry nature_spec_a_modifier_3 = add(nature_spec_a_modifier_3());
+	private static Entry nature_spec_a_modifier_3() {
+		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_3");
+		var title = "Frequent Vines";
+		var description = "Reduces the cooldown of Vine Whip by {cooldown_duration_deduct} sec.";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = vine_whip().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		modifier.cooldown_duration_deduct = 0.25F;
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static Entry nature_spec_b_modifier_3 = add(nature_spec_b_modifier_3());
+	private static Entry nature_spec_b_modifier_3() {
+		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_3");
+		var title = "Whip of Life";
+		var description = "Vine Whip heals you for {heal} health.";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = vine_whip().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		var impact = createHeal(0.1F);
+		impact.action.apply_to_caster = true;
+		impact.particles = new ParticleBatch[]{
+			new ParticleBatch(
+				HEALING_PARTICLES.toString(),
+				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+				20, 0.02F, 0.15F)
+				.color(Color.NATURE.toRGBA()),
+			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+				1, 0, 0).color(Color.NATURE.toRGBA()).scale(2F)
+		};
+		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
+
+		modifier.mutate_impacts = Spell.Modifier.ImpactListModifier.APPEND;
+		spell.impacts = List.of(impact);
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static Entry nature_spec_a_modifier_4 = add(nature_spec_a_modifier_4());
+	private static Entry nature_spec_a_modifier_4() {
+		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_4");
+		var title = "Font of Life";
+		var description = "Mass Entanglement heals you and allies for {heal} health.";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = mass_entanglement().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		var impact = createHeal(0.25F);
+		impact.action.apply_to_caster = true;
+		impact.particles = new ParticleBatch[]{
+			new ParticleBatch(
+				HEALING_PARTICLES.toString(),
+				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+				20, 0.02F, 0.15F)
+				.color(Color.NATURE.toRGBA()),
+			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+				1, 0, 0).color(Color.NATURE.toRGBA()).scale(mass_entanglement().spell.range)
+		};
+		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
+
+		modifier.mutate_impacts = Spell.Modifier.ImpactListModifier.APPEND;
+		spell.impacts = List.of(impact);
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static Entry nature_spec_b_modifier_4 = add(nature_spec_b_modifier_4());
+	private static Entry nature_spec_b_modifier_4() {
+		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_4");
+		var title = "More Entanglement";
+		var description = "Reduces the cooldown of Mass Entanglement by {cooldown_duration_deduct} sec.";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = mass_entanglement().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		modifier.cooldown_duration_deduct = 4;
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	// Passives
+
+	public static final Entry nature_spec_a_passive_1 = add(nature_spec_a_passive_1());
+	private static Entry nature_spec_a_passive_1() {
+		var id = Identifier.of(Druids.ID, "nature_spec_a_passive_1");
+		var title = "Blessed Roots";
+		var description = "Nature spell impacts have {trigger_chance} chance to heal you and targets around you for {heal} health.";
+		var spell = SpellBuilder.createSpellPassive();
+		spell.school = MoreSpellSchools.NATURE;
+		spell.range = 4;
+
+		spell.target.type = Spell.Target.Type.AREA;
+		spell.target.area = new Spell.Target.Area();
+		spell.target.area.vertical_range_multiplier = 1;
+		spell.target.area.include_caster = true;
+
+		var trigger = SpellBuilder.Triggers.activeSpellHit(0.15F, "nature");
+		trigger.target_override = Spell.Trigger.TargetSelector.CASTER;
+		spell.passive.triggers = List.of(trigger);
+
+		var impact = createHeal(0.1F);
+		impact.action.apply_to_caster = true;
+		impact.particles = new ParticleBatch[]{
+			new ParticleBatch(
+				HEALING_PARTICLES.toString(),
+				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+				20, 0.02F, 0.15F)
+				.color(Color.NATURE.toRGBA()),
+			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
+				1, 0, 0).color(Color.NATURE.toRGBA()).scale(2F)
+		};
+		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
+		spell.impacts = List.of(impact);
+
+		SpellBuilder.Cost.cooldown(spell, 1F);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static final Entry nature_spec_b_passive_1 = add(nature_spec_b_passive_1());
+	private static Entry nature_spec_b_passive_1() {
+		var id = Identifier.of(Druids.ID, "nature_spec_b_passive_1");
+		var title = "Poison Ritual";
+		var description = "If you are fatally poisoned gain {bonus} nature spell power.";
+		var spell = SpellBuilder.createSpellPassive();
+		var effect = ModEffects.POISON_RITUAL;
+		spell.school = MoreSpellSchools.NATURE;
+		SpellTooltip.DescriptionMutator mutator = (args) -> {
+			var modifier = effect.config().firstModifier();
+			var bonus = SpellTooltip.bonus(modifier.value, modifier.operation);
+			return args.description()
+				.replace("{bonus}", bonus);
+		};
+
+		spell.target.type = Spell.Target.Type.FROM_TRIGGER;
+
+		var trigger = SpellBuilder.Triggers.effectTick(MRPGCEffects.FATAL_POISON.id.toString());
+		spell.passive.triggers = List.of(trigger);
+
+		var impact = SpellBuilder.Impacts.effectAdd(effect.id.toString(),5,0, 0);
+		impact.action.apply_to_caster = true;
+
+		impact.sound = new Sound(MRPGLibSounds.NATURE_IMPACT_4.id());
+		spell.impacts = List.of(impact);
+
+		return new Entry(id, spell, title, description).mutator(mutator);
+	}
+
+	public static final Entry nature_spec_a_passive_2 = add(nature_spec_a_passive_2());
+	private static Entry nature_spec_a_passive_2() {
+		var id = Identifier.of(Druids.ID, "nature_spec_a_passive_2");
+		var title = "Rootstride";
+		var description = "{trigger_chance} chance upon rolling to leave roots behind for {cloud_duration} sec.";
+
+		var spell = SpellBuilder.createSpellPassive();
+		spell.school = MoreSpellSchools.NATURE;
+		spell.range = 0;
+
+		var trigger = SpellBuilder.Triggers.roll();
+		trigger.chance = 0.5F;
+		spell.passive.triggers = List.of(trigger);
+
+		spell.deliver.type = Spell.Delivery.Type.CLOUD;
+		var cloud = new Spell.Delivery.Cloud();
+		cloud.volume.radius = 1F;
+		cloud.volume.area.vertical_range_multiplier = 0.3F;
+		cloud.volume.sound = new Sound(SpellEngineSounds.POISON_CLOUD_TICK.id());
+		cloud.impact_tick_interval = 15;
+		cloud.time_to_live_seconds = 8;
+		cloud.client_data = new Spell.Delivery.Cloud.ClientData();
+		cloud.client_data.particles = new ParticleBatch[]{
+			new ParticleBatch(
+				SpellEngineParticles.roots.id().toString(),
+				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
+				2, 0, 0)
+		};
+		spell.deliver.clouds = List.of(cloud);
+
+		var debuff = createEffectImpact(SkillEffects.NATURES_GRASP.id, 1);
+		debuff.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.SET;
+		debuff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
+		debuff.action.status_effect.apply_limit.health_base = 50;
+		debuff.action.status_effect.apply_limit.spell_power_multiplier = 5;
+		debuff.particles = new ParticleBatch[]{
+			new ParticleBatch("falling_spore_blossom",
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
+				2, 0.1F, 0.2F)
+		};
+		spell.impacts = List.of(debuff);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static final Entry nature_spec_b_passive_2 = add(nature_spec_b_passive_2());
+	private static Entry nature_spec_b_passive_2() {
+		var id = Identifier.of(Druids.ID, "nature_spec_b_passive_2");
+		var title = "Thorn Rush";
+		var description = "{trigger_chance} chance upon rolling to give the caster thorns for {effect_duration} sec.";
+
+		var spell = SpellBuilder.createSpellPassive();
+		spell.school = MoreSpellSchools.NATURE;
+		spell.range = 0;
+
+		var trigger = SpellBuilder.Triggers.roll();
+		trigger.chance = 0.5F;
+		spell.passive.triggers = List.of(trigger);
+
+		spell.target.type = Spell.Target.Type.AREA;
+		spell.target.area = new Spell.Target.Area();
+		spell.target.area.vertical_range_multiplier = 1;
+		spell.target.area.include_caster = true;
+
+		var effect = createEffectImpact(ModEffects.THORNED.id, 5);
+		effect.sound = Sound.withVolume(MRPGLibSounds.NATURE_RELEASE_1.id(), 0.5F);
+		effect.action.status_effect.duration = 17;
+		effect.action.status_effect.amplifier = 1;
+		effect.action.status_effect.amplifier_cap_power_multiplier = 0.10F;
+
+		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
+			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
+				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
+				1, 0, 0).color(0x56211a)
+		};
+
+		spell.impacts = List.of(effect);
+
+		return new Entry(id, spell, title, description);
+	}
 }

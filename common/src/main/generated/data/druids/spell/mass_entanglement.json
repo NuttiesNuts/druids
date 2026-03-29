@@ -46,11 +46,11 @@
         "shape": "SPHERE",
         "count": 1.0,
         "max_speed": 0.0,
-        "color_rgba": 4283786581
+        "color_rgba": 1728014079
       }
     ],
     "sound": {
-      "id": "more_rpg_classes:nature_impact_1"
+      "id": "more_rpg_classes:nature_impact_3"
     }
   },
   "target": {

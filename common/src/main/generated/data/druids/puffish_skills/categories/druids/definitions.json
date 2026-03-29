@@ -1,0 +1,503 @@
+{
+  "nature_boost": {
+    "description": {
+      "skill_definition_id": "nature_boost"
+    },
+    "icon": {
+      "type": "item",
+      "data": {
+        "item": "druids:wand_nature"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "spell_power:nature",
+          "operation": "multiply_base",
+          "value": 0.01
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_boost.title"
+    }
+  },
+  "nature_root": {
+    "description": {
+      "skill_definition_id": "nature_root"
+    },
+    "icon": {
+      "type": "item",
+      "data": {
+        "components": {
+          "spell_engine:item_model": "druids:item/spell_book/nature"
+        },
+        "item": "spell_engine:spell_book"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "puffish_skills:attribute",
+        "data": {
+          "attribute": "spell_power:nature",
+          "operation": "multiply_base",
+          "value": 0.01
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_root.title"
+    }
+  },
+  "nature_spec_a_modifier_1": {
+    "description": {
+      "skill_definition_id": "nature_spec_a_modifier_1"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/bramble_shot.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_a_modifier_1"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_a_modifier_1.title"
+    }
+  },
+  "nature_spec_a_modifier_2": {
+    "description": {
+      "skill_definition_id": "nature_spec_a_modifier_2"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/barkskin.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_a_modifier_2"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_a_modifier_2.title"
+    }
+  },
+  "nature_spec_a_modifier_3": {
+    "description": {
+      "skill_definition_id": "nature_spec_a_modifier_3"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/vine_whip.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_a_modifier_3"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_a_modifier_3.title"
+    }
+  },
+  "nature_spec_a_modifier_4": {
+    "description": {
+      "skill_definition_id": "nature_spec_a_modifier_4"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/mass_entanglement.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_a_modifier_4"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_a_modifier_4.title"
+    }
+  },
+  "nature_spec_a_passive_1": {
+    "description": {
+      "skill_definition_id": "nature_spec_a_passive_1"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/nature_spec_a_passive_1.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_a_passive_1"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_a_passive_1.title"
+    }
+  },
+  "nature_spec_a_passive_2": {
+    "description": {
+      "skill_definition_id": "nature_spec_a_passive_2"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/nature_spec_a_passive_2.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_a_passive_2"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_a_passive_2.title"
+    }
+  },
+  "nature_spec_b_modifier_1": {
+    "description": {
+      "skill_definition_id": "nature_spec_b_modifier_1"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/bramble_volley.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_b_modifier_1"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_b_modifier_1.title"
+    }
+  },
+  "nature_spec_b_modifier_2": {
+    "description": {
+      "skill_definition_id": "nature_spec_b_modifier_2"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/barkskin.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_b_modifier_2"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_b_modifier_2.title"
+    }
+  },
+  "nature_spec_b_modifier_3": {
+    "description": {
+      "skill_definition_id": "nature_spec_b_modifier_3"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/vine_whip.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_b_modifier_3"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_b_modifier_3.title"
+    }
+  },
+  "nature_spec_b_modifier_4": {
+    "description": {
+      "skill_definition_id": "nature_spec_b_modifier_4"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/mass_entanglement.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_b_modifier_4"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_b_modifier_4.title"
+    }
+  },
+  "nature_spec_b_passive_1": {
+    "description": {
+      "skill_definition_id": "nature_spec_b_passive_1"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/nature_spec_b_passive_1.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_b_passive_1"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_b_passive_1.title"
+    }
+  },
+  "nature_spec_b_passive_2": {
+    "description": {
+      "skill_definition_id": "nature_spec_b_passive_2"
+    },
+    "icon": {
+      "type": "texture",
+      "data": {
+        "texture": "druids:textures/spell/nature_spec_b_passive_2.png"
+      }
+    },
+    "required_mods": [
+      "druids"
+    ],
+    "rewards": [
+      {
+        "type": "skill_tree_rpgs:spell",
+        "data": {
+          "containers": [
+            {
+              "access": "NONE",
+              "access_param": "",
+              "extra_tier_binding": 0,
+              "max_spell_count": 0,
+              "pool": "",
+              "slot": "",
+              "spell_ids": [
+                "druids:nature_spec_b_passive_2"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "title": {
+      "translate": "skill.druids.nature_spec_b_passive_2.title"
+    }
+  }
+}

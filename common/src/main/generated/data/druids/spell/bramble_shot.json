@@ -1,15 +1,18 @@
 {
   "school": "spell_power:nature",
-  "range": 64.0,
+  "range": 28.0,
   "group": "primary",
-  "tier": 1,
+  "tier": 0,
   "learn": {},
   "active": {
     "cast": {
-      "duration": 0.3,
-      "channel_ticks": 3,
+      "duration": 0.2,
+      "channel_ticks": 1,
       "animation": {
         "id": "spell_engine:one_handed_projectile_charge"
+      },
+      "sound": {
+        "id": "more_rpg_classes:nature_cast_1"
       }
     }
   },
@@ -25,20 +28,6 @@
   "deliver": {
     "type": "PROJECTILE",
     "projectile": {
-      "direction_offsets": [
-        {
-          "yaw": -10.0
-        },
-        {
-          "pitch": 2.0
-        },
-        {
-          "yaw": 10.0
-        },
-        {
-          "pitch": -2.0
-        }
-      ],
       "launch_properties": {
         "sound": {
           "id": "more_rpg_classes:nature_release_1",
@@ -71,29 +60,6 @@
       "action": {
         "type": "STATUS_EFFECT",
         "status_effect": {
-          "effect_id": "more_rpg_classes:grievous_wounds",
-          "duration": 5.0,
-          "amplifier": 1,
-          "amplifier_cap": 5,
-          "amplifier_cap_power_multiplier": 0.2,
-          "apply_mode": "ADD"
-        }
-      },
-      "particles": [
-        {
-          "particle_id": "spell_engine:dripping_blood",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 10.0,
-          "min_speed": 0.05,
-          "max_speed": 0.3
-        }
-      ]
-    },
-    {
-      "action": {
-        "type": "STATUS_EFFECT",
-        "status_effect": {
           "effect_id": "more_rpg_classes:fatal_poison",
           "duration": 5.0,
           "amplifier": 1,
@@ -111,6 +77,16 @@
           "knockback": 0.8
         }
       },
+      "particles": [
+        {
+          "particle_id": "spell_engine:dripping_blood",
+          "origin": "CENTER",
+          "shape": "SPHERE",
+          "count": 10.0,
+          "min_speed": 0.05,
+          "max_speed": 0.3
+        }
+      ],
       "sound": {
         "id": "more_rpg_classes:crippling_strike",
         "volume": 0.5
@@ -119,7 +95,7 @@
   ],
   "cost": {
     "cooldown": {
-      "duration": 3.0
+      "duration": 2.0
     },
     "item": {
       "id": "more_rpg_classes:nature_stone"

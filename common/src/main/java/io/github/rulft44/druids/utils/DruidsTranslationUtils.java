@@ -4,7 +4,6 @@ import io.github.rulft44.druids.spell.skill.DruidsSkillDefinitions;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
-import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.mixin.client.ItemStackTooltipAccessor;
 
 import java.util.*;

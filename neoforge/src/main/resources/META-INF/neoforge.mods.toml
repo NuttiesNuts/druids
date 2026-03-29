@@ -42,7 +42,7 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.druids]]
-modId = "mrpgc_skill_tree"
+modId = "skill_tree_rpgs"
 type = "optional"
 versionRange = ""
 ordering = "AFTER"

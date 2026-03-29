@@ -3,6 +3,10 @@
     {
       "id": "druids:bramble_volley",
       "required": false
+    },
+    {
+      "id": "druids:bramble_shot",
+      "required": false
     }
   ]
 }

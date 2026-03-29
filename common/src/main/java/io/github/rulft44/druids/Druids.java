@@ -1,15 +1,12 @@
 package io.github.rulft44.druids;
 
 import io.github.rulft44.druids.config.Default;
-import io.github.rulft44.druids.config.EffectsConfig;
 import io.github.rulft44.druids.config.TweaksConfig;
 import io.github.rulft44.druids.effect.ModEffects;
 import io.github.rulft44.druids.item.*;
 import io.github.rulft44.druids.sounds.ModSounds;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
 import net.fabricmc.fabric.api.loot.v3.LootTableEvents;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemStack;
 import net.minecraft.loot.LootPool;
@@ -18,7 +15,6 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
-import net.minecraft.util.Identifier;
 import net.spell_engine.api.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
@@ -35,13 +31,12 @@ public class Druids {
 		.sanitize(true)
 		.build();
 
-	public static ConfigManager<EffectsConfig> effectsConfig = new ConfigManager<>
-		("effects", new EffectsConfig())
+	public static ConfigManager<ConfigFile.Effects> effectConfig = new ConfigManager<>
+		("effects_v0", new ConfigFile.Effects())
 		.builder()
 		.setDirectory(ID)
 		.sanitize(true)
 		.build();
-
 
 	public static ConfigManager<TweaksConfig> tweaksConfig = new ConfigManager<>
 		("tweaks", new TweaksConfig())
@@ -53,7 +48,7 @@ public class Druids {
 	public static void init() {
 		LOGGER.info("[Druids] skibidi");
 		equipmentConfig.refresh();
-		effectsConfig.refresh();
+		effectConfig.refresh();
 		tweaksConfig.refresh();
 
 		if (FabricLoader.getInstance().isDevelopmentEnvironment()) {
@@ -87,19 +82,6 @@ public class Druids {
 		});
 	}
 
-	public static void registerResourcePack() {
-		if (!Druids.tweaksConfig.value.disable_druids_skilltree_changes) {
-			FabricLoader.getInstance().getModContainer(ID).ifPresent(modContainer -> {
-				ResourceManagerHelper.registerBuiltinResourcePack(
-					Identifier.of(ID, "druids_skill_tree_changes"),
-					modContainer,
-					ResourcePackActivationType.ALWAYS_ENABLED
-				);
-			});
-		}
-		tweaksConfig.save();
-	}
-
 	public static void registerSounds(){
 		ModSounds.register();
 	}
@@ -120,7 +102,7 @@ public class Druids {
 	}
 
 	public static void registerEffects() {
-		ModEffects.register();
-		effectsConfig.save();
+		ModEffects.register(effectConfig.value);
+		effectConfig.save();
 	}
 }

@@ -16,17 +16,8 @@ public final class FabricMod implements ModInitializer {
         // However, some things (like resources) may still be uninitialized.
         // Proceed with mild caution.
 
-		FabricLoader.getInstance().getModContainer(ID).ifPresent(modContainer -> {
-			ResourceManagerHelper.registerBuiltinResourcePack(
-				Identifier.of(ID, "druids_skill_tree_changes"),
-				modContainer,
-				ResourcePackActivationType.ALWAYS_ENABLED
-			);
-		});
-
         // Run our common setup.
         Druids.init();
-		Druids.registerResourcePack();
 		Druids.registerItems();
 		Druids.registerSounds();
 		Druids.registerEffects();

@@ -28,8 +28,7 @@
 		"more_rpg_classes": ">=2.5.18-1.21.1"
 	},
 	"recommends": {
-	"skill_tree_rpgs": "*",
-	"mrpgc_skill_tree": "*"
+	"skill_tree_rpgs": "*"
 },
 	"suggests": {
 		"archers": "*",

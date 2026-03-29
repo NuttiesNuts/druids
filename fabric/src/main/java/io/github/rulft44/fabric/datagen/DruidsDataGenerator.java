@@ -1,6 +1,7 @@
 package io.github.rulft44.fabric.datagen;
 
 import io.github.rulft44.druids.Druids;
+import io.github.rulft44.druids.effect.ModEffects;
 import io.github.rulft44.druids.item.ModArmors;
 import io.github.rulft44.druids.item.ModWeapons;
 import io.github.rulft44.druids.spell.DruidSpells;
@@ -25,6 +26,7 @@ import net.skill_tree_rpgs.node.SpellContainerReward;
 import net.skill_tree_rpgs.utils.ResolvableTextContent;
 import net.spell_engine.api.datagen.SpellGenerator;
 import net.spell_engine.api.datagen.WeaponAttributeGenerator;
+import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.rpg_series.item.Armor;
 import net.spell_engine.api.spell.Spell;
 import net.spell_engine.api.spell.registry.SpellRegistry;
@@ -108,22 +110,29 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 		}
 	}
 
-
 	public static class LangGenerator extends FabricLanguageProvider {
 		protected LangGenerator(FabricDataOutput dataOutput, CompletableFuture<RegistryWrapper.WrapperLookup> registryLookup) {
 			super(dataOutput, registryLookup);
 		}
-	@Override
-	public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, FabricLanguageProvider.TranslationBuilder translationBuilder) {
-		for (var skill: DruidsSkillDefinitions.ENTRIES) {
-			if (skill.title() != null && !skill.title().isEmpty()) {
-				translationBuilder.add(skill.titleTranslationKey(), skill.title());
+		@Override
+		public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+			for (var skill: DruidsSkillDefinitions.ENTRIES) {
+				if (skill.title() != null && !skill.title().isEmpty()) {
+					translationBuilder.add(skill.titleTranslationKey(), skill.title());
+				}
+				if (skill.description() != null && !skill.description().isEmpty()) {
+					translationBuilder.add(skill.descriptionTranslationKey(), skill.description());
+				}
 			}
-			if (skill.description() != null && !skill.description().isEmpty()) {
-				translationBuilder.add(skill.descriptionTranslationKey(), skill.description());
+			for (var entry: DruidSpells.entries) {
+				translationBuilder.add(SpellTooltip.spellTranslationKey(entry.id()), entry.title());
+				translationBuilder.add(SpellTooltip.spellDescriptionTranslationKey(entry.id()), entry.description());
 			}
+			ModEffects.entries.forEach(entry -> {
+				translationBuilder.add(entry.effect.getTranslationKey(), entry.title);
+				translationBuilder.add(entry.effect.getTranslationKey() + ".description", entry.description);
+			});
 		}
-	}
 }
 
 		public static class SkillDefinitionGen extends SkillDefinitionGenerator {
@@ -149,7 +158,9 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 					Icon icon = null;
 					switch (skill.icon().type()) {
 						case TEXTURE -> icon = Icon.texture(skill.icon().value());
-						case ITEM -> icon = Icon.item(skill.icon().value());
+						case ITEM -> icon = skill.icon().modelId() != null
+							? Icon.itemWithModel(skill.icon().value(), skill.icon().modelId())
+							: Icon.item(skill.icon().value());
 						case EFFECT -> icon = Icon.effect(skill.icon().value());
 					}
 					ArrayList<Reward> rewards = new ArrayList<>();
