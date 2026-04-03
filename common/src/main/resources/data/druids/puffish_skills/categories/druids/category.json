@@ -1,5 +1,5 @@
 {
-	"title": "Druids Class Skills",
+	"title": "Druids Skills",
 	"icon": {
 		"type": "item",
 		"data": {
@@ -7,8 +7,8 @@
 		}
 	},
 	"unlocked_by_default": true,
-	"spent_points_limit": 11,
-	"exclusive_root": true,
+	"spent_points_limit": 12,
+	"exclusive_root": false,
 	"background": {
 		"texture": "druids:textures/gui/background.png",
 		"width": 450,

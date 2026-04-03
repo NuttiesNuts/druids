@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 public class Druids {
 	public static final String ID = "druids";
-	public static final Logger LOGGER = LoggerFactory.getLogger(ID);
+	public static final Logger LOGGER = LoggerFactory.getLogger("Druids");
 
 	public static ConfigManager<ConfigFile.Equipment> equipmentConfig = new ConfigManager<>
 		("equipment", Default.itemConfig)

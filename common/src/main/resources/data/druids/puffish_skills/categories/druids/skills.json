@@ -1,98 +1,116 @@
 {
-	"pwg4hhv5syeoc9sz": {
+	"spl6h5hq6cqouy9h": {
 		"definition": "nature_root",
-		"x": -224,
-		"y": 0,
+		"x": 0,
+		"y": 224,
 		"root": true
 	},
-	"fa8aefc6row3clar": {
-		"definition": "nature_spec_a_modifier_1",
-		"x": -160,
+	"otbvr7vhtl6gum0a": {
+		"definition": "nature_boost",
+		"x": 0,
+		"y": 96,
+		"root": false
+	},
+	"mkv2fo7mfvcl36g6": {
+		"definition": "nature_boost",
+		"x": 0,
 		"y": -32,
 		"root": false
 	},
-	"5b6gcz9h11ww6rvm": {
-		"definition": "nature_spec_b_modifier_1",
-		"x": -160,
-		"y": 32,
-		"root": false
-	},
-	"gup11eyyone52ucr": {
-		"definition": "nature_spec_a_passive_1",
-		"x": -96,
-		"y": -64,
-		"root": false
-	},
-	"b3esz7difthevqx2": {
+	"9nep11lmf0ujhzxf": {
 		"definition": "nature_boost",
-		"x": -96,
-		"y": 0,
+		"x": 0,
+		"y": -160,
 		"root": false
 	},
-	"mllli8ts9byxqkm0": {
-		"definition": "nature_spec_a_modifier_2",
+	"xr4hwmxphekyfg13": {
+		"definition": "druid_tier_1_passive_1",
 		"x": -32,
-		"y": -32,
+		"y": 160,
 		"root": false
 	},
-	"oh3lc4i13x7x1ks8": {
-		"definition": "nature_spec_b_modifier_2",
+	"xzrnae4eff5mzvjk": {
+		"definition": "druid_tier_1_passive_2",
+		"x": 32,
+		"y": 160,
+		"root": false
+	},
+	"q6zyj3mzvpvv7y1h": {
+		"definition": "druid_tier_2_spell_1_modifier_1",
 		"x": -32,
 		"y": 32,
 		"root": false
 	},
-	"y07hqletvyw2qmwc": {
-		"definition": "nature_spec_a_passive_2",
+	"fpe3jmlw52s5ds8x": {
+		"definition": "druid_tier_2_spell_1_modifier_2",
 		"x": 32,
-		"y": -64,
-		"root": false
-	},
-	"v0tk7swlryddrktr": {
-		"definition": "nature_spec_b_passive_2",
-		"x": 32,
-		"y": 64,
-		"root": false
-	},
-	"pgf8u7d60kgjnivf": {
-		"definition": "nature_boost",
-		"x": 32,
-		"y": 0,
-		"root": false
-	},
-	"f60gqeyozitxa2mx": {
-		"definition": "nature_spec_a_modifier_3",
-		"x": 96,
-		"y": -32,
-		"root": false
-	},
-	"jlcju9bxiov1nqek": {
-		"definition": "nature_spec_a_modifier_4",
-		"x": 224,
-		"y": -32,
-		"root": false
-	},
-	"aikcsyfxpbv1m9wb": {
-		"definition": "nature_spec_b_modifier_3",
-		"x": 96,
 		"y": 32,
 		"root": false
 	},
-	"ecc1g6iq8wftktom": {
-		"definition": "nature_spec_b_modifier_4",
-		"x": 224,
-		"y": 32,
+	"y8d666cs6xoafwpl": {
+		"definition": "druid_tier_2_passive_1",
+		"x": -64,
+		"y": -32,
 		"root": false
 	},
-	"ue3ovpn17tlo6sx8": {
-		"definition": "nature_boost",
-		"x": 160,
-		"y": 0,
+	"57ycjs77auct36ue": {
+		"definition": "druid_tier_2_passive_2",
+		"x": 64,
+		"y": -32,
 		"root": false
 	},
-	"iky60y5y9knoommw": {
-		"definition": "nature_spec_b_passive_1",
-		"x": -96,
-		"y": 64,
+	"4qyk822myf7rlhvn": {
+		"definition": "druid_tier_3_spell_1_modifier_1",
+		"x": -32,
+		"y": -96,
+		"root": false
+	},
+	"0vew5jjpp8pbrx19": {
+		"definition": "druid_tier_3_spell_1_modifier_2",
+		"x": 32,
+		"y": -96,
+		"root": false
+	},
+	"ytr1gotpv1ezb16c": {
+		"definition": "druid_tier_3_passive_1",
+		"x": -64,
+		"y": -160,
+		"root": false
+	},
+	"fsj98zi7vbkq2phk": {
+		"definition": "druid_tier_4_spell_1_modifier_1",
+		"x": -32,
+		"y": -224,
+		"root": false
+	},
+	"oewlt6v0nf37ufiy": {
+		"definition": "druid_tier_4_spell_1_modifier_2",
+		"x": 32,
+		"y": -224,
+		"root": false
+	},
+	"nkn5r38j4757vexi": {
+		"definition": "druid_tier_3_passive_2",
+		"x": 64,
+		"y": -160,
+		"root": false
+	},
+	"fj5ktq1pg90iyvyr": {
+		"definition": "weapon_nature_root",
+		"x": -192,
+		"y": 192,
+		"root": true
+	},
+	"vbpng292w7n0i2pl": {
+		"definition": "weapon_bramble_volley_modifier_2",
+		"x": -160,
+		"y": 128,
+		"root": false
+	},
+	"bghg5s0evyb7cz02": {
+		"definition": "weapon_bramble_volley_modifier_1",
+		"x": -224,
+		"y": 128,
 		"root": false
 	}
 }

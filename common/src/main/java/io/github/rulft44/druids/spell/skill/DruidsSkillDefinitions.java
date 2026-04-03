@@ -58,6 +58,12 @@ public class DruidsSkillDefinitions {
 		public Entry withIcon(Icon icon) {
 			return new Entry(id, title, description, icon, spellReward, attributeReward, required_mods);
 		}
+		public Entry withItemIcon(String itemId) {
+			return withIcon(Icon.item(itemId));
+		}
+		public Entry withTitle(String title) {
+			return new Entry(id, title, description, icon, spellReward, attributeReward, required_mods);
+		}
 		public Entry require(String modId) {
 			return new Entry(id, title, description, icon, spellReward, attributeReward, List.of(modId));
 		}
@@ -114,18 +120,27 @@ public class DruidsSkillDefinitions {
 			Icon.item("druids:wand_nature"),
 			NATURE_ROOT.attributeReward()).require(DRUIDS)
 	);
-	public static final Entry NATURE_SPEC_A_MODIFIER_1 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_1).require(DRUIDS));
-	public static final Entry NATURE_SPEC_B_MODIFIER_1 = add(modifierSpell(DruidSpells.nature_spec_b_modifier_1).require(DRUIDS));
-	public static final Entry NATURE_SPEC_A_MODIFIER_2 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_2).require(DRUIDS));
-	public static final Entry NATURE_SPEC_B_MODIFIER_2 = add(modifierSpell(DruidSpells.nature_spec_b_modifier_2).require(DRUIDS));
-	public static final Entry NATURE_SPEC_A_MODIFIER_3 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_3).require(DRUIDS));
-	public static final Entry NATURE_SPEC_B_MODIFIER_3 = add(modifierSpell(DruidSpells.nature_spec_b_modifier_3).require(DRUIDS));
-	public static final Entry NATURE_SPEC_A_MODIFIER_4 = add(modifierSpell(DruidSpells.nature_spec_a_modifier_4).require(DRUIDS));
-	public static final Entry NATURE_SPEC_B_MODIFIER_4 = add(modifierSpell(DruidSpells.nature_spec_b_modifier_4).require(DRUIDS));
-	public static final Entry NATURE_SPEC_A_PASSIVE_1 = add(passiveSpell(DruidSpells.nature_spec_a_passive_1).require(DRUIDS));
-	public static final Entry NATURE_SPEC_B_PASSIVE_1 = add(passiveSpell(DruidSpells.nature_spec_b_passive_1).require(DRUIDS));
-	public static final Entry NATURE_SPEC_A_PASSIVE_2 = add(passiveSpell(DruidSpells.nature_spec_a_passive_2).require(DRUIDS));
-	public static final Entry NATURE_SPEC_B_PASSIVE_2 = add(passiveSpell(DruidSpells.nature_spec_b_passive_2).require(DRUIDS));
-//	public static final Entry NATURE_SPEC_A_PASSIVE_3 = add(passiveSpell(DruidSpells.nature_spec_a_passive_3).require(DRUIDS));
-//	public static final Entry NATURE_SPEC_B_PASSIVE_3 = add(passiveSpell(DruidSpells.nature_spec_b_passive_3).require(DRUIDS));
+	public static final Entry DRUID_TIER_2_SPELL_1_MODIFIER_1 = add(modifierSpell(DruidSpells.druid_tier_2_spell_1_modifier_1).require(DRUIDS));
+	public static final Entry DRUID_TIER_2_SPELL_1_MODIFIER_2 = add(modifierSpell(DruidSpells.druid_tier_2_spell_1_modifier_2).require(DRUIDS));
+	public static final Entry DRUID_TIER_3_SPELL_1_MODIFIER_1 = add(modifierSpell(DruidSpells.druid_tier_3_spell_1_modifier_1).require(DRUIDS));
+	public static final Entry DRUID_TIER_3_SPELL_1_MODIFIER_2 = add(modifierSpell(DruidSpells.druid_tier_3_spell_1_modifier_2).require(DRUIDS));
+	public static final Entry DRUID_TIER_4_SPELL_1_MODIFIER_1 = add(modifierSpell(DruidSpells.druid_tier_4_spell_1_modifier_1).require(DRUIDS));
+	public static final Entry DRUID_TIER_4_SPELL_1_MODIFIER_2 = add(modifierSpell(DruidSpells.druid_tier_4_spell_1_modifier_2).require(DRUIDS));
+
+	public static final Entry DRUID_TIER_1_PASSIVE_1 = add(passiveSpell(DruidSpells.druid_tier_1_passive_1).require(DRUIDS));
+	public static final Entry DRUID_TIER_1_PASSIVE_2 = add(passiveSpell(DruidSpells.druid_tier_1_passive_2).require(DRUIDS));
+	public static final Entry DRUID_TIER_2_PASSIVE_1 = add(passiveSpell(DruidSpells.druid_tier_2_passive_1).require(DRUIDS));
+	public static final Entry DRUID_TIER_2_PASSIVE_2 = add(passiveSpell(DruidSpells.druid_tier_2_passive_2).require(DRUIDS));
+	public static final Entry DRUID_TIER_3_PASSIVE_1 = add(passiveSpell(DruidSpells.druid_tier_3_passive_1).require(DRUIDS));
+	public static final Entry DRUID_TIER_3_PASSIVE_2 = add(passiveSpell(DruidSpells.druid_tier_3_passive_2).require(DRUIDS));
+
+	// Nature Staff
+	public static final Entry WEAPON_NATURE_ROOT = add(modifierSpell(DruidSpells.weapon_nature_root)
+		.withTitle("Nature Staff Specialisation")
+		.withItemIcon("druids:staff_nature")
+		.require(DRUIDS)
+	);
+	public static final Entry WEAPON_BRAMBLE_VOLLEY_MODIFIER_1 = add(modifierSpell(DruidSpells.weapon_bramble_volley_modifier_1).require(DRUIDS));
+	public static final Entry WEAPON_BRAMBLE_VOLLEY_MODIFIER_2 = add(modifierSpell(DruidSpells.weapon_bramble_volley_modifier_2).require(DRUIDS));
+
 }

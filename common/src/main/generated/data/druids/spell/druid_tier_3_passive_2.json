@@ -1,0 +1,42 @@
+{
+  "school": "spell_power:nature",
+  "range": 0.0,
+  "tier": 1,
+  "type": "PASSIVE",
+  "passive": {
+    "triggers": [
+      {
+        "target_override": "CASTER",
+        "type": "SPELL_IMPACT_SPECIFIC",
+        "chance": 0.5,
+        "spell": {
+          "school": "nature",
+          "type": "ACTIVE"
+        },
+        "impact": {
+          "impact_type": "DAMAGE"
+        }
+      }
+    ]
+  },
+  "target": {
+    "type": "FROM_TRIGGER"
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "spell_engine:immobilize",
+          "duration": 2.0
+        }
+      }
+    }
+  ],
+  "cost": {
+    "durability": 0,
+    "cooldown": {
+      "duration": 0.5
+    }
+  }
+}

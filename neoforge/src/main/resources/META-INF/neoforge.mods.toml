@@ -44,6 +44,6 @@ side = "BOTH"
 [[dependencies.druids]]
 modId = "skill_tree_rpgs"
 type = "optional"
-versionRange = ""
+versionRange = "[1.4.4,)"
 ordering = "AFTER"
 side = "BOTH"

@@ -2,10 +2,12 @@ package io.github.rulft44.druids.spell;
 
 import io.github.rulft44.druids.Druids;
 import io.github.rulft44.druids.effect.ModEffects;
+import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.more_rpg_classes.client.particle.MoreParticles;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.more_rpg_classes.effect.MRPGCEffects;
 import net.more_rpg_classes.item.MRPGCItems;
@@ -177,7 +179,70 @@ public class DruidSpells {
 		SpellEngineParticles.MagicParticles.Shape.HEAL,
 		SpellEngineParticles.MagicParticles.Motion.ASCEND).id();
 
-	// Main Spells
+	// region Weapon Skills
+	public static final Entry weapon_nature_root = add(weapon_nature_root());
+	private static Entry weapon_nature_root() {
+		var id = Identifier.of(Druids.ID, "weapon_nature_root");
+		var title = "Nature Mastery";
+		var description = "Bramble Shot deals {knockback_multiply_base} increased knockback.";
+		var spell = SpellBuilder.createSpellModifier();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = bramble_shot().id.toString();
+		modifier.power_modifier = new Spell.Impact.Modifier();
+		modifier.knockback_multiply_base = 0.5f;
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static Entry weapon_bramble_volley_modifier_1 = add(weapon_bramble_volley_modifier_1());
+	private static Entry weapon_bramble_volley_modifier_1() {
+		var id = Identifier.of(Druids.ID, "weapon_bramble_volley_modifier_1");
+		var title = "Mass Bramble Volley";
+		var description = "Increases the maximum number of bramble projectiles by 1.";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = bramble_shot().id.toString();
+		var modifier2 = new Spell.Modifier();
+		modifier2.spell_pattern = bramble_volley().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+		modifier2.power_modifier = new Spell.Impact.Modifier();
+
+		modifier.channel_ticks_add = 1;
+		modifier2.channel_ticks_add = 1;
+
+		spell.modifiers = List.of(modifier, modifier2);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static Entry weapon_bramble_volley_modifier_2 = add(weapon_bramble_volley_modifier_2());
+	private static Entry weapon_bramble_volley_modifier_2() {
+		var id = Identifier.of(Druids.ID, "weapon_bramble_volley_modifier_2");
+		var title = "Poison Tip";
+		var description = "Increases the poison duration of Bramble Volley by {effect_duration_add} seconds.";
+		var spell = modifierSpellBase();
+		spell.school = MoreSpellSchools.NATURE;
+
+		var modifier = new Spell.Modifier();
+		modifier.spell_pattern = bramble_volley().id.toString();
+
+		modifier.power_modifier = new Spell.Impact.Modifier();
+
+		modifier.effect_duration_add = 2;
+
+		spell.modifiers = List.of(modifier);
+
+		return new Entry(id, spell, title, description);
+	}
+	// endregion
+
+	// region Main Spells
 
 	public static final Entry bramble_volley = add(bramble_volley());
 	private static Entry bramble_volley() {
@@ -514,56 +579,12 @@ public class DruidSpells {
 		configureCooldown(spell, 0.5F);
 		return new Entry(id, spell, title, description);
 	}
+	// endregion
 
-	// Modifiers
-
-	public static Entry nature_spec_a_modifier_1 = add(nature_spec_a_modifier_1());
-	private static Entry nature_spec_a_modifier_1() {
-		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_1");
-		var title = "Mass Bramble Volley";
-		var description = "Increases the maximum number of bramble projectiles by 1.";
-		var spell = modifierSpellBase();
-		spell.school = MoreSpellSchools.NATURE;
-
-		var modifier = new Spell.Modifier();
-		modifier.spell_pattern = bramble_shot().id.toString();
-		var modifier2 = new Spell.Modifier();
-		modifier2.spell_pattern = bramble_volley().id.toString();
-
-		modifier.power_modifier = new Spell.Impact.Modifier();
-		modifier2.power_modifier = new Spell.Impact.Modifier();
-
-		modifier.channel_ticks_add = 1;
-		modifier2.channel_ticks_add = 1;
-
-		spell.modifiers = List.of(modifier, modifier2);
-
-		return new Entry(id, spell, title, description);
-	}
-
-	public static Entry nature_spec_b_modifier_1 = add(nature_spec_b_modifier_1());
-	private static Entry nature_spec_b_modifier_1() {
-		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_1");
-		var title = "Poison Tip";
-		var description = "Increases the poison duration of Bramble Volley by {effect_duration_add} seconds.";
-		var spell = modifierSpellBase();
-		spell.school = MoreSpellSchools.NATURE;
-
-		var modifier = new Spell.Modifier();
-		modifier.spell_pattern = bramble_volley().id.toString();
-
-		modifier.power_modifier = new Spell.Impact.Modifier();
-
-		modifier.effect_duration_add = 2;
-
-		spell.modifiers = List.of(modifier);
-
-		return new Entry(id, spell, title, description);
-	}
-
-	public static Entry nature_spec_a_modifier_2 = add(nature_spec_a_modifier_2());
-	private static Entry nature_spec_a_modifier_2() {
-		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_2");
+	// region Modifiers
+	public static Entry druid_tier_2_spell_1_modifier_1 = add(druid_tier_2_spell_1_modifier_1());
+	private static Entry druid_tier_2_spell_1_modifier_1() {
+		var id = Identifier.of(Druids.ID, "druid_tier_2_spell_1_modifier_1");
 		var title = "Friend of Nature";
 		var description = "Barkskin can be casted on allies";
 		var spell = modifierSpellBase();
@@ -581,9 +602,9 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description);
 	}
 
-	public static Entry nature_spec_b_modifier_2 = add(nature_spec_b_modifier_2());
-	private static Entry nature_spec_b_modifier_2() {
-		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_2");
+	public static Entry druid_tier_2_spell_1_modifier_2 = add(druid_tier_2_spell_1_modifier_2());
+	private static Entry druid_tier_2_spell_1_modifier_2() {
+		var id = Identifier.of(Druids.ID, "druid_tier_2_spell_1_modifier_2");
 		var title = "Poisonous Bark";
 		var description = "Barkskin has {impact_chance} chance to fatally poison you but increase nature spell power by {bonus} for {effect_duration} seconds.";
 		var spell = modifierSpellBase();
@@ -614,9 +635,9 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description).mutator(mutator);
 	}
 
-	public static Entry nature_spec_a_modifier_3 = add(nature_spec_a_modifier_3());
-	private static Entry nature_spec_a_modifier_3() {
-		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_3");
+	public static Entry druid_tier_3_spell_1_modifier_1 = add(druid_tier_3_spell_1_modifier_1());
+	private static Entry druid_tier_3_spell_1_modifier_1() {
+		var id = Identifier.of(Druids.ID, "druid_tier_3_spell_1_modifier_1");
 		var title = "Frequent Vines";
 		var description = "Reduces the cooldown of Vine Whip by {cooldown_duration_deduct} sec.";
 		var spell = modifierSpellBase();
@@ -634,9 +655,9 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description);
 	}
 
-	public static Entry nature_spec_b_modifier_3 = add(nature_spec_b_modifier_3());
-	private static Entry nature_spec_b_modifier_3() {
-		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_3");
+	public static Entry druid_tier_3_spell_1_modifier_2 = add(druid_tier_3_spell_1_modifier_2());
+	private static Entry druid_tier_3_spell_1_modifier_2() {
+		var id = Identifier.of(Druids.ID, "druid_tier_3_spell_1_modifier_2");
 		var title = "Whip of Life";
 		var description = "Vine Whip heals you for {heal} health.";
 		var spell = modifierSpellBase();
@@ -662,16 +683,16 @@ public class DruidSpells {
 		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
 
 		modifier.mutate_impacts = Spell.Modifier.ImpactListModifier.APPEND;
-		spell.impacts = List.of(impact);
+		modifier.impacts = List.of(impact);
 
 		spell.modifiers = List.of(modifier);
 
 		return new Entry(id, spell, title, description);
 	}
 
-	public static Entry nature_spec_a_modifier_4 = add(nature_spec_a_modifier_4());
-	private static Entry nature_spec_a_modifier_4() {
-		var id = Identifier.of(Druids.ID, "nature_spec_a_modifier_4");
+	public static Entry druid_tier_4_spell_1_modifier_1 = add(druid_tier_4_spell_1_modifier_1());
+	private static Entry druid_tier_4_spell_1_modifier_1() {
+		var id = Identifier.of(Druids.ID, "druid_tier_4_spell_1_modifier_1");
 		var title = "Font of Life";
 		var description = "Mass Entanglement heals you and allies for {heal} health.";
 		var spell = modifierSpellBase();
@@ -697,16 +718,16 @@ public class DruidSpells {
 		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
 
 		modifier.mutate_impacts = Spell.Modifier.ImpactListModifier.APPEND;
-		spell.impacts = List.of(impact);
+		modifier.impacts = List.of(impact);
 
 		spell.modifiers = List.of(modifier);
 
 		return new Entry(id, spell, title, description);
 	}
 
-	public static Entry nature_spec_b_modifier_4 = add(nature_spec_b_modifier_4());
-	private static Entry nature_spec_b_modifier_4() {
-		var id = Identifier.of(Druids.ID, "nature_spec_b_modifier_4");
+	public static Entry druid_tier_4_spell_1_modifier_2 = add(druid_tier_4_spell_1_modifier_2());
+	private static Entry druid_tier_4_spell_1_modifier_2() {
+		var id = Identifier.of(Druids.ID, "druid_tier_4_spell_1_modifier_2");
 		var title = "More Entanglement";
 		var description = "Reduces the cooldown of Mass Entanglement by {cooldown_duration_deduct} sec.";
 		var spell = modifierSpellBase();
@@ -723,12 +744,13 @@ public class DruidSpells {
 
 		return new Entry(id, spell, title, description);
 	}
+    // endregion
 
-	// Passives
+	// region Passives
 
-	public static final Entry nature_spec_a_passive_1 = add(nature_spec_a_passive_1());
-	private static Entry nature_spec_a_passive_1() {
-		var id = Identifier.of(Druids.ID, "nature_spec_a_passive_1");
+	public static final Entry druid_tier_1_passive_1 = add(druid_tier_1_passive_1());
+	private static Entry druid_tier_1_passive_1() {
+		var id = Identifier.of(Druids.ID, "druid_tier_1_passive_1");
 		var title = "Blessed Roots";
 		var description = "Nature spell impacts have {trigger_chance} chance to heal you and targets around you for {heal} health.";
 		var spell = SpellBuilder.createSpellPassive();
@@ -764,38 +786,54 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description);
 	}
 
-	public static final Entry nature_spec_b_passive_1 = add(nature_spec_b_passive_1());
-	private static Entry nature_spec_b_passive_1() {
-		var id = Identifier.of(Druids.ID, "nature_spec_b_passive_1");
-		var title = "Poison Ritual";
-		var description = "If you are fatally poisoned gain {bonus} nature spell power.";
+	public static final Entry druid_tier_1_passive_2 = add(druid_tier_1_passive_2());
+	private static Entry druid_tier_1_passive_2() {
+		var id = Identifier.of(Druids.ID, "druid_tier_1_passive_2");
+		var title = "Toxic Bloom";
+		var description = "Nature spell hits have {trigger_chance} chance to spawn a spore cloud, spreading Fatal Poison to nearby enemies.";
 		var spell = SpellBuilder.createSpellPassive();
-		var effect = ModEffects.POISON_RITUAL;
 		spell.school = MoreSpellSchools.NATURE;
-		SpellTooltip.DescriptionMutator mutator = (args) -> {
-			var modifier = effect.config().firstModifier();
-			var bonus = SpellTooltip.bonus(modifier.value, modifier.operation);
-			return args.description()
-				.replace("{bonus}", bonus);
-		};
+		spell.range = 20;
 
-		spell.target.type = Spell.Target.Type.FROM_TRIGGER;
-
-		var trigger = SpellBuilder.Triggers.effectTick(MRPGCEffects.FATAL_POISON.id.toString());
+		var trigger = SpellBuilder.Triggers.activeSpellHit(0.15F, "nature");
 		spell.passive.triggers = List.of(trigger);
 
-		var impact = SpellBuilder.Impacts.effectAdd(effect.id.toString(),5,0, 0);
-		impact.action.apply_to_caster = true;
+		spell.deliver.type = Spell.Delivery.Type.CLOUD;
+		var cloud = new Spell.Delivery.Cloud();
+		cloud.volume.radius = 2.5F;
+		cloud.volume.area.vertical_range_multiplier = 1F;
+		cloud.impact_tick_interval = 20;
+		cloud.time_to_live_seconds = 4;
+		cloud.client_data = new Spell.Delivery.Cloud.ClientData();
+		cloud.client_data.particles = new ParticleBatch[]{
+			new ParticleBatch(
+				SpellEngineParticles.ground_glow.toString(),
+				ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.GROUND,
+				1, 0.1F, 0.3F).color(Color.from(6107020).toRGBA()),
+			new ParticleBatch(
+				SpellEngineParticles.MagicParticles.get(
+					SpellEngineParticles.MagicParticles.Shape.SKULL,
+					SpellEngineParticles.MagicParticles.Motion.ASCEND).id().toString(),
+				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.GROUND,
+				2, 0.1F, 0.15F).color(Color.from(6107020).toRGBA())
+		};
+		spell.deliver.clouds = List.of(cloud);
 
-		impact.sound = new Sound(MRPGLibSounds.NATURE_IMPACT_4.id());
-		spell.impacts = List.of(impact);
+		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 4);
+		poison.action.status_effect.amplifier = 1;
+		poison.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+		poison.action.status_effect.show_particles = false;
 
-		return new Entry(id, spell, title, description).mutator(mutator);
+		spell.impacts = List.of(poison);
+
+		SpellBuilder.Cost.cooldown(spell, 3F);
+
+		return new Entry(id, spell, title, description);
 	}
 
-	public static final Entry nature_spec_a_passive_2 = add(nature_spec_a_passive_2());
-	private static Entry nature_spec_a_passive_2() {
-		var id = Identifier.of(Druids.ID, "nature_spec_a_passive_2");
+	public static final Entry druid_tier_2_passive_1 = add(druid_tier_2_passive_1());
+	private static Entry druid_tier_2_passive_1() {
+		var id = Identifier.of(Druids.ID, "druid_tier_2_passive_1");
 		var title = "Rootstride";
 		var description = "{trigger_chance} chance upon rolling to leave roots behind for {cloud_duration} sec.";
 
@@ -838,9 +876,9 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description);
 	}
 
-	public static final Entry nature_spec_b_passive_2 = add(nature_spec_b_passive_2());
-	private static Entry nature_spec_b_passive_2() {
-		var id = Identifier.of(Druids.ID, "nature_spec_b_passive_2");
+	public static final Entry druid_tier_2_passive_2 = add(druid_tier_2_passive_2());
+	private static Entry druid_tier_2_passive_2() {
+		var id = Identifier.of(Druids.ID, "druid_tier_2_passive_2");
 		var title = "Thorn Rush";
 		var description = "{trigger_chance} chance upon rolling to give the caster thorns for {effect_duration} sec.";
 
@@ -873,4 +911,80 @@ public class DruidSpells {
 
 		return new Entry(id, spell, title, description);
 	}
+
+	public static final Entry druid_tier_3_passive_1 = add(druid_tier_3_passive_1());
+	private static Entry druid_tier_3_passive_1() {
+		var id = Identifier.of(Druids.ID, "druid_tier_3_passive_1");
+		var title = "Guiding Thorn";
+		var description = "Upon taking damage, {trigger_chance} chance to shoot a guiding thorn that applies fatal poison for {effect_duration} sec.";
+
+		var spell = SpellBuilder.createSpellPassive();
+		spell.school = MoreSpellSchools.NATURE;
+		spell.range = 20;
+
+		var trigger = SpellBuilder.Triggers.damageTaken();
+		trigger.chance = 0.5F;
+		spell.passive.triggers = List.of(trigger);
+
+		spell.deliver.type = Spell.Delivery.Type.PROJECTILE;
+		spell.deliver.projectile = new Spell.Delivery.ShootProjectile();
+		spell.deliver.projectile.launch_properties.sound = new Sound(MRPGLibSounds.NATURE_RELEASE_1.id());
+		spell.deliver.projectile.launch_properties.velocity = 0.5F;
+		spell.deliver.projectile.projectile = new Spell.ProjectileData();
+		spell.deliver.projectile.projectile.homing_angle = 1;
+		spell.deliver.projectile.projectile.perks = new Spell.ProjectileData.Perks();
+		spell.deliver.projectile.projectile.perks.pierce = 999;
+		spell.deliver.projectile.projectile.perks.ricochet_range = 0F;
+		spell.deliver.projectile.projectile.perks.ricochet = 0;
+		spell.deliver.projectile.projectile.perks.bounce = 0;
+
+		var model = new Spell.ProjectileModel();
+		model.light_emission = LightEmission.NONE;
+		model.model_id = "druids:spell_projectile/thorn";
+		model.scale = 1.0F;
+		model.rotate_degrees_per_tick = 0;
+
+		spell.deliver.projectile.projectile.client_data = new Spell.ProjectileData.Client();
+		spell.deliver.projectile.projectile.client_data.model = model;
+
+
+		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
+		poison.action.status_effect.amplifier = 1;
+		poison.action.status_effect.show_particles = false;
+		poison.action.status_effect.amplifier_cap = 5;
+		poison.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
+		poison.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+
+		spell.impacts = List.of(poison);
+
+		SpellBuilder.Cost.cooldown(spell, 2F);
+
+		return new Entry(id, spell, title, description);
+	}
+
+	public static final Entry druid_tier_3_passive_2 = add(druid_tier_3_passive_2());
+	private static Entry druid_tier_3_passive_2() {
+		var id = Identifier.of(Druids.ID, "druid_tier_3_passive_2");
+		var title = "Surge of the Wild";
+		var description = "Hitting with a nature spell has {trigger_chance} chance to immobilize targets for {effect_duration}.";
+		var spell = SpellBuilder.createSpellPassive();
+		spell.school = MoreSpellSchools.NATURE;
+		spell.range = 0;
+
+		spell.target.type = Spell.Target.Type.FROM_TRIGGER;
+
+		var trigger = SpellBuilder.Triggers.activeSpellHit(0.5F, "nature");
+		trigger.target_override = Spell.Trigger.TargetSelector.CASTER;
+		spell.passive.triggers = List.of(trigger);
+
+		var effect = createEffectImpact(SpellEngineEffects.IMMOBILIZE.id, 2);
+		effect.action.status_effect.amplifier = 0;
+		effect.action.apply_to_caster = false;
+
+		spell.impacts = List.of(effect);
+
+		SpellBuilder.Cost.cooldown(spell, 0.5F);
+		return new Entry(id, spell, title, description);
+	}
+	// endregion
 }

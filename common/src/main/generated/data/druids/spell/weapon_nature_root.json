@@ -1,0 +1,13 @@
+{
+  "school": "spell_power:nature",
+  "range": 0.0,
+  "tier": 1,
+  "type": "MODIFIER",
+  "modifiers": [
+    {
+      "spell_pattern": "druids:bramble_shot",
+      "power_modifier": {},
+      "knockback_multiply_base": 0.5
+    }
+  ]
+}

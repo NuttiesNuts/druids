@@ -1,0 +1,74 @@
+{
+  "school": "spell_power:nature",
+  "range": 20.0,
+  "tier": 1,
+  "type": "PASSIVE",
+  "passive": {
+    "triggers": [
+      {
+        "type": "SPELL_IMPACT_SPECIFIC",
+        "chance": 0.15,
+        "spell": {
+          "school": "nature",
+          "type": "ACTIVE"
+        },
+        "impact": {
+          "impact_type": "DAMAGE"
+        }
+      }
+    ]
+  },
+  "deliver": {
+    "type": "CLOUD",
+    "clouds": [
+      {
+        "volume": {
+          "radius": 2.5
+        },
+        "time_to_live_seconds": 4.0,
+        "impact_tick_interval": 20,
+        "client_data": {
+          "particles": [
+            {
+              "particle_id": "TemplateEntry[id=spell_engine:ground_glow, texture=Texture[id=spell_engine:area/ground_glow, frames=1, reverseOrder=false], particleType=net.spell_engine.client.particle.TemplateParticleType@64a1027e, fading=IN_OUT, orientation=HORIZONTAL]",
+              "origin": "GROUND",
+              "shape": "CIRCLE",
+              "count": 1.0,
+              "min_speed": 0.1,
+              "max_speed": 0.3,
+              "color_rgba": 1563397375
+            },
+            {
+              "particle_id": "spell_engine:magic_skull_ascend",
+              "origin": "GROUND",
+              "shape": "PILLAR",
+              "count": 2.0,
+              "min_speed": 0.1,
+              "max_speed": 0.15,
+              "color_rgba": 1563397375
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "more_rpg_classes:fatal_poison",
+          "duration": 4.0,
+          "amplifier": 1,
+          "apply_mode": "ADD"
+        }
+      }
+    }
+  ],
+  "cost": {
+    "durability": 0,
+    "cooldown": {
+      "duration": 3.0
+    }
+  }
+}

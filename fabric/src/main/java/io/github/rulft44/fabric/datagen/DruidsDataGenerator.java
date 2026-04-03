@@ -34,6 +34,8 @@ import net.spell_engine.api.tags.SpellTags;
 import net.spell_engine.rpg_series.datagen.RPGSeriesDataGen;
 import net.spell_engine.rpg_series.tags.RPGSeriesItemTags;
 
+import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -116,6 +118,12 @@ public class DruidsDataGenerator implements DataGeneratorEntrypoint {
 		}
 		@Override
 		public void generateTranslations(RegistryWrapper.WrapperLookup wrapperLookup, TranslationBuilder translationBuilder) {
+			try { // merge handwritten lang with data generated one
+				translationBuilder.add(Path.of("../../../fabric/src/main/resources/assets/druids/lang/h_en_us.json"));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+
 			for (var skill: DruidsSkillDefinitions.ENTRIES) {
 				if (skill.title() != null && !skill.title().isEmpty()) {
 					translationBuilder.add(skill.titleTranslationKey(), skill.title());
