@@ -92,6 +92,8 @@
   "spell.druids.druid_tier_4_spell_1_modifier_1.name": "Font of Life",
   "spell.druids.druid_tier_4_spell_1_modifier_2.description": "Reduces the cooldown of Mass Entanglement by {cooldown_duration_deduct} sec.",
   "spell.druids.druid_tier_4_spell_1_modifier_2.name": "More Entanglement",
+  "spell.druids.druid_weapon_tier_5.description": "Spell impacts have {trigger_chance} chance to increase stacking spell haste for {effect_duration} sec.",
+  "spell.druids.druid_weapon_tier_5.name": "Blessed Haste",
   "spell.druids.mass_entanglement.description": "Roots, damages and poisons all enemies in range.",
   "spell.druids.mass_entanglement.name": "Mass Entanglement",
   "spell.druids.vine_whip.description": "Send forth vines that pull and poison an enemy.",

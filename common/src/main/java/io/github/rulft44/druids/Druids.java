@@ -21,6 +21,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Druids {
+	/*
+	TODO- Move skill tree spells to separate class
+	TODO- Armory compat (new armor)
+	TODO- Moon staff changes
+	TODO- Spell expansion
+	TODO- Fatal Poison screen overlay
+	TODO- Barkskin player overlay
+	*/
+
 	public static final String ID = "druids";
 	public static final Logger LOGGER = LoggerFactory.getLogger("Druids");
 

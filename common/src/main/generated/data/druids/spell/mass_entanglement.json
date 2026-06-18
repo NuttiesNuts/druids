@@ -5,7 +5,7 @@
   "learn": {},
   "active": {
     "cast": {
-      "duration": 10.0,
+      "duration": 7.5,
       "animation": {
         "id": "spell_engine:one_handed_area_charge"
       },

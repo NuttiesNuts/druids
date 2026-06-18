@@ -8,7 +8,7 @@
       {
         "target_override": "CASTER",
         "type": "SPELL_IMPACT_SPECIFIC",
-        "chance": 0.15,
+        "chance": 0.25,
         "spell": {
           "school": "nature",
           "type": "ACTIVE"
@@ -62,7 +62,7 @@
   "cost": {
     "durability": 0,
     "cooldown": {
-      "duration": 1.0
+      "duration": 5.0
     }
   }
 }

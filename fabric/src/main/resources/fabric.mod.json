@@ -25,11 +25,12 @@
 		"azurelibarmor": "*",
 		"spell_engine": ">=1.9.0",
 		"spell_power": "*",
-		"more_rpg_classes": ">=2.5.18-1.21.1"
+		"more_rpg_classes": ">=2.5.18-1.21.1",
+		"skill_tree_rpgs": "*"
 	},
 	"recommends": {
-	"skill_tree_rpgs": "*"
-},
+
+	},
 	"suggests": {
 		"archers": "*",
 		"better_combat": "*"

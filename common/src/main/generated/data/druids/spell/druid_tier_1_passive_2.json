@@ -30,7 +30,7 @@
         "client_data": {
           "particles": [
             {
-              "particle_id": "TemplateEntry[id=spell_engine:ground_glow, texture=Texture[id=spell_engine:area/ground_glow, frames=1, reverseOrder=false], particleType=net.spell_engine.client.particle.TemplateParticleType@64a1027e, fading=IN_OUT, orientation=HORIZONTAL]",
+              "particle_id": "TemplateEntry[id=spell_engine:ground_glow, texture=Texture[id=spell_engine:area/ground_glow, frames=1, reverseOrder=false], particleType=net.spell_engine.client.particle.TemplateParticleType@7546d260, fading=IN_OUT, orientation=HORIZONTAL]",
               "origin": "GROUND",
               "shape": "CIRCLE",
               "count": 1.0,

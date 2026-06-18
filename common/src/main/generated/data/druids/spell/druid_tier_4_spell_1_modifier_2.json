@@ -17,7 +17,7 @@
     {
       "spell_pattern": "druids:mass_entanglement",
       "power_modifier": {},
-      "cooldown_duration_deduct": 4.0
+      "cooldown_duration_deduct": 5.0
     }
   ]
 }

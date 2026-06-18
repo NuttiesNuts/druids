@@ -1,10 +1,15 @@
+# 1.2
+
+- Reduced Mass Entanglement cast time
+- Buffed some skill tree skills
+- Added new spell passive to Moon Staff and fixed its tags
+
 # 1.1
 
 `Warning, BREAKING CHANGES: All spell books and spell scrolls will be reset on first load.`
 - Update for Spell Engine 1.9
 - **Added the Druid Skill Tree** (Credits for background art: Smorty)
 - Bramble Volley spell is now attached to Nature Staff variants
-
 
 # 1.0
 - Add Fatal Poison potion

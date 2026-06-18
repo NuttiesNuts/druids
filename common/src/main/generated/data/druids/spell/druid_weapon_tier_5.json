@@ -1,0 +1,44 @@
+{
+  "school": "spell_power:nature",
+  "tier": 1,
+  "type": "PASSIVE",
+  "passive": {
+    "triggers": [
+      {
+        "type": "SPELL_IMPACT_SPECIFIC",
+        "chance": 0.2,
+        "spell": {},
+        "impact": {
+          "impact_type": "DAMAGE"
+        }
+      }
+    ]
+  },
+  "target": {
+    "type": "AREA",
+    "area": {
+      "include_caster": true
+    }
+  },
+  "impacts": [
+    {
+      "action": {
+        "type": "STATUS_EFFECT",
+        "status_effect": {
+          "effect_id": "spell_power:haste",
+          "duration": 17.0,
+          "amplifier": 1,
+          "amplifier_cap": 5,
+          "apply_mode": "ADD"
+        }
+      },
+      "sound": {
+        "id": "more_rpg_classes:nature_release_2",
+        "volume": 0.5
+      }
+    }
+  ],
+  "cost": {
+    "durability": 0
+  }
+}
