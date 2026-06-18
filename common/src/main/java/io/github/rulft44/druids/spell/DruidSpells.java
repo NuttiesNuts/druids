@@ -25,6 +25,7 @@ import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.fx.SpellEngineSounds;
 import net.spell_engine.internals.target.SpellTarget;
+import net.spell_power.api.SpellPowerMechanics;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -473,7 +474,7 @@ public class DruidSpells {
 
 		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_area_charge");
 		spell.active.cast.particles = natureCastingParticles();
-		spell.active.cast.duration = 10;
+		spell.active.cast.duration = 7.5F;
 		spell.active.cast.sound = new Sound(MRPGLibSounds.NATURE_CAST_1.id());
 
 		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_area_release");
@@ -738,7 +739,7 @@ public class DruidSpells {
 
 		modifier.power_modifier = new Spell.Impact.Modifier();
 
-		modifier.cooldown_duration_deduct = 4;
+		modifier.cooldown_duration_deduct = 5;
 
 		spell.modifiers = List.of(modifier);
 
@@ -747,6 +748,36 @@ public class DruidSpells {
     // endregion
 
 	// region Passives
+
+	public static final Entry druid_weapon_tier_5 = add(druid_weapon_tier_5());
+	private static Entry druid_weapon_tier_5() {
+		var id = Identifier.of(Druids.ID, "druid_weapon_tier_5");
+		var title = "Blessed Haste";
+		var description = "Spell impacts have {trigger_chance} chance to increase stacking spell haste for {effect_duration} sec.";
+
+		var spell = SpellBuilder.createSpellPassive();
+		spell.school = MoreSpellSchools.NATURE;
+		spell.range = 50;
+
+		var trigger = SpellBuilder.Triggers.spellHit(0.20F, null);
+		spell.passive.triggers = List.of(trigger);
+
+		spell.target.type = Spell.Target.Type.AREA;
+		spell.target.area = new Spell.Target.Area();
+		spell.target.area.vertical_range_multiplier = 1;
+		spell.target.area.include_caster = true;
+
+		var effect = createEffectImpact(SpellPowerMechanics.HASTE.id, 5);
+		effect.sound = Sound.withVolume(MRPGLibSounds.NATURE_RELEASE_2.id(), 0.5F);
+		effect.action.status_effect.duration = 18;
+		effect.action.status_effect.amplifier = 1;
+		effect.action.status_effect.amplifier_cap = 7;
+		effect.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
+
+		spell.impacts = List.of(effect);
+
+		return new Entry(id, spell, title, description);
+	}
 
 	public static final Entry druid_tier_1_passive_1 = add(druid_tier_1_passive_1());
 	private static Entry druid_tier_1_passive_1() {
@@ -762,7 +793,7 @@ public class DruidSpells {
 		spell.target.area.vertical_range_multiplier = 1;
 		spell.target.area.include_caster = true;
 
-		var trigger = SpellBuilder.Triggers.activeSpellHit(0.15F, "nature");
+		var trigger = SpellBuilder.Triggers.activeSpellHit(0.25F, "nature");
 		trigger.target_override = Spell.Trigger.TargetSelector.CASTER;
 		spell.passive.triggers = List.of(trigger);
 
@@ -781,7 +812,7 @@ public class DruidSpells {
 		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
 		spell.impacts = List.of(impact);
 
-		SpellBuilder.Cost.cooldown(spell, 1F);
+		SpellBuilder.Cost.cooldown(spell, 5F);
 
 		return new Entry(id, spell, title, description);
 	}

@@ -19,6 +19,7 @@ import net.spell_engine.api.item.weapon.StaffItem;
 import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_engine.rpg_series.item.Weapons;
 import net.spell_power.api.SpellSchools;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +32,13 @@ public class ModWeapons {
 		entries.add(entry);
 		return entry;
 	}
-	private static Supplier<Ingredient> ingredient(String idString, boolean requirement, Item fallback) {
+	private static Supplier<Ingredient> ingredient(String idString, boolean requirement, @Nullable Item fallback) {
 		var id = Identifier.of(idString);
 		if (requirement) {
 			return () -> {
+				if (fallback == null) {
+					return Ingredient.ofItems(Items.DIRT);
+				}
 				return Ingredient.ofItems(fallback);
 			};
 		} else {
@@ -63,6 +67,7 @@ public class ModWeapons {
 			List.of(MoreSpellSchools.NATURE.id))
 		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(Identifier.of(Druids.ID, "bramble_shot")))
 	);
+
 	// MARK: Staves
 
 	public static final Weapon.Entry natureStaff = add(Weapons.damageStaff(
@@ -84,9 +89,10 @@ public class ModWeapons {
 
 	public static void register(Map<String, WeaponConfig> configs) {
 		if (Druids.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(ARSENAL)) {
-			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), FabricLoader.getInstance().isModLoaded(ARSENAL), Items.NETHERITE_INGOT);
-			add(Weapons.damageStaff(Druids.ID, "staff_moon", Equipment.Tier.TIER_4, repair, List.of(MoreSpellSchools.NATURE.id))
-				.spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
+			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), FabricLoader.getInstance().isModLoaded(ARSENAL), null);
+			add(Weapons.damageStaff(Druids.ID, "staff_moon", Equipment.Tier.TIER_5, repair, List.of(MoreSpellSchools.NATURE.id, SpellSchools.HEALING.id))
+				.spellContainer(SpellContainers.forMagicWeapon().withSpell(DruidSpells.bramble_volley.id().toString()))
+				.withAdditionalSpell(DruidSpells.druid_weapon_tier_5.id().toString())
 			);
 		}
 
