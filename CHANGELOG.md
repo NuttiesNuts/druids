@@ -1,3 +1,7 @@
+# 1.3
+
+- Added Fatal Poison screen overlay
+
 # 1.2
 
 - Reduced Mass Entanglement cast time

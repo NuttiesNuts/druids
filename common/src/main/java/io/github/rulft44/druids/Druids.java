@@ -24,10 +24,11 @@ public class Druids {
 	/*
 	TODO- Move skill tree spells to separate class
 	TODO- Armory compat (new armor)
-	TODO- Moon staff changes
 	TODO- Spell expansion
-	TODO- Fatal Poison screen overlay
 	TODO- Barkskin player overlay
+	TODO- Orb of Oblivion not working
+	TODO- Fix tree unlocking issue - https://github.com/NuttiesNuts/druids/issues/12
+	TODO- Better spore cloud visuals
 	*/
 
 	public static final String ID = "druids";

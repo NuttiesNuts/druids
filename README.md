@@ -1,11 +1,11 @@
-![](https://raw.githubusercontent.com/Rulft44/druids/refs/heads/1.21.1/icon.png "")
+![title](https://raw.githubusercontent.com/NuttiesNuts/druids/refs/heads/1.21.1/title%20text.png)
 
 ## 🍃 Engulf foes in deadly vines and poison targets!
 
 [![Modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/modrinth_vector.svg)](https://modrinth.com/mod/druids)
 [![CruseForge](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/cozy/available/curseforge_vector.svg)](https://www.curseforge.com/minecraft/mc-mods/druids)
 
-# 📦 Installation
+# Installation
 
 ### Required
 
@@ -17,9 +17,9 @@
 - [Better Combat](https://modrinth.com/mod/better-combat "")
 - [Additional RPG Jewelry](https://modrinth.com/mod/additional-rpg-jewelry "")
 
-# ✨ Features
+# Features
 
-This project adds RPG-style combat focused skill sets—commonly known as classes—, introducing the druid archetype (inspired by popular RPG games).
+This project adds RPG-style combat focused skill sets, commonly known as classes, introducing the druid archetype (inspired by popular RPG games).
 
 ![](https://cdn.modrinth.com/data/flHIknzE/images/c981bd32ae0690d78ffa27e8ec74e34247736451.png)
 
