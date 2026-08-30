@@ -26,10 +26,16 @@
           "pierce": 999
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_projectile/thorn",
-            "light_emission": "NONE",
-            "rotate_degrees_per_tick": 0.0
+          "composite_model": {
+            "models": [
+              {
+                "rotate_degrees_per_tick": 0.0,
+                "fx": {
+                  "model_id": "druids:spell_projectile/thorn",
+                  "light_emission": "NONE"
+                }
+              }
+            ]
           }
         }
       }

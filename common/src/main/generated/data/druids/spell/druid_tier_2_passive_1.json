@@ -28,11 +28,13 @@
         "client_data": {
           "particles": [
             {
-              "particle_id": "spell_engine:roots",
-              "origin": "FEET",
-              "shape": "PILLAR",
-              "count": 2.0,
-              "max_speed": 0.0
+              "id": "spell_engine:roots",
+              "appearance": {},
+              "batch": {
+                "count": 2.0,
+                "shape": "CIRCLE",
+                "anchor": "GROUND"
+              }
             }
           ]
         }
@@ -52,16 +54,21 @@
           }
         }
       },
-      "particles": [
-        {
-          "particle_id": "falling_spore_blossom",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 2.0,
-          "min_speed": 0.1,
-          "max_speed": 0.2
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "minecraft:falling_spore_blossom",
+            "appearance": {},
+            "batch": {
+              "count": 2.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.2
+            }
+          }
+        ]
+      }
     }
   ],
   "cost": {

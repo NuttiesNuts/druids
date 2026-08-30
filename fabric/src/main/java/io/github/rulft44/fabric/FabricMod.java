@@ -2,12 +2,6 @@ package io.github.rulft44.fabric;
 
 import io.github.rulft44.druids.Druids;
 import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.fabricmc.fabric.api.resource.ResourcePackActivationType;
-import net.fabricmc.loader.api.FabricLoader;
-import net.minecraft.util.Identifier;
-
-import static io.github.rulft44.druids.Druids.ID;
 
 public final class FabricMod implements ModInitializer {
     @Override

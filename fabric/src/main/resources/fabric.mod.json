@@ -5,15 +5,15 @@
 	"name": "Druids (RPG Series Plus)",
 	"description": "Engulf foes in deadly vines and poison targets.",
 	"authors": [
-		"Rulft"
+		"Nutties"
 	],
 	"contributors": [
 		""
 	],
 	"contact": {
 		"homepage": "https://modrinth.com/mod/druids",
-		"issues": "https://github.com/Rulft44/druids/issues",
-		"sources": "https://github.com/Rulft44/druids"
+		"issues": "https://github.com/Nutties/druids/issues",
+		"sources": "https://github.com/Nutties/druids"
 	},
 	"license": "MIT",
 	"icon": "icon.png",

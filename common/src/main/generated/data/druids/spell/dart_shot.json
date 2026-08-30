@@ -1,8 +1,8 @@
 {
   "school": "spell_power:nature",
   "range": 64.0,
-  "group": "primary",
   "tier": 0,
+  "group": "primary",
   "learn": {},
   "active": {},
   "release": {
@@ -23,16 +23,23 @@
           "knockback": 0.0
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:magic_arcane_burst",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 20.0,
-          "min_speed": 0.2,
-          "max_speed": 0.7
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:magic_arcane",
+            "appearance": {
+              "motion": "BURST"
+            },
+            "batch": {
+              "count": 20.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.2,
+              "max_speed": 0.7
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "druids:dart_impact",
         "volume": 1.5

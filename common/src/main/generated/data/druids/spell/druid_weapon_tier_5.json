@@ -26,9 +26,9 @@
         "type": "STATUS_EFFECT",
         "status_effect": {
           "effect_id": "spell_power:haste",
-          "duration": 17.0,
+          "duration": 18.0,
           "amplifier": 1,
-          "amplifier_cap": 5,
+          "amplifier_cap": 7,
           "apply_mode": "ADD"
         }
       },

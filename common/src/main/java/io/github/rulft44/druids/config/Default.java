@@ -1,6 +1,6 @@
 package io.github.rulft44.druids.config;
 
-import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.rpg_series.config.ConfigFile;
 
 import java.util.Arrays;
 import java.util.Collection;

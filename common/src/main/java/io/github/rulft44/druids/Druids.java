@@ -15,13 +15,14 @@ import net.minecraft.loot.entry.ItemEntry;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.text.Text;
-import net.spell_engine.api.config.ConfigFile;
+import net.spell_engine.rpg_series.config.ConfigFile;
 import net.tiny_config.ConfigManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Druids {
 	/*
+	TODO- Fix whatever the fing jesus holy christ mama baba yetu yetu spell engine 1.10 oompaloompa lollapalooza bing boing
 	TODO- Move skill tree spells to separate class
 	TODO- Armory compat (new armor)
 	TODO- Spell expansion
@@ -42,7 +43,7 @@ public class Druids {
 		.build();
 
 	public static ConfigManager<ConfigFile.Effects> effectConfig = new ConfigManager<>
-		("effects_v0", new ConfigFile.Effects())
+		("effects", new ConfigFile.Effects())
 		.builder()
 		.setDirectory(ID)
 		.sanitize(true)

@@ -21,7 +21,7 @@ import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.puffish.skillsmod.reward.builtin.AttributeReward;
-import net.skill_tree_rpgs.data_gen.SkillDefinitionGenerator;
+import net.skill_tree_rpgs.fabric.data_gen.SkillDefinitionGenerator;
 import net.skill_tree_rpgs.node.SpellContainerReward;
 import net.skill_tree_rpgs.utils.ResolvableTextContent;
 import net.spell_engine.api.datagen.SpellGenerator;

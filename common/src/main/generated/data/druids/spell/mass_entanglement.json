@@ -14,23 +14,33 @@
       },
       "particles": [
         {
-          "particle_id": "spell_engine:magic_spark_float",
-          "origin": "FEET",
-          "shape": "WIDE_PIPE",
-          "count": 1.5,
-          "min_speed": 0.05,
-          "max_speed": 0.2,
-          "color_rgba": 4294954239
+          "id": "spell_engine:magic_spell",
+          "appearance": {
+            "color": 4294954239,
+            "motion": "ASCEND"
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "PIPE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.05,
+            "max_speed": 0.1,
+            "width_factor": 2.0
+          }
         },
         {
-          "particle_id": "more_rpg_classes:leaf",
-          "origin": "FEET",
-          "shape": "PIPE",
-          "count": 0.5,
-          "min_speed": 0.05,
-          "max_speed": 0.1,
-          "scale": 0.5,
-          "max_age": 0.25
+          "id": "more_rpg_classes:leaf",
+          "appearance": {},
+          "batch": {
+            "count": 0.5,
+            "chance": 0.1,
+            "shape": "PIPE",
+            "anchor": "ENTITY",
+            "vertical_origin": 0.1,
+            "min_speed": 0.001,
+            "max_speed": 0.003
+          }
         }
       ]
     }
@@ -39,16 +49,22 @@
     "animation": {
       "id": "spell_engine:one_handed_area_release"
     },
-    "particles_scaled_with_ranged": [
-      {
-        "particle_id": "spell_engine:area_effect_658",
-        "origin": "FEET",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 1728014079
-      }
-    ],
+    "visuals": {
+      "particles": [
+        {
+          "id": "spell_engine:area_effect_658",
+          "appearance": {
+            "color": 1728014079,
+            "scale_with": "RANGE"
+          },
+          "batch": {
+            "count": 1.0,
+            "shape": "SPHERE",
+            "anchor": "GROUND"
+          }
+        }
+      ]
+    },
     "sound": {
       "id": "more_rpg_classes:nature_impact_3"
     }
@@ -77,12 +93,50 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement1",
-            "light_emission": "NONE",
-            "scale": 1.2,
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement1",
+              "light_emission": "NONE",
+              "scale": 1.2,
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -100,12 +154,50 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement11",
-            "light_emission": "NONE",
-            "scale": 1.2,
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement11",
+              "light_emission": "NONE",
+              "scale": 1.2,
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -123,12 +215,50 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement1",
-            "light_emission": "NONE",
-            "scale": 1.2,
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement1",
+              "light_emission": "NONE",
+              "scale": 1.2,
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -146,12 +276,50 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement11",
-            "light_emission": "NONE",
-            "scale": 1.2,
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement11",
+              "light_emission": "NONE",
+              "scale": 1.2,
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -168,11 +336,49 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement2",
-            "light_emission": "NONE",
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement2",
+              "light_emission": "NONE",
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -190,11 +396,49 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement2",
-            "light_emission": "NONE",
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement2",
+              "light_emission": "NONE",
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -212,11 +456,49 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement2",
-            "light_emission": "NONE",
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement2",
+              "light_emission": "NONE",
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -234,11 +516,49 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/entanglement2",
-            "light_emission": "NONE",
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/entanglement2",
+              "light_emission": "NONE",
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -255,11 +575,49 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/poppy",
-            "light_emission": "NONE",
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/poppy",
+              "light_emission": "NONE",
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       },
       {
@@ -277,11 +635,49 @@
           "apply_yaw": true
         },
         "client_data": {
-          "model": {
-            "model_id": "druids:spell_effect/dandelion",
-            "light_emission": "NONE",
-            "rotate_degrees_per_tick": 0.0
-          }
+          "model_fx": [
+            {
+              "model_id": "druids:spell_effect/dandelion",
+              "light_emission": "NONE",
+              "initial": [
+                {
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                }
+              ],
+              "animations": [
+                {
+                  "start": 0,
+                  "end": 0,
+                  "easing": "EASE_OUT_CUBIC",
+                  "operation": "scale",
+                  "x": 1.0,
+                  "y": 1.0,
+                  "z": 1.0
+                },
+                {
+                  "start": 10,
+                  "end": 10,
+                  "easing": "EASE_IN_CUBIC",
+                  "operation": "scale",
+                  "x": -1.0,
+                  "y": -1.0,
+                  "z": -1.0
+                },
+                {
+                  "start": 0,
+                  "end": 10,
+                  "easing": "LINEAR",
+                  "operation": "rotate",
+                  "x": 0.0,
+                  "y": 0.0,
+                  "z": 0.0
+                }
+              ]
+            }
+          ]
         }
       }
     ]
@@ -299,16 +695,21 @@
           "apply_mode": "ADD"
         }
       },
-      "particles": [
-        {
-          "particle_id": "falling_spore_blossom",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 2.0,
-          "min_speed": 0.1,
-          "max_speed": 0.2
-        }
-      ]
+      "visuals": {
+        "particles": [
+          {
+            "id": "minecraft:falling_spore_blossom",
+            "appearance": {},
+            "batch": {
+              "count": 2.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.1,
+              "max_speed": 0.2
+            }
+          }
+        ]
+      }
     },
     {
       "action": {

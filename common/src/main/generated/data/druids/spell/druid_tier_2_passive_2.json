@@ -11,18 +11,6 @@
       }
     ]
   },
-  "release": {
-    "particles_scaled_with_ranged": [
-      {
-        "particle_id": "spell_engine:area_effect_658",
-        "origin": "GROUND",
-        "shape": "SPHERE",
-        "count": 1.0,
-        "max_speed": 0.0,
-        "color_rgba": 5644570
-      }
-    ]
-  },
   "target": {
     "type": "AREA",
     "area": {

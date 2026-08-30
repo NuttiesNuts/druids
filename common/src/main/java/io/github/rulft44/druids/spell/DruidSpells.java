@@ -2,7 +2,6 @@ package io.github.rulft44.druids.spell;
 
 import io.github.rulft44.druids.Druids;
 import io.github.rulft44.druids.effect.ModEffects;
-import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Formatting;
@@ -17,15 +16,14 @@ import net.spell_engine.api.datagen.SpellBuilder;
 import net.spell_engine.api.effect.SpellEngineEffects;
 import net.spell_engine.api.render.LightEmission;
 import net.spell_engine.api.spell.Spell;
-import net.spell_engine.api.spell.fx.ParticleBatch;
-import net.spell_engine.api.spell.fx.PlayerAnimation;
-import net.spell_engine.api.spell.fx.Sound;
+import net.spell_engine.api.spell.fx.*;
 import net.spell_engine.client.gui.SpellTooltip;
 import net.spell_engine.client.util.Color;
 import net.spell_engine.fx.SpellEngineParticles;
 import net.spell_engine.fx.SpellEngineSounds;
 import net.spell_engine.internals.target.SpellTarget;
 import net.spell_power.api.SpellPowerMechanics;
+import net.spell_power.api.SpellSchools;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -53,15 +51,11 @@ public class DruidSpells {
 			return new Entry(id, spell, title, description, mutator, weaponGroups, book);
 		}
 	}
-
-
 	public static final List<Entry> entries = new ArrayList<>();
-
 	private static Entry add(Entry entry) {
 		entries.add(entry);
 		return entry;
 	}
-
 	private static Spell modifierSpellBase() {
 		var spell = new Spell();
 		spell.range = 0;
@@ -142,20 +136,19 @@ public class DruidSpells {
 		spell.cost.item = new Spell.Cost.Item();
 		spell.cost.item.id = Registries.ITEM.getId(MRPGCItems.NATURE_STONE).toString();
 	}
-	private static ParticleBatch[] natureCastingParticles() {
-		return new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.MagicParticles.get(
-				SpellEngineParticles.MagicParticles.Shape.SPARK,
-				SpellEngineParticles.MagicParticles.Motion.FLOAT).id().toString(),
-				ParticleBatch.Shape.WIDE_PIPE, ParticleBatch.Origin.FEET,
-				1.5F, 0.05F, 0.2F).color(4294954239L),
-			new ParticleBatch("more_rpg_classes:leaf",
-				ParticleBatch.Shape.PIPE, ParticleBatch.Origin.FEET,
-				0.5F, 0.05F, 0.1F).scale(0.5F).maxAge(0.25F)
-		};
+	private static List<ParticleGroup> natureCastingParticles() {
+		return List.of(
+			ParticleGroupBuilder.magic(SpellEngineParticles.magic_spell, ParticleGroup.Motion.ASCEND)
+				.color(Color.HOLY.toRGBA())
+				.batch(b -> b.shape(ParticleGroup.Shape.PIPE)
+					.widthFactor(2F).verticalOrigin(ParticleGroupBuilder.Batches.FEET)
+					.count(1).speed(0.05F, 0.1F)),
+			ParticleGroupBuilder.of(MoreParticles.LEAF)
+				.batch(b -> b.shape(ParticleGroup.Shape.PIPE)
+					.count(0.5F).chance(0.1F).speed(0.001F, 0.003F)
+					.verticalOrigin(ParticleGroupBuilder.Batches.FEET)));
 	}
-	private static Spell.Delivery.Cloud makeRootCluster(String model, float scale, int delay, float distance_from_caster, int placement_angle, int rotation
-	) {
+	private static Spell.Delivery.Cloud makeRootCluster(String model, float scale, int delay, float distance_from_caster, int placement_angle, int rotation) {
 		var c = new Spell.Delivery.Cloud();
 		c.volume.radius = 1F;
 		c.volume.area.vertical_range_multiplier = 2F;
@@ -165,21 +158,24 @@ public class DruidSpells {
 		c.spawn = new Spell.Delivery.Cloud.Spawn();
 
 		c.client_data = new Spell.Delivery.Cloud.ClientData();
-		c.client_data.model = new Spell.ProjectileModel();
-		c.client_data.model.model_id = model;
-		c.client_data.model.scale = scale;
-		c.client_data.model.rotate_degrees_per_tick = 0;
-		//c.client_data.model.orientation = Spell.ProjectileModel.Orientation.TOWARDS_MOTION;
-		c.client_data.model.light_emission = LightEmission.NONE;
+		c.client_data.model_fx = List.of(
+			ModelEffectBuilder.create(model)
+				.scale(scale)
+				.light(LightEmission.NONE)
+				.scaleIn(0, c.spawn_ticks, Easing.EASE_OUT_CUBIC)
+				.scaleOut((int)c.time_to_live_seconds - c.despawn_ticks, (int)c.time_to_live_seconds, Easing.EASE_IN_CUBIC)
+				.rotate(0, 0, 0, 0, (int)c.time_to_live_seconds, Easing.LINEAR)
+				.build()
+		);
 
 		c.placement = SpellBuilder.Deliver.placementByLook(distance_from_caster, placement_angle, 0);
 		return c;
 	}
-
-	private static final Identifier HEALING_PARTICLES = SpellEngineParticles.MagicParticles.get(
-		SpellEngineParticles.MagicParticles.Shape.HEAL,
-		SpellEngineParticles.MagicParticles.Motion.ASCEND).id();
-
+	private static ParticleGroup healPillar(float count) {
+		return ParticleGroupBuilder.magic(SpellEngineParticles.magic_heal, ParticleGroup.Motion.ASCEND, Color.NATURE)
+			.batch(b -> b.shape(ParticleGroup.Shape.PILLAR).count(count)
+				.speed(0.02F, 0.15F).verticalOrigin(ParticleGroupBuilder.Batches.FEET));
+	}
 	// region Weapon Skills
 	public static final Entry weapon_nature_root = add(weapon_nature_root());
 	private static Entry weapon_nature_root() {
@@ -257,7 +253,9 @@ public class DruidSpells {
 		spell.school = MoreSpellSchools.NATURE;
 
 		spell.active.cast.duration = 0.3F;
-		spell.active.cast.channel_ticks = 3;
+		spell.active.cast.type = Spell.Active.Cast.Type.CHANNEL;
+		spell.active.cast.channel = new Spell.Active.Cast.Channel();
+		spell.active.cast.channel.ticks = 3;
 
 		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_charge");
 		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_release");
@@ -268,11 +266,10 @@ public class DruidSpells {
 		debuff1.action.status_effect.amplifier = 1;
 		debuff1.action.status_effect.amplifier_cap = 5;
 		debuff1.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
-		debuff1.particles = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				10, 0.05F, 0.3F),
-		};
+		debuff1.visuals = Fx.Visuals.of(
+			ParticleGroupBuilder.of(SpellEngineParticles.dripping_blood)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+					.count(10F).speed(0.05F, 0.3F)));
 		var debuff2 = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
 		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
 		debuff2.action.status_effect.show_particles = false;
@@ -298,16 +295,17 @@ public class DruidSpells {
 			projectile.homing_angle = 1;
 			projectile.client_data = new Spell.ProjectileData.Client();
 			projectile.client_data.light_level = 6;
-			projectile.client_data.travel_particles = new ParticleBatch[]{
-				new ParticleBatch(
-					Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR).toString(),
-					ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-					ParticleBatch.Rotation.LOOK, 1, 0, 0.1F, 0),
-			};
-			projectile.client_data.model = new Spell.ProjectileModel();
-			projectile.client_data.model.model_id = "druids:spell_projectile/bramble_shot";
-			projectile.client_data.model.scale = 0.5F;
-			spell.deliver.projectile.projectile = projectile;
+			projectile.client_data.travel_particles = List.of(
+				ParticleGroupBuilder.of(Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR))
+					.batch(b -> b.shape(ParticleGroup.Shape.LINE)
+					.alignment(ParticleGroup.Alignment.LOOK).count(1).speed(0, 0.1F))
+			);
+
+		spell.deliver.projectile.projectile = projectile;
+
+		var bramble = SpellBuilder.ProjectileModels.model("druids:spell_projectile/bramble_shot", 0.5F, LightEmission.NONE);
+			bramble.rotate_degrees_per_tick = 0;
+			spell.deliver.projectile.projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(bramble);
 
 		var damage = damageImpact(0.50F, 0.8F);
 		damage.sound = new Sound(MRPGLibSounds.CRIPPLING_STRIKE.id().toString(), 0.5F, 1F, 0.1F);
@@ -331,7 +329,9 @@ public class DruidSpells {
 		spell.school = MoreSpellSchools.NATURE;
 
 		spell.active.cast.duration = 0.2F;
-		spell.active.cast.channel_ticks = 1;
+		spell.active.cast.type = Spell.Active.Cast.Type.CHANNEL;
+		spell.active.cast.channel= new Spell.Active.Cast.Channel();
+		spell.active.cast.channel.ticks = 1;
 
 		spell.active.cast.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_charge");
 		spell.release.animation = PlayerAnimation.of("spell_engine:one_handed_projectile_release");
@@ -357,23 +357,23 @@ public class DruidSpells {
 			projectile.homing_angle = 1;
 			projectile.client_data = new Spell.ProjectileData.Client();
 			projectile.client_data.light_level = 6;
-			projectile.client_data.travel_particles = new ParticleBatch[]{
-				new ParticleBatch(
-					Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR).toString(),
-					ParticleBatch.Shape.LINE, ParticleBatch.Origin.CENTER,
-					ParticleBatch.Rotation.LOOK, 1, 0, 0.1F, 0),
-			};
-			projectile.client_data.model = new Spell.ProjectileModel();
-			projectile.client_data.model.model_id = "druids:spell_projectile/bramble_shot";
-			projectile.client_data.model.scale = 0.5F;
+			projectile.client_data.travel_particles = List.of(
+			ParticleGroupBuilder.of(Registries.PARTICLE_TYPE.getId(ParticleTypes.SPORE_BLOSSOM_AIR))
+				.batch(b -> b.shape(ParticleGroup.Shape.LINE)
+					.alignment(ParticleGroup.Alignment.LOOK).count(1).speed(0, 0.1F))
+			);
 			spell.deliver.projectile.projectile = projectile;
+
+			var bramble = SpellBuilder.ProjectileModels.model("druids:spell_projectile/bramble_shot", 0.5F, LightEmission.NONE);
+			bramble.rotate_degrees_per_tick = 0;
+			spell.deliver.projectile.projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(bramble);
 
 		var damage = damageImpact(0.5F, 0.8F);
 		damage.sound = new Sound(MRPGLibSounds.CRIPPLING_STRIKE.id().toString(), 0.5F, 1F, 0.1F);
-		damage.particles =
-			new ParticleBatch[]{new ParticleBatch(SpellEngineParticles.dripping_blood.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				10, 0.05F, 0.3F)};
+		damage.visuals = Fx.Visuals.of(
+			ParticleGroupBuilder.of(SpellEngineParticles.dripping_blood)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+					.count(10F).speed(0.05F, 0.3F)));
 
 		spell.impacts = List.of(poison, damage);
 
@@ -410,11 +410,10 @@ public class DruidSpells {
 		effect.action.status_effect.amplifier = 1;
 		effect.action.status_effect.amplifier_cap_power_multiplier = 0.10F;
 
-		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
-				1, 0, 0).color(0x56211a)
-		};
+		spell.release.visuals = Fx.Visuals.of(
+			ParticleGroupBuilder.of(SpellEngineParticles.area_effect_658)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE).origin(ParticleGroup.Anchor.GROUND, 0)
+					.count(1F)).appearance(configure -> configure.color(0x56211a).scaleWith(Fx.ScaleWith.RANGE)));
 
 		spell.impacts = List.of(effect);
 
@@ -485,11 +484,9 @@ public class DruidSpells {
 		debuff.action.status_effect.amplifier = 1;
 		debuff.action.status_effect.amplifier_cap = 5;
 		debuff.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
-		debuff.particles = new ParticleBatch[]{
-			new ParticleBatch("falling_spore_blossom",
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				2, 0.1F, 0.2F)
-		};
+		debuff.visuals = Fx.Visuals.of(ParticleGroupBuilder.of(Registries.PARTICLE_TYPE.getId(ParticleTypes.FALLING_SPORE_BLOSSOM))
+			.batch(b -> b.shape(ParticleGroup.Shape.SPHERE)
+				.count(2F).speed(0.1F, 0.2F)));
 
 		var debuff2 = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
 		debuff2.action.status_effect.apply_mode = Spell.Impact.Action.StatusEffect.ApplyMode.ADD;
@@ -523,11 +520,10 @@ public class DruidSpells {
 
 		spell.release.sound = new Sound(MRPGLibSounds.NATURE_IMPACT_3.id());
 
-		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-				1, 0, 0).color(Color.NATURE.toRGBA())
-		};
+		spell.release.visuals = Fx.Visuals.of(
+			ParticleGroupBuilder.of(SpellEngineParticles.area_effect_658)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE).origin(ParticleGroup.Anchor.GROUND, 0.5F)
+					.count(1F).speed(0F)).appearance(configure -> configure.color(Color.NATURE.toRGBA()).scaleWith(Fx.ScaleWith.RANGE)));
 
 		var damage = damageImpact(0.15F, 0F);
 
@@ -565,15 +561,10 @@ public class DruidSpells {
 		debuff2.action.status_effect.amplifier_cap_power_multiplier = 0.2F;
 
 		var damage = SpellBuilder.Impacts.damage(0.7F, 0F);
-		damage.particles = new ParticleBatch[] {
-			new ParticleBatch(
-				SpellEngineParticles.MagicParticles.get(
-					SpellEngineParticles.MagicParticles.Shape.ARCANE,
-					SpellEngineParticles.MagicParticles.Motion.BURST
-				).id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				null, 20, 0.2F, 0.7F, 0.0F, 0F)
-		};
+		damage.visuals = Fx.Visuals.of(
+			ParticleGroupBuilder.magic(SpellEngineParticles.magic_arcane, ParticleGroup.Motion.BURST)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE).count(20).speed(0.2F, 0.7F))
+		);
 		damage.sound = new Sound(io.github.rulft44.druids.sounds.ModSounds.DART_IMPACT_ID.toString(), 1.5F, 1F, 0.1F);
 		spell.impacts = List.of(damage, debuff2);
 
@@ -656,6 +647,12 @@ public class DruidSpells {
 		return new Entry(id, spell, title, description);
 	}
 
+	/*
+
+			If you see this, DM me, rulft44: "I cast skibidify on you!" to get a funny prize.
+
+	*/
+
 	public static Entry druid_tier_3_spell_1_modifier_2 = add(druid_tier_3_spell_1_modifier_2());
 	private static Entry druid_tier_3_spell_1_modifier_2() {
 		var id = Identifier.of(Druids.ID, "druid_tier_3_spell_1_modifier_2");
@@ -671,16 +668,11 @@ public class DruidSpells {
 
 		var impact = createHeal(0.1F);
 		impact.action.apply_to_caster = true;
-		impact.particles = new ParticleBatch[]{
-			new ParticleBatch(
-				HEALING_PARTICLES.toString(),
-				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-				20, 0.02F, 0.15F)
-				.color(Color.NATURE.toRGBA()),
-			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-				1, 0, 0).color(Color.NATURE.toRGBA()).scale(2F)
-		};
+		impact.visuals = Fx.Visuals.of(healPillar(30),
+			ParticleGroupBuilder.of(SpellEngineParticles.area_effect_658)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE).origin(ParticleGroup.Anchor.GROUND, 0.5F)
+					.count(1F).speed(0F)).appearance(configure -> configure.color(Color.NATURE.toRGBA()).scale(2F)));
+
 		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
 
 		modifier.mutate_impacts = Spell.Modifier.ImpactListModifier.APPEND;
@@ -706,16 +698,11 @@ public class DruidSpells {
 
 		var impact = createHeal(0.25F);
 		impact.action.apply_to_caster = true;
-		impact.particles = new ParticleBatch[]{
-			new ParticleBatch(
-				HEALING_PARTICLES.toString(),
-				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-				20, 0.02F, 0.15F)
-				.color(Color.NATURE.toRGBA()),
-			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-				1, 0, 0).color(Color.NATURE.toRGBA()).scale(mass_entanglement().spell.range)
-		};
+		impact.visuals = Fx.Visuals.of(healPillar(30),
+			ParticleGroupBuilder.of(SpellEngineParticles.area_effect_658)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE).origin(ParticleGroup.Anchor.GROUND, 0.5F)
+					.count(1F).speed(0F)).appearance(configure -> configure.color(Color.NATURE.toRGBA()).scale(mass_entanglement().spell().range)));
+
 		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
 
 		modifier.mutate_impacts = Spell.Modifier.ImpactListModifier.APPEND;
@@ -799,16 +786,10 @@ public class DruidSpells {
 
 		var impact = createHeal(0.1F);
 		impact.action.apply_to_caster = true;
-		impact.particles = new ParticleBatch[]{
-			new ParticleBatch(
-				HEALING_PARTICLES.toString(),
-				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-				20, 0.02F, 0.15F)
-				.color(Color.NATURE.toRGBA()),
-			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.FEET,
-				1, 0, 0).color(Color.NATURE.toRGBA()).scale(2F)
-		};
+		impact.visuals = Fx.Visuals.of(healPillar(30),
+			ParticleGroupBuilder.of(SpellEngineParticles.area_effect_658)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE).origin(ParticleGroup.Anchor.GROUND, 0.5F)
+					.count(1F).speed(0F)).appearance(configure -> configure.color(Color.NATURE.toRGBA()).scale(2F)));
 		impact.sound = new Sound(SpellEngineSounds.GENERIC_HEALING_IMPACT_1.id());
 		spell.impacts = List.of(impact);
 
@@ -836,18 +817,17 @@ public class DruidSpells {
 		cloud.impact_tick_interval = 20;
 		cloud.time_to_live_seconds = 4;
 		cloud.client_data = new Spell.Delivery.Cloud.ClientData();
-		cloud.client_data.particles = new ParticleBatch[]{
-			new ParticleBatch(
-				SpellEngineParticles.ground_glow.toString(),
-				ParticleBatch.Shape.CIRCLE, ParticleBatch.Origin.GROUND,
-				1, 0.1F, 0.3F).color(Color.from(6107020).toRGBA()),
-			new ParticleBatch(
-				SpellEngineParticles.MagicParticles.get(
-					SpellEngineParticles.MagicParticles.Shape.SKULL,
-					SpellEngineParticles.MagicParticles.Motion.ASCEND).id().toString(),
-				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.GROUND,
-				2, 0.1F, 0.15F).color(Color.from(6107020).toRGBA())
-		};
+		cloud.client_data.particles = List.of(
+			ParticleGroupBuilder.of(SpellEngineParticles.ground_glow)
+				.batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
+					.verticalOrigin(ParticleGroupBuilder.Batches.FEET).count(1)
+					.speed(0.1F, 0.3F)).appearance(skibidi -> skibidi.color(Color.POISON_MID.toRGBA())),
+			ParticleGroupBuilder.of(SpellEngineParticles.magic_skull)
+				.batch(b -> b.shape(ParticleGroup.Shape.PILLAR).anchor(ParticleGroup.Anchor.GROUND)
+				.count(2)
+				.speed(0.1F, 0.15F))
+				.appearance(nig -> nig.color(Color.POISON_MID.toRGBA()))
+		);
 		spell.deliver.clouds = List.of(cloud);
 
 		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 4);
@@ -884,12 +864,13 @@ public class DruidSpells {
 		cloud.impact_tick_interval = 15;
 		cloud.time_to_live_seconds = 8;
 		cloud.client_data = new Spell.Delivery.Cloud.ClientData();
-		cloud.client_data.particles = new ParticleBatch[]{
-			new ParticleBatch(
-				SpellEngineParticles.roots.id().toString(),
-				ParticleBatch.Shape.PILLAR, ParticleBatch.Origin.FEET,
-				2, 0, 0)
-		};
+		cloud.client_data.particles = List.of(
+			ParticleGroupBuilder.of(SpellEngineParticles.roots)
+				.batch(b -> b.shape(ParticleGroup.Shape.CIRCLE)
+				.count(2)
+				.anchor(ParticleGroup.Anchor.GROUND))
+		);
+
 		spell.deliver.clouds = List.of(cloud);
 
 		var debuff = createEffectImpact(SkillEffects.NATURES_GRASP.id, 1);
@@ -897,11 +878,9 @@ public class DruidSpells {
 		debuff.action.status_effect.apply_limit = new Spell.Impact.Action.StatusEffect.ApplyLimit();
 		debuff.action.status_effect.apply_limit.health_base = 50;
 		debuff.action.status_effect.apply_limit.spell_power_multiplier = 5;
-		debuff.particles = new ParticleBatch[]{
-			new ParticleBatch("falling_spore_blossom",
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.CENTER,
-				2, 0.1F, 0.2F)
-		};
+		debuff.visuals = Fx.Visuals.of(ParticleGroupBuilder.of(Registries.PARTICLE_TYPE.getId(ParticleTypes.FALLING_SPORE_BLOSSOM))
+			.batch(bach -> bach.shape(ParticleGroup.Shape.SPHERE).count(2).speed(0.1F, 0.2F)));
+
 		spell.impacts = List.of(debuff);
 
 		return new Entry(id, spell, title, description);
@@ -932,11 +911,10 @@ public class DruidSpells {
 		effect.action.status_effect.amplifier = 1;
 		effect.action.status_effect.amplifier_cap_power_multiplier = 0.10F;
 
-		spell.release.particles_scaled_with_ranged = new ParticleBatch[]{
-			new ParticleBatch(SpellEngineParticles.area_effect_658.id().toString(),
-				ParticleBatch.Shape.SPHERE, ParticleBatch.Origin.GROUND,
-				1, 0, 0).color(0x56211a)
-		};
+		Fx.Visuals.of(
+			ParticleGroupBuilder.of(SpellEngineParticles.area_effect_658)
+				.batch(b -> b.shape(ParticleGroup.Shape.SPHERE).origin(ParticleGroup.Anchor.GROUND, 0)
+					.count(1F)).appearance(configure -> configure.color(0x56211a).scaleWith(Fx.ScaleWith.RANGE)));
 
 		spell.impacts = List.of(effect);
 
@@ -969,15 +947,11 @@ public class DruidSpells {
 		spell.deliver.projectile.projectile.perks.ricochet = 0;
 		spell.deliver.projectile.projectile.perks.bounce = 0;
 
-		var model = new Spell.ProjectileModel();
-		model.light_emission = LightEmission.NONE;
-		model.model_id = "druids:spell_projectile/thorn";
-		model.scale = 1.0F;
-		model.rotate_degrees_per_tick = 0;
-
 		spell.deliver.projectile.projectile.client_data = new Spell.ProjectileData.Client();
-		spell.deliver.projectile.projectile.client_data.model = model;
 
+		var thron = SpellBuilder.ProjectileModels.model("druids:spell_projectile/thorn", 1F, LightEmission.NONE);
+		thron.rotate_degrees_per_tick = 0;
+		spell.deliver.projectile.projectile.client_data.composite_model = SpellBuilder.ProjectileModels.composite(thron);
 
 		var poison = createEffectImpact(MRPGCEffects.FATAL_POISON.id, 5);
 		poison.action.status_effect.amplifier = 1;

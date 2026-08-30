@@ -1,13 +1,16 @@
 {
   "school": "spell_power:nature",
   "range": 28.0,
-  "group": "primary",
   "tier": 0,
+  "group": "primary",
   "learn": {},
   "active": {
     "cast": {
       "duration": 0.2,
-      "channel_ticks": 1,
+      "type": "CHANNEL",
+      "channel": {
+        "ticks": 1
+      },
       "animation": {
         "id": "spell_engine:one_handed_projectile_charge"
       },
@@ -39,17 +42,28 @@
           "light_level": 6,
           "travel_particles": [
             {
-              "particle_id": "minecraft:spore_blossom_air",
-              "origin": "CENTER",
-              "shape": "LINE",
-              "rotation": "LOOK",
-              "count": 1.0,
-              "max_speed": 0.1
+              "id": "minecraft:spore_blossom_air",
+              "appearance": {},
+              "batch": {
+                "count": 1.0,
+                "shape": "LINE",
+                "anchor": "ENTITY",
+                "alignment": "LOOK",
+                "max_speed": 0.1
+              }
             }
           ],
-          "model": {
-            "model_id": "druids:spell_projectile/bramble_shot",
-            "scale": 0.5
+          "composite_model": {
+            "models": [
+              {
+                "rotate_degrees_per_tick": 0.0,
+                "fx": {
+                  "model_id": "druids:spell_projectile/bramble_shot",
+                  "light_emission": "NONE",
+                  "scale": 0.5
+                }
+              }
+            ]
           }
         }
       }
@@ -77,16 +91,21 @@
           "knockback": 0.8
         }
       },
-      "particles": [
-        {
-          "particle_id": "spell_engine:dripping_blood",
-          "origin": "CENTER",
-          "shape": "SPHERE",
-          "count": 10.0,
-          "min_speed": 0.05,
-          "max_speed": 0.3
-        }
-      ],
+      "visuals": {
+        "particles": [
+          {
+            "id": "spell_engine:dripping_blood",
+            "appearance": {},
+            "batch": {
+              "count": 10.0,
+              "shape": "SPHERE",
+              "anchor": "ENTITY",
+              "min_speed": 0.05,
+              "max_speed": 0.3
+            }
+          }
+        ]
+      },
       "sound": {
         "id": "more_rpg_classes:crippling_strike",
         "volume": 0.5

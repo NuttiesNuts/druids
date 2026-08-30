@@ -196,12 +196,12 @@ publisher {
 	// Modrinth Dependencies
 	modrinthDepends {
 		// Multiple required dependencies
-		required 'forgified-fabric-api', 'spell-engine', 'azurelib-armor', 'more-rpg-library'
+		required 'forgified-fabric-api', 'spell-engine', 'azurelib-armor', 'more-rpg-library', 'skill-tree'
 	}
 
 	// Curse Dependencies
 	curseDepends {
 		// Multiple required dependencies
-		required 'forgified-fabric-api', 'spell-engine', 'azurelib-armor', 'more-rpg-library'
+		required 'forgified-fabric-api', 'spell-engine', 'azurelib-armor', 'more-rpg-library', 'skill-tree'
 	}
 }

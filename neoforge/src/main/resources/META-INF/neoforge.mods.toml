@@ -7,7 +7,7 @@ license = "MIT"
 modId = "druids"
 version = "${version}"
 displayName = "Druids (RPG Series Plus)"
-authors = "Rulft"
+authors = "Nutties"
 description = '''
 Engulf foes in deadly vines and poison targets.
 '''
