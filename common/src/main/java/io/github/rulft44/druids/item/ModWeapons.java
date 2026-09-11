@@ -2,13 +2,13 @@ package io.github.rulft44.druids.item;
 
 import io.github.rulft44.druids.Druids;
 import io.github.rulft44.druids.spell.DruidSpells;
-import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
+import net.spell_engine.Platform;
 import net.spell_engine.rpg_series.config.WeaponConfig;
 import net.spell_engine.api.spell.container.SpellContainers;
 import net.spell_engine.rpg_series.item.Equipment;
@@ -84,8 +84,8 @@ public class ModWeapons {
 	// MARK: Register
 
 	public static void register(Map<String, WeaponConfig> configs) {
-		if (Druids.tweaksConfig.value.ignore_items_required_mods || FabricLoader.getInstance().isModLoaded(ARSENAL)) {
-			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), FabricLoader.getInstance().isModLoaded(ARSENAL), null);
+		if (Druids.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(ARSENAL)) {
+			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), Platform.util().isModLoaded(ARSENAL), null);
 			add(Weapons.damageStaff(Druids.ID, "staff_moon", Equipment.Tier.TIER_5, repair, List.of(MoreSpellSchools.NATURE.id, SpellSchools.HEALING.id))
 				.spellContainer(SpellContainers.forMagicWeapon().withSpell(DruidSpells.bramble_volley.id().toString()))
 				.withAdditionalSpell(DruidSpells.druid_weapon_tier_5.id().toString())

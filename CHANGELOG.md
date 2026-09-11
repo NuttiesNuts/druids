@@ -1,12 +1,9 @@
-# 1.4
+# 1.3
 
 **Important disclaimer** - NeoForge users need to unequip their spell books, jewelry, relics and quivers to preserve it, before updating to this version!
 
 - Adopt Spell Engine 1.10 changes
 - NeoForge version no longer depends on Forgified Fabric API
-
-# 1.3
-
 - Added Fatal Poison screen overlay
 
 # 1.2
