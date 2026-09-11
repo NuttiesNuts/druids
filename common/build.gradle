@@ -2,6 +2,8 @@ architectury {
     common rootProject.enabled_platforms.split(',')
 }
 
+def platform = "fabric"; // just for funny
+
 repositories {
 	maven {
 		name = 'Modrinth'
@@ -48,11 +50,6 @@ repositories {
 	}
 
 	maven {
-		name = "AzureDoom Mods"
-		url = "https://maven.azuredoom.com/mods"
-	}
-
-	maven {
 		url = uri("https://maven.puffish.net")
 	}
 }
@@ -61,22 +58,21 @@ dependencies {
     // We depend on Fabric Loader here to use the Fabric @Environment annotations,
     // which get remapped to the correct annotations on each platform.
     // Do NOT use other classes from Fabric Loader.
-	modImplementation libs.fl
-	modImplementation libs.fapi
+	modImplementation("net.fabricmc:fabric-loader:${fabric}")
+	modImplementation("net.fabricmc.fabric-api:fabric-api:${fapi}")
 
-	modImplementation libs.spell
-	modImplementation libs.spellpow
-	modImplementation libs.rpg
-	modImplementation libs.azure
-	modImplementation libs.rune
-	modImplementation libs.cloth
-	modImplementation libs.playeranim
-	modImplementation libs.trink
-	modImplementation libs.tiny
-	modImplementation libs.ranged
-	modImplementation libs.rpgtree
+	modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:${playeranim}")
+	modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${cloth}")
+	modImplementation("maven.modrinth:armor-model-api:${armormodel}-${platform}")
+	modImplementation("maven.modrinth:tiny-config:${ticonfig}-${platform}")
+	modImplementation("maven.modrinth:runes:${rune}-${platform}")
+	modImplementation("maven.modrinth:spell-power:${spellpow}-${platform}")
+	modImplementation("maven.modrinth:spell-engine:${spell}-${platform}")
+	modImplementation("maven.modrinth:more-rpg-library:${mrpg}-${platform}")
+	modImplementation("maven.modrinth:skill-tree:${skilltree}-${platform}")
+	modImplementation("maven.modrinth:ranged-weapon-api:${rangedapi}-${platform}")
 
-	modImplementation("net.puffish:skillsmod:${project.libs.versions.puff.get()}"+"fabric")
+	modImplementation("net.puffish:skillsmod:${puffskills}:${platform}")
 
-	modImplementation libs.jei
+	modImplementation("maven.modrinth:jei:${jei}")
 }

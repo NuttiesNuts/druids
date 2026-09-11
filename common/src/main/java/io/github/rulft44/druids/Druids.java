@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 
 public class Druids {
 	/*
-	TODO- Fix whatever the fing jesus holy christ mama baba yetu yetu spell engine 1.10 oompaloompa lollapalooza bing boing
+	TODO- Remove FFAPI - https://github.com/ZsoltMolnarrr/Wizards/commit/58f35d842b84426ed8fa86b2fefddad4c9effe36
 	TODO- Move skill tree spells to separate class
 	TODO- Armory compat (new armor)
 	TODO- Spell expansion
@@ -30,6 +30,7 @@ public class Druids {
 	TODO- Orb of Oblivion not working
 	TODO- Fix tree unlocking issue - https://github.com/NuttiesNuts/druids/issues/12
 	TODO- Better spore cloud visuals
+	TODO- Armor trim support
 	*/
 
 	public static final String ID = "druids";

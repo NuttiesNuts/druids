@@ -22,11 +22,11 @@
 		"minecraft": "~1.21.1",
 		"java": ">=21",
 		"fabric-api": "*",
-		"azurelibarmor": "*",
-		"spell_engine": ">=1.9.0",
+		"spell_engine": ">=1.10.0",
 		"spell_power": "*",
 		"more_rpg_classes": ">=2.5.18-1.21.1",
-		"skill_tree_rpgs": "*"
+		"skill_tree_rpgs": "*",
+		"armor_model_api": "*"
 	},
 	"recommends": {
 

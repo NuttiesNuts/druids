@@ -30,20 +30,27 @@ side = "BOTH"
 [[dependencies.druids]]
 modId = "more_rpg_classes"
 type = "required"
-versionRange = "[2.5.18,)"
+versionRange = "[2.7.0,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.druids]]
 modId = "spell_engine"
 type = "required"
-versionRange = "[1.9.0,)"
+versionRange = "[1.10.3,)"
 ordering = "NONE"
 side = "BOTH"
 
 [[dependencies.druids]]
 modId = "skill_tree_rpgs"
 type = "required"
-versionRange = "[1.4.4,)"
+versionRange = "[1.6.0,)"
 ordering = "AFTER"
+side = "BOTH"
+
+[[dependencies.druids]]
+modId = "armor_model_api"
+type = "required"
+versionRange = "[1.0.0,)"
+ordering = "NONE"
 side = "BOTH"

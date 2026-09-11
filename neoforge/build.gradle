@@ -102,49 +102,36 @@ repositories {
 		url = "https://modmaven.dev"
 	}
 
-	maven {
-		name = "AzureDoom Mods"
-		url = "https://maven.azuredoom.com/mods"
-	}
-
-	// For Accessories
-	maven { url 'https://maven.wispforest.io/releases' }
 	maven { url 'https://maven.su5ed.dev/releases' }
 	maven { url 'https://maven.fabricmc.net' }
 
 	maven {
 		url = uri("https://maven.puffish.net")
 	}
+
+	// For Curios (transitive from SpellEngine on NeoForge)
+	maven { url 'https://maven.theillusivec4.top/' }
 }
 
 dependencies {
-    neoForge libs.neo
-    common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
+	neoForge("net.neoforged:neoforge:${neo}")
+	common(project(path: ':common', configuration: 'namedElements')) { transitive = false }
     shadowBundle project(path: ':common', configuration: 'transformProductionNeoForge')
-	modImplementation ("org.sinytra.forgified-fabric-api:forgified-fabric-api:"+libs.versions.fofapi.get())
+	modImplementation ("org.sinytra.forgified-fabric-api:forgified-fabric-api:${forgefapi}")
 
-	modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:"+libs.versions.playeranim.get())
-	modImplementation("me.shedaniel.cloth:cloth-config-${platform}:"+libs.versions.cloth.get())
-	modImplementation("mod.azure.azurelibarmor:azurelibarmor-neo-${project.minecraft_version}:"+libs.versions.azure.get())
-	modImplementation("maven.modrinth:tiny-config:"+libs.versions.tinyneo.get())
+	modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:${playeranim}")
+	modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${cloth}")
+	modImplementation("maven.modrinth:armor-model-api:${armormodel}-${platform}")
+	modImplementation("maven.modrinth:tiny-config:${ticonfig}-${platform}")
+	modImplementation("maven.modrinth:runes:${rune}-${platform}")
+	modImplementation("maven.modrinth:spell-power:${spellpow}-${platform}")
+	modImplementation("maven.modrinth:spell-engine:${spell}-${platform}")
+	modImplementation("maven.modrinth:more-rpg-library:${mrpg}-${platform}")
+	modImplementation("maven.modrinth:skill-tree:${skilltree}-${platform}")
+	modImplementation("maven.modrinth:ranged-weapon-api:${rangedapi}-${platform}")
+	modImplementation("top.theillusivec4.curios:curios-${platform}:${curios}")
 
-	// Accessories - https://docs.wispforest.io/accessories/developer/dev_setup
-	modImplementation ("maven.modrinth:owo-lib:"+libs.versions.owoneo.get()) // AccessoryItem wouldn't compile without this
-	modImplementation("io.wispforest:accessories-neoforge:"+libs.versions.accessories.get())
-	forgeRuntimeLibrary("blue.endless:jankson:1.2.2")
-	forgeRuntimeLibrary("io.wispforest:endec:0.1.5.1")
-	forgeRuntimeLibrary("io.wispforest.endec:gson:0.1.3.1")
-	forgeRuntimeLibrary("io.wispforest.endec:jankson:0.1.3.1")
-	forgeRuntimeLibrary("io.wispforest.endec:netty:0.1.2")
-
-	modImplementation("maven.modrinth:runes:"+libs.versions.runeneo.get())
-	modImplementation("maven.modrinth:spell-power:"+libs.versions.spellpowneo.get())
-	modImplementation("maven.modrinth:spell-engine:"+libs.versions.spellneo.get())
-	modImplementation("maven.modrinth:more-rpg-library:"+libs.versions.rpgneo.get())
-	modImplementation("maven.modrinth:skill-tree:"+libs.versions.rpgtreeneo.get())
-	modImplementation("maven.modrinth:ranged-weapon-api:"+libs.versions.rangedneo.get())
-
-	modImplementation("net.puffish:skillsmod:"+libs.versions.puff.get()+platform)
+	modImplementation("net.puffish:skillsmod:${puffskills}:${platform}")
 }
 
 processResources {
@@ -196,12 +183,12 @@ publisher {
 	// Modrinth Dependencies
 	modrinthDepends {
 		// Multiple required dependencies
-		required 'forgified-fabric-api', 'spell-engine', 'azurelib-armor', 'more-rpg-library', 'skill-tree'
+		required 'forgified-fabric-api', 'spell-engine', 'armor-model-api', 'more-rpg-library', 'skill-tree'
 	}
 
 	// Curse Dependencies
 	curseDepends {
 		// Multiple required dependencies
-		required 'forgified-fabric-api', 'spell-engine', 'azurelib-armor', 'more-rpg-library', 'skill-tree'
+		required 'forgified-fabric-api', 'spell-engine', 'armor-model-api', 'more-rpg-library', 'skill-tree'
 	}
 }

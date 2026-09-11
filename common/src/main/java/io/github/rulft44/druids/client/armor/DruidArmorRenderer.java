@@ -1,22 +1,25 @@
 package io.github.rulft44.druids.client.armor;
 
 import io.github.rulft44.druids.Druids;
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRenderer;
-import mod.azure.azurelibarmor.common.render.armor.AzArmorRendererConfig;
+import net.rpg_foundation.armor_api.client.GeoArmorRenderer;
 import net.minecraft.util.Identifier;
 
-public class DruidArmorRenderer extends AzArmorRenderer {
-	public static DruidArmorRenderer druid() {
-		return new DruidArmorRenderer("druid_armor", "druid_armor");
-	}
-	public static DruidArmorRenderer netherite_druid() {
-		return new DruidArmorRenderer("druid_armor", "netherite_druid_armor");
+public final class DruidArmorRenderer {
+
+	private DruidArmorRenderer() { }
+
+	public static GeoArmorRenderer druid() {
+		return make("druid_armor", "druid_armor", "druid_armor_generic");
 	}
 
-	public DruidArmorRenderer(String modelName, String textureName) {
-		super(AzArmorRendererConfig.builder(
+	public static GeoArmorRenderer netherite_druid() {
+		return make("druid_armor", "netherite_druid_armor", "netherite_druid_armor_generic");
+	}
+
+	private static GeoArmorRenderer make(String modelName, String textureName, String trimTextureName) {
+		return GeoArmorRenderer.of(
 			Identifier.of(Druids.ID, "geo/" + modelName + ".geo.json"),
-			Identifier.of(Druids.ID, "textures/armor/" + textureName + ".png")
-		).build());
+			Identifier.of(Druids.ID, "textures/armor/" + textureName + ".png"));
+			//.trim(Identifier.of(Druids.ID, "armor/trim/" + trimTextureName), false);
 	}
 }
