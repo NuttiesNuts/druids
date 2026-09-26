@@ -1,12 +1,9 @@
 pluginManagement {
     repositories {
-        maven { url = 'https://maven.fabricmc.net/' }
-        maven { url = 'https://maven.architectury.dev/' }
-        maven { url = 'https://files.minecraftforge.net/maven/' }
+        maven { url "https://maven.fabricmc.net/" }
+        maven { url "https://maven.architectury.dev/" }
+        maven { url "https://files.minecraftforge.net/maven/" }
         gradlePluginPortal()
-		maven {
-			url "https://maven.firstdark.dev/releases"
-		}
     }
 }
 
@@ -14,4 +11,4 @@ rootProject.name = 'druids'
 
 include 'common'
 include 'fabric'
-include 'neoforge'
+include 'forge'

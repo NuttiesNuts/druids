@@ -1,78 +1,53 @@
 architectury {
-    common rootProject.enabled_platforms.split(',')
+    common enabled_platforms.split(',')
 }
 
-def platform = "fabric"; // just for funny
+def platform = "fabric";
 
 repositories {
-	maven {
-		name = 'Modrinth'
-		url = 'https://api.modrinth.com/maven'
-		content {
-			includeGroup 'maven.modrinth'
-		}
-	}
-
-	maven {
-		name "KosmX's maven"
-		url 'https://maven.kosmx.dev/'
-	}
-
-	maven {
-		url = 'https://maven.shedaniel.me/'
-	}
-
-	maven {
-		name = "TerraformersMC"
-		url = "https://maven.terraformersmc.com/"
-	}
-	maven {
-		name = "Ladysnake Libs"
-		url = 'https://maven.ladysnake.org/releases'
-	}
-
-	repositories {
-		maven { url "https://jitpack.io" }
-	}
-
-	maven {
-		url "https://cursemaven.com"
-		content { includeGroup "curse.maven" }
-	}
-
-	maven {
-		name = "Jared's maven"
-		url = "https://maven.blamejared.com/"
-	}
-	maven {
-		name = "ModMaven"
-		url = "https://modmaven.dev"
-	}
-
-	maven {
-		url = uri("https://maven.puffish.net")
-	}
+    maven { url 'https://maven.kosmx.dev/' }
+    maven { url 'https://maven.shedaniel.me/' }
+    maven {
+        name = 'Modrinth'
+        url = 'https://api.modrinth.com/maven'
+        content {
+            includeGroup 'maven.modrinth'
+        }
+    }
+    maven {
+        name = "TerraformersMC"
+        url = "https://maven.terraformersmc.com/"
+    }
+    maven {
+        name = "Ladysnake Libs"
+        url = 'https://maven.ladysnake.org/releases'
+    }
+    maven {
+        url "https://cursemaven.com"
+        content { includeGroup "curse.maven" }
+    }
+    maven { url 'https://maven.fabricmc.net' }
+    maven { url 'https://maven.puffish.net' }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://maven.blamejared.com/' }
+    maven { url 'https://modmaven.dev' }
 }
 
 dependencies {
-    // We depend on Fabric Loader here to use the Fabric @Environment annotations,
-    // which get remapped to the correct annotations on each platform.
-    // Do NOT use other classes from Fabric Loader.
-	modImplementation("net.fabricmc:fabric-loader:${fabric}")
-	modImplementation("net.fabricmc.fabric-api:fabric-api:${fapi}")
+    modImplementation "net.fabricmc:fabric-loader:$fabric_loader_version"
+    modImplementation "dev.architectury:architectury:$architectury_api_version"
 
-	modImplementation("dev.kosmx.player-anim:player-animation-lib-forge:${playeranim}")
-	modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${cloth}")
-	modImplementation("maven.modrinth:armor-model-api:${armormodel}-${platform}")
-	modImplementation("maven.modrinth:tiny-config:${ticonfig}-${platform}")
-	modImplementation("maven.modrinth:runes:${rune}-${platform}")
-	modImplementation("maven.modrinth:spell-power:${spellpow}-${platform}")
-	modImplementation("maven.modrinth:spell-engine:${spell}-${platform}")
-	modImplementation("maven.modrinth:more-rpg-library:${mrpg}-${platform}")
-	modImplementation("maven.modrinth:skill-tree:${skilltree}-${platform}")
-	modImplementation("maven.modrinth:ranged-weapon-api:${rangedapi}-${platform}")
+    modImplementation("dev.kosmx.player-anim:player-animation-lib-${platform}:${player_anim_version}")
+    modImplementation("me.shedaniel.cloth:cloth-config-${platform}:${cloth_config_version}")
 
-	modImplementation("net.puffish:skillsmod:${puffskills}:${platform}")
+    modImplementation("maven.modrinth:armor-model-api:${armor_model_api_version}-${platform}")
+    modImplementation("maven.modrinth:tiny-config:${tiny_config_version}-${platform}")
+    modImplementation("maven.modrinth:spell-power:${spell_power_version}-${platform}")
+    modImplementation("maven.modrinth:spell-engine:${spell_engine_version}-${platform}") { transitive = false }
+    modImplementation("maven.modrinth:runes:${runes_version}-${platform}")
+    modImplementation("maven.modrinth:more-rpg-library:${mrpg_version}-${platform}")
+    modImplementation("maven.modrinth:skill-tree:${skilltree_version}-${platform}")
+    modImplementation("maven.modrinth:ranged-weapon-api:${ranged_api_version}-${platform}")
 
-	modImplementation("maven.modrinth:jei:${jei}")
+    modImplementation("net.puffish:skillsmod:${pufferfish_skills_version}:${platform}")
 }

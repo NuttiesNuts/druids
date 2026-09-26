@@ -9,8 +9,8 @@ import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 import net.more_rpg_classes.custom.MoreSpellSchools;
 import net.spell_engine.Platform;
-import net.spell_engine.rpg_series.config.WeaponConfig;
 import net.spell_engine.api.spell.container.SpellContainers;
+import net.spell_engine.rpg_series.config.WeaponConfig;
 import net.spell_engine.rpg_series.item.Equipment;
 import net.spell_engine.rpg_series.item.Weapon;
 import net.spell_engine.rpg_series.item.Weapons;
@@ -23,75 +23,76 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 public class ModWeapons {
-	public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
-	private static Weapon.Entry add(Weapon.Entry entry) {
-		entries.add(entry);
-		return entry;
-	}
-	private static Supplier<Ingredient> ingredient(String idString, boolean requirement, @Nullable Item fallback) {
-		var id = Identifier.of(idString);
-		if (requirement) {
-			return () -> {
-				if (fallback == null) {
-					return Ingredient.ofItems(Items.DIRT);
-				}
-				return Ingredient.ofItems(fallback);
-			};
-		} else {
-			return () -> {
-				var item = Registries.ITEM.get(id);
-				var ingredient = item != null ? item : fallback;
-				return Ingredient.ofItems(ingredient);
-			};
-		}
-	}
+    public static final ArrayList<Weapon.Entry> entries = new ArrayList<>();
+    private static Weapon.Entry add(Weapon.Entry entry) {
+        entries.add(entry);
+        return entry;
+    }
 
-	private static final String ARSENAL = "arsenal";
+    private static Supplier<Ingredient> ingredient(String idString, boolean requirement, @Nullable Item fallback) {
+        var id = new Identifier(idString);
+        if (requirement) {
+            return () -> {
+                if (fallback == null) {
+                    return Ingredient.ofItems(Items.DIRT);
+                }
+                return Ingredient.ofItems(fallback);
+            };
+        } else {
+            return () -> {
+                var item = Registries.ITEM.get(id);
+                var ingredient = item != null ? item : fallback;
+                return Ingredient.ofItems(ingredient);
+            };
+        }
+    }
 
-	// MARK: Wands
+    private static final String ARSENAL = "arsenal";
 
-	public static final Weapon.Entry natureWand = add(Weapons.damageWand(
-			Druids.ID, "wand_nature",
-			Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.EMERALD),
-			List.of(MoreSpellSchools.NATURE.id))
-		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(Identifier.of(Druids.ID, "bramble_shot")))
-	);
+    // MARK: Wands
 
-	public static final Weapon.Entry netheriteNatureWand = add(Weapons.damageWand(
-			Druids.ID, "wand_netherite_nature",
-			Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-			List.of(MoreSpellSchools.NATURE.id))
-		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(Identifier.of(Druids.ID, "bramble_shot")))
-	);
+    public static final Weapon.Entry natureWand = add(Weapons.damageWand(
+                    Druids.ID, "wand_nature",
+                    Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.EMERALD),
+                    List.of(MoreSpellSchools.NATURE.id))
+            .spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_shot.id()))
+    );
 
-	// MARK: Staves
+    public static final Weapon.Entry netheriteNatureWand = add(Weapons.damageWand(
+                    Druids.ID, "wand_netherite_nature",
+                    Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
+                    List.of(MoreSpellSchools.NATURE.id))
+            .spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_shot.id()))
+    );
 
-	public static final Weapon.Entry natureStaff = add(Weapons.damageStaff(
-			Druids.ID, "staff_nature",
-			Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.EMERALD),
-			List.of(MoreSpellSchools.NATURE.id))
-		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
-	);
+    // MARK: Staves
 
-	public static final Weapon.Entry netheriteNatureStaff = add(Weapons.damageStaff(
-			Druids.ID, "staff_netherite_nature",
-			Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
-			List.of(MoreSpellSchools.NATURE.id))
-		.spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
-	);
+    public static final Weapon.Entry natureStaff = add(Weapons.damageStaff(
+                    Druids.ID, "staff_nature",
+                    Equipment.Tier.TIER_2, () -> Ingredient.ofItems(Items.EMERALD),
+                    List.of(MoreSpellSchools.NATURE.id))
+            .spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
+    );
+
+    public static final Weapon.Entry netheriteNatureStaff = add(Weapons.damageStaff(
+                    Druids.ID, "staff_netherite_nature",
+                    Equipment.Tier.TIER_3, () -> Ingredient.ofItems(Items.NETHERITE_INGOT),
+                    List.of(MoreSpellSchools.NATURE.id))
+            .spellContainer(SpellContainers.forMagicWeapon().withSpellId(DruidSpells.bramble_volley.id()))
+    );
 
 
-	// MARK: Register
+    // MARK: Register
 
-	public static void register(Map<String, WeaponConfig> configs) {
-		if (Druids.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(ARSENAL)) {
-			var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), Platform.util().isModLoaded(ARSENAL), null);
-			add(Weapons.damageStaff(Druids.ID, "staff_moon", Equipment.Tier.TIER_5, repair, List.of(MoreSpellSchools.NATURE.id, SpellSchools.HEALING.id))
-				.spellContainer(SpellContainers.forMagicWeapon().withSpell(DruidSpells.bramble_volley.id().toString()))
-				.withAdditionalSpell(DruidSpells.druid_weapon_tier_5.id().toString())
-			);
-		}
+    public static void register(Map<String, WeaponConfig> configs) {
+        if (Druids.tweaksConfig.value.ignore_items_required_mods || Platform.util().isModLoaded(ARSENAL)) {
+            var repair = ingredient(Registries.ITEM.getId(Items.EMERALD).toString(), Platform.util().isModLoaded(ARSENAL), null);
+            add(Weapons.damageStaff(Druids.ID, "staff_moon", Equipment.Tier.TIER_5, repair, List.of(MoreSpellSchools.NATURE.id, SpellSchools.HEALING.id))
+                    .spellContainer(SpellContainers.forMagicWeapon().withSpell(DruidSpells.bramble_volley.id().toString()))
+                    .withAdditionalSpell(DruidSpells.druid_weapon_tier_5.id().toString())
+            );
+        }
 
-		Weapon.register(configs, entries, Group.KEY);
-	}
+        Weapon.register(configs, entries, Group.KEY);
+    }
 }

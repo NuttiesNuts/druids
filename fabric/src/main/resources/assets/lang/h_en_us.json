@@ -1,0 +1,58 @@
+{
+  "itemGroup.druids.general": "Druids",
+
+  "item.druids.heart_of_the_forest": "Heart Of The Forest",
+  "item.druids.copper_nugget": "Copper Nugget",
+  "item.druids.fatal_poison_potion": "Potion of Fatal Poison",
+  "item.druids.fatal_poison_potion_description": "Fatal Poison (01:00)",
+  "item.druids.blowgun": "Blowgun",
+
+  "item.druids.spell_book/nature": "Druidic Grimoire",
+  "item.druids.spell_scroll/nature": "Druidic Scroll",
+  "item.druids.spell_book/nature.spell_binding.description": "Spell Book of Druids, bending nature magic to lock down and damage targets over time\n- Strengths: Magical damage over time and rooting\n- Weaknesses: Mediocre damage\n- Equipment: Lightly armored",
+
+  "item.druids.druid_armor_head": "Druid Hood",
+  "item.druids.druid_armor_chest": "Druid Robe",
+  "item.druids.druid_armor_legs": "Druid Leggings",
+  "item.druids.druid_armor_feet": "Druid Boots",
+
+  "item.druids.netherite_druid_armor_head": "Netherite Druid Hood",
+  "item.druids.netherite_druid_armor_chest": "Netherite Druid Robe",
+  "item.druids.netherite_druid_armor_legs": "Netherite Druid Leggings",
+  "item.druids.netherite_druid_armor_feet": "Netherite Druid Boots",
+
+  "item.druids.wand_nature": "Nature Wand",
+  "item.druids.wand_netherite_nature": "Netherite Nature Wand",
+  "item.druids.staff_nature": "Nature Staff",
+  "item.druids.staff_netherite_nature": "Netherite Nature Staff",
+  "item.druids.staff_moon": "Crescent Staff Of The Forest",
+
+  "tag.item.c.nuggets.copper": "Copper Nuggets",
+
+  "druids.jei.info.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
+  "lore.druids.heart_of_the_forest": "A treasure that can be used to craft powerful druid magic artifacts and weapons. It's an uncommon find.",
+
+  "druids.jei.info.poison_potion": "A strange poison fatal to anything. The recipe for it is unknown since the ancient druids are the only ones who knew how to brew it.",
+  "lore.druids.fatal_poison_potion": "A strange poison fatal to anything. The recipe for it is unknown since the ancient druids are the only ones who knew how to brew it.",
+
+  "advancements.rpg_series.path_choose_druid.title": "Path of Nature",
+  "advancements.rpg_series.path_choose_druid.description": "Create a Druidic Grimoire",
+
+  "advancements.rpg_series.spell_novice_druid.title": "100% Natural",
+  "advancements.rpg_series.spell_novice_druid.description": "Obtain your first Druid Spell",
+
+  "advancements.rpg_series.spell_master_druid.title": "Vegan",
+  "advancements.rpg_series.spell_master_druid.description": "Obtain all Druid Spells",
+
+  "advancements.rpg_series.obtain_druid_robes.title": "A Druid Is Always Late",
+  "advancements.rpg_series.obtain_druid_robes.description": "Acquire a full set of Druid Armor",
+
+  "advancements.rpg_series.obtain_druid_rune.title": "Path of Nature",
+  "advancements.rpg_series.obtain_druid_rune.description": "Obtain an druid Rune",
+
+  "advancements.rpg_series.spell_cast_druid_wand.title": "Druidic Practice",
+  "advancements.rpg_series.spell_cast_druid_wand.description": "Cast a spell with a Nature Wand",
+
+  "advancements.rpg_series.spell_cast_druid_book.title": "Nature Empowerment",
+  "advancements.rpg_series.spell_cast_druid_book.description": "Cast a spell from the Druidic Grimoire"
+}

@@ -4,28 +4,26 @@ build/
 out/
 classes/
 
-# eclipse
-*.launch
-
 # idea
 .idea/
 *.iml
 *.ipr
 *.iws
 
-# vscode
+# eclipse / vscode
+.classpath
+.project
 .settings/
 .vscode/
 bin/
-.classpath
-.project
 
-# macos
-*.DS_Store
+# run directories
+run/
+runs/
 
-# datagen cache
-common/src/main/generated/.cache/
+# local tooling
+.claude/
 
-# run
-fabric/run
-neoforge/run
+# os
+.DS_Store
+Thumbs.db
