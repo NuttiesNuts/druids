@@ -1,0 +1,175 @@
+package io.github.rulft44.druids.spell.skill;
+
+import io.github.rulft44.druids.Druids;
+import io.github.rulft44.druids.spell.DruidSpells;
+import net.minecraft.entity.attribute.EntityAttribute;
+import net.minecraft.entity.attribute.EntityAttributeModifier;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.util.Identifier;
+import net.more_rpg_classes.custom.MoreSpellSchools;
+import net.puffish.skillsmod.common.IconType;
+import net.skill_tree_rpgs.utils.RegistryIds;
+import net.spell_engine.api.spell.container.SpellContainer;
+import net.spell_engine.api.spell.container.SpellContainers;
+import org.jetbrains.annotations.Nullable;
+
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
+public class DruidSkillDefinitions {
+    public static final Identifier CATEGORY_ID = new Identifier(Druids.ID, "druids");
+    public record Icon(IconType type, String value, String modelId) {
+        public static Icon texture(String texture) {
+            return new Icon(IconType.TEXTURE, texture, null);
+        }
+        public static Icon item(String item) {
+            return new Icon(IconType.ITEM, item, null);
+        }
+        public static Icon itemWithModel(String item, String modelId) {
+            return new Icon(IconType.ITEM, item, modelId);
+        }
+        public static Icon effect(String effect) {
+            return new Icon(IconType.EFFECT, effect, null);
+        }
+        public static Icon spell(Identifier spellId) {
+            return texture(spellId.getNamespace() + ":textures/spell/" + spellId.getPath() + ".png");
+        }
+    }
+
+    public record EntityAttributeReward(String attributeId, @Nullable String fallbackAttributeId, EntityAttributeModifier modifier) {
+        private static final Identifier MODIFIER_ID = new Identifier(Druids.ID, "attribute_reward");
+
+        public static EntityAttributeReward  of(RegistryEntry<EntityAttribute> attribute, double value, EntityAttributeModifier.Operation operation) {
+            return of(RegistryIds.attribute(attribute), null, value, operation);
+        }
+
+        private static EntityAttributeReward of(EntityAttribute attribute, double value, EntityAttributeModifier.Operation operation) {
+            return of(RegistryIds.attribute(attribute), null, value, operation);
+        }
+
+        public static EntityAttributeReward of(String attributeId, @Nullable String fallbackAttributeId, double value, EntityAttributeModifier.Operation operation) {
+            var modifier = new EntityAttributeModifier(
+                    UUID.nameUUIDFromBytes(MODIFIER_ID.toString().getBytes(StandardCharsets.UTF_8)),
+                    MODIFIER_ID.toString(), value, operation
+            );
+            return new EntityAttributeReward(attributeId, fallbackAttributeId, modifier);
+        }
+    }
+
+    public record Entry(String id, String title, String description, Icon icon, List<SpellContainer> spellReward, EntityAttributeReward attributeReward, List<String> required_mods) {
+        public static Entry spell(String id, String title, String description, Icon icon, List<SpellContainer> spellReward) {
+            return new Entry(id, title, description, icon, spellReward, null, null);
+        }
+        public static Entry attribute(String id, String title, String description, Icon icon, RegistryEntry<EntityAttribute> attribute, double value, EntityAttributeModifier.Operation operation) {
+            return attribute(id, title, description, icon, EntityAttributeReward.of(attribute, value, operation));
+        }
+        public static Entry attribute(String id, String title, String description, Icon icon, EntityAttributeReward attributeReward) {
+            return new Entry(id, title, description, icon, null, attributeReward, null);
+        }
+
+        public static Entry attribute(String id, String title, String description, Icon icon, String attributeId, @Nullable String fallbackAttributeId, double value, EntityAttributeModifier.Operation operation) {
+            return attribute(id, title, description, icon, EntityAttributeReward.of(attributeId, fallbackAttributeId, value, operation));
+        }
+
+        public String titleTranslationKey() {
+            return "skill." + Druids.ID + "." + id + ".title";
+        }
+        public String descriptionTranslationKey() {
+            return "skill." + Druids.ID + "." + id + ".description";
+        }
+
+        public Entry withIcon(Icon icon) {
+            return new Entry(id, title, description, icon, spellReward, attributeReward, required_mods);
+        }
+        public Entry withItemIcon(String itemId) {
+            return withIcon(Icon.item(itemId));
+        }
+        public Entry withTitle(String title) {
+            return new Entry(id, title, description, icon, spellReward, attributeReward, required_mods);
+        }
+        public Entry require(String modId) {
+            return new Entry(id, title, description, icon, spellReward, attributeReward, List.of(modId));
+        }
+    }
+
+    public static final ArrayList<Entry> ENTRIES = new ArrayList<>();
+    private static Entry add(Entry entry) {
+        ENTRIES.add(entry);
+        return entry;
+    }
+
+    public static final String DRUIDS = "druids";
+
+    public static final float ROOT_MULTIPLIER = 0.01f;
+    public static final float BOOST_MULTIPLIER = 0.01f;
+
+    private static List<SpellContainer> dummyContainer() {
+        return List.of(SpellContainers.forModifier(new Identifier("wizards:fireball")));
+    }
+
+    private static Entry modifierSpell(DruidSpells.Entry entry) {
+        var modifiedSpellId = new Identifier(entry.spell().modifiers.get(0).spell_pattern);
+        return Entry.spell(entry.id().getPath(),
+                entry.title(),
+                null,
+                Icon.spell(modifiedSpellId),
+                List.of(SpellContainers.forModifier(entry.id()))
+        );
+    }
+
+    private static Entry passiveSpell(DruidSpells.Entry entry) {
+        return Entry.spell(entry.id().getPath(),
+                entry.title(),
+                null,
+                Icon.spell(entry.id()),
+                List.of(SpellContainers.forModifier(entry.id()))
+        );
+    }
+
+    ///DRUID
+    public static final Entry NATURE_ROOT = add(
+            Entry.attribute("nature_root",
+                    "Path of Nature",
+                    null,
+                    Icon.itemWithModel("spell_engine:spell_book", "druids:item/spell_book/nature"),
+                    MoreSpellSchools.NATURE.attributeEntry,
+                    0.01,
+                    EntityAttributeModifier.Operation.MULTIPLY_BASE
+            ).require(DRUIDS)
+    );
+
+    public static final Entry NATURE_BOOST = add(
+            Entry.attribute("nature_boost",
+                    "Nature Attunement",
+                    null,
+                    Icon.item("druids:wand_nature"),
+                    NATURE_ROOT.attributeReward()).require(DRUIDS)
+    );
+
+    public static final Entry DRUID_TIER_2_SPELL_1_MODIFIER_1 = add(modifierSpell(DruidSpells.druid_tier_2_spell_1_modifier_1).require(DRUIDS));
+    public static final Entry DRUID_TIER_2_SPELL_1_MODIFIER_2 = add(modifierSpell(DruidSpells.druid_tier_2_spell_1_modifier_2).require(DRUIDS));
+    public static final Entry DRUID_TIER_3_SPELL_1_MODIFIER_1 = add(modifierSpell(DruidSpells.druid_tier_3_spell_1_modifier_1).require(DRUIDS));
+    public static final Entry DRUID_TIER_3_SPELL_1_MODIFIER_2 = add(modifierSpell(DruidSpells.druid_tier_3_spell_1_modifier_2).require(DRUIDS));
+    public static final Entry DRUID_TIER_4_SPELL_1_MODIFIER_1 = add(modifierSpell(DruidSpells.druid_tier_4_spell_1_modifier_1).require(DRUIDS));
+    public static final Entry DRUID_TIER_4_SPELL_1_MODIFIER_2 = add(modifierSpell(DruidSpells.druid_tier_4_spell_1_modifier_2).require(DRUIDS));
+
+    public static final Entry DRUID_TIER_1_PASSIVE_1 = add(passiveSpell(DruidSpells.druid_tier_1_passive_1).require(DRUIDS));
+    public static final Entry DRUID_TIER_1_PASSIVE_2 = add(passiveSpell(DruidSpells.druid_tier_1_passive_2).require(DRUIDS));
+    public static final Entry DRUID_TIER_2_PASSIVE_1 = add(passiveSpell(DruidSpells.druid_tier_2_passive_1).require(DRUIDS));
+    public static final Entry DRUID_TIER_2_PASSIVE_2 = add(passiveSpell(DruidSpells.druid_tier_2_passive_2).require(DRUIDS));
+    public static final Entry DRUID_TIER_3_PASSIVE_1 = add(passiveSpell(DruidSpells.druid_tier_3_passive_1).require(DRUIDS));
+    public static final Entry DRUID_TIER_3_PASSIVE_2 = add(passiveSpell(DruidSpells.druid_tier_3_passive_2).require(DRUIDS));
+
+    // Nature Staff
+    public static final Entry WEAPON_NATURE_ROOT = add(modifierSpell(DruidSpells.weapon_nature_root)
+            .withTitle("Nature Staff Specialisation")
+            .withItemIcon("druids:staff_nature")
+            .require(DRUIDS)
+    );
+
+    public static final Entry WEAPON_BRAMBLE_VOLLEY_MODIFIER_1 = add(modifierSpell(DruidSpells.weapon_bramble_volley_modifier_1).require(DRUIDS));
+    public static final Entry WEAPON_BRAMBLE_VOLLEY_MODIFIER_2 = add(modifierSpell(DruidSpells.weapon_bramble_volley_modifier_2).require(DRUIDS));
+
+}

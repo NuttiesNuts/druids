@@ -1,52 +1,51 @@
 {
-	"schemaVersion": 1,
-	"id": "druids",
-	"version": "${version}",
-	"name": "Druids (RPG Series Plus)",
-	"description": "Engulf foes in deadly vines and poison targets.",
-	"authors": [
-		"Nutties"
-	],
-	"contributors": [
-		""
-	],
-	"contact": {
-		"homepage": "https://modrinth.com/mod/druids",
-		"issues": "https://github.com/Nutties/druids/issues",
-		"sources": "https://github.com/Nutties/druids"
-	},
-	"license": "MIT",
-	"icon": "icon.png",
-	"depends": {
-		"fabricloader": ">=0.14.21",
-		"minecraft": "~1.21.1",
-		"java": ">=21",
-		"fabric-api": "*",
-		"spell_engine": ">=1.10.0",
-		"spell_power": "*",
-		"more_rpg_classes": ">=2.5.18-1.21.1",
-		"skill_tree_rpgs": "*",
-		"armor_model_api": "*"
-	},
-	"recommends": {
+  "schemaVersion": 1,
+  "id": "druids",
+  "version": "${version}",
+  "name": "Druids (RPG Series Plus)",
+  "description": "Engulf foes in deadly vines and poison targets.",
+  "authors": [
+    "Nutties",
+    "EldarGods"
+  ],
 
-	},
-	"suggests": {
-		"archers": "*",
-		"better_combat": "*"
-	},
-	"entrypoints": {
-		"main": [
-          "io.github.rulft44.fabric.FabricMod"
-		],
-		"client": [
-			"io.github.rulft44.fabric.client.FabricClient"
-		],
-		"fabric-datagen": [
-          "io.github.rulft44.fabric.datagen.DruidsDataGenerator"
-		],
-		"jei_mod_plugin": [
-			"io.github.rulft44.druids.integration.jei.JEIPlugin"
-		]
-	}
+  "contact": {
+    "homepage": "https://modrinth.com/mod/druids",
+    "issues": "https://github.com/Nutties/druids/issues",
+    "sources": "https://github.com/Nutties/druids"
+  },
+
+  "license": "MIT",
+  "icon": "icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "io.github.rulft44.druids.fabric.DruidsFabric"
+    ],
+    "client": [
+      "io.github.rulft44.druids.fabric.client.FabricClient"
+    ],
+    "fabric-datagen": [
+      "io.github.rulft44.druids.fabric.datagen.DruidsDataGenerator"
+    ]
+  },
+  "mixins": [
+    "druids.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.5",
+    "minecraft": "~1.20.1",
+    "java": ">=17",
+    "architectury": ">=9.2.14",
+    "fabric-api": "*",
+    "spell_engine": ">=1.10.5",
+    "spell_power": "*",
+    "more_rpg_classes": ">=2.7.2-1.20.1",
+    "skill_tree_rpgs": "*",
+    "armor_model_api": "*"
+  },
+  "suggests": {
+    "archers": ">=3.1.1",
+    "better_combat": "*"
+  }
 }
